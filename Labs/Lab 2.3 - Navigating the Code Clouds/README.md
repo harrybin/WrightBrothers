@@ -1,13 +1,13 @@
 # Lab 2.3 - Navigating the Code Clouds: Additional Features of GitHub Copilot
 
-This lab exercise delves into GitHub Copilot's advanced features, teaching participants to enhance coding efficiency through complex tasks like adding new properties, generating documentation, refactoring code, and parsing strings, supplemented by optional labs on context understanding and regex parsing.
+This lab exercise introduces GitHub Copilot's advanced features and shows you how to boost your coding efficiency. You'll practice tasks like adding new properties, generating documentation, refactoring code, and parsing strings. Optional labs will also cover context understanding and regex parsing.
 
 ## Prerequisites
 - The prerequisites steps must be completed, see [Labs Prerequisites](../Lab%201.1%20-%20Pre-Flight%20Checklist/README.md)
 
 ## Estimated time to complete
 
-- 30 minutes, times may vary with optional labs.
+- 30 minutes.
 
 ## Objectives
 
@@ -49,11 +49,7 @@ Use a direct Copilot Chat prompt to generate XML documentation, including method
 
 <img src="../../Images/Screenshot-PlanesController-docs2.png" width="350">
 
-- Open **GitHub Copilot Chat**.
-
-- Click `+` to clear prompt history.
-
-- Type the following prompt:
+Now that you’ve used Copilot Chat for focused, step-by-step improvements, let’s explore how Copilot Edits can make larger or repetitive changes even faster:
 
     ```
     Document this C# function, including its purpose, parameters, and return value.
