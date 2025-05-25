@@ -105,7 +105,8 @@ In this lab, you’ll use GitHub Copilot to automate health checks, set up a CI/
 
 - Stop the application by pressing `Ctrl+C` in the terminal.
 
-- Let's make a small change to the code. Change the `CheckSystemPerformance` method to return a random number greater than 50. This will simulate a more unstable system.
+- Let's make a small change to the code.
+- Change the `CheckSystemPerformance` method to return a random number greater than 50. This will simulate a more unstable system.
 
     ```csharp
     bool CheckSystemPerformance()
@@ -125,28 +126,27 @@ In this lab, you’ll use GitHub Copilot to automate health checks, set up a CI/
 git checkout -b feature/health-checks
 ```
 
-- Click commit and push your changes.
-
 **Stage, commit, and push your changes:**
 
 - Open the Source Control tab in VS Code
 
+- Click on the `Magic` icon to generate a commit message
+
 - In the `Changes` area, click the `+` icon to `Stage all changes`
 
-- Click on the `Magic` icon to generate a commit message
 
 <img src="../../Images/Screenshot-Healthcheck-commit.png" width="600">
 
 > [!NOTE]
 > GitHub Copilot Chat suggests a commit message based on the changes made to the code. This is a great way to get started with a commit message.
 
-- Click the `✓ Commit & Sync` button to commit the changes.
+- Click the `✓ Commit` button commit the changes.
 
-<img src="../../Images/Screenshot-commit-sync.png" width="400">
-
-- Click the `Publish branch` button to push the changes.
+- Click the `Publish Branch` button to push the changes.
 
 <img src="../../Images/Screenshot145014.png" width="500">
+
+- Close the file `Program.cs`.
 
 ### Step 2. Smooth Flying in the Cloud - Automating GitHub Pipelines
 
@@ -163,6 +163,9 @@ automating CI/CD pipelines for deployment to Azure.
     Create a GitHub Actions build pipeline for this .NET solution that restores dependencies, builds, and runs tests.
     ```
 
+> [!NOTE]
+> If you see message `Workspace used /new (rerun without)`, click on the `Rerun without` button to continue.
+
 - GitHub Copilot Chat will suggest creating a GitHub Actions build pipeline for the application. It also includes a build steps and a test steps.
 
 - In GitHub Copilot Chat, click the ellipses `...` and select `Insert into New File` for the suggested pipeline.
@@ -173,7 +176,7 @@ automating CI/CD pipelines for deployment to Azure.
 
 - Change directory to the `.github/workflows` folder`.
 
-- Enter the file name `Build.yml` and click `Save`.
+- Enter the file name `build.yaml` and click `Save`.
 
 > [!NOTE]
 > With the @workspace agent, GitHub Copilot understands that the current workspace is a .NET application with a Test project in it. It also understands that the application is hosted in a folder called `WrightBrothersApi` and the test project is in a folder called `WrightBrothersApi.Tests`. This is a great example of how GitHub Copilot can understand the context of the current workspace and provide suggestions based on that context.
@@ -185,15 +188,9 @@ Deploying your application to Azure facilitates scalable, secure, and efficient 
 > [!WARNING]  
 > You must complete the previous lab before continuing.
 
-- Pre-requisite is a valid `*.yml` build pipeline from previous step.
+- Pre-requisite is a valid `build.yaml` build pipeline from previous step.
 
-~~- Select all the content of the `Build.yml`.~~
-
-- Open **GitHub Copilot Chat**.
-
-- Click `+` to clear prompt history.
-
-- Type the following prompt:
+- With **GitHub Copilot Chat** open, type the following prompt:
 
     ```
     Generate a Bicep template to provision an Azure Web App for this .NET API project.
@@ -205,13 +202,14 @@ Deploying your application to Azure facilitates scalable, secure, and efficient 
 
 - Save the file by clicking pressing `Ctrl + S` or `Cmd + S`.
 
-- Create folder in root called `Infrastructure`.
+- Enter the file name `Main.bicep` and click `Save` in the `.github/workflows` folder.
 
-- Enter the file name `Main.bicep` and click `Save` in the `Infrastructure` folder.
+> [!NOTE]
+> For the purpose of this lab, we are creating a simple Bicep file and saving in the `.github/workflows` folder. Its best practice to create a separate folder for infrastructure code and save the Bicep files there.
 
-- Using **GitHub Copilot Chat**.
+- Click on tab for `build.yaml` file to bring it to focus.
 
-- Type the following prompt:
+- With **GitHub Copilot Chat** open, type the following prompt:
 
    ```
    Update the build.yml pipeline to deploy the infrastructure using main.bicep and then deploy the application to the Azure Web App.
@@ -219,23 +217,23 @@ Deploying your application to Azure facilitates scalable, secure, and efficient 
 
 - GitHub Copilot Chat will suggest adding a deploy step to the pipeline, which is a Azure Web App deployment.
 
-- Open the `Build.yml` file in the `.github/workflows` folder.
+- Select all the content of the `build.yml`.
 
-- Place your cursor at the end of the file.
-
-```yaml
-# Rest of the pipeline
-
-<-- Place your cursor here
-```
-
-- In GitHub Copilot Chat, click the ellipses `...` and select `Apply in Editor` for the suggested unit test methods.
-
-- Save the file by clicking pressing `Ctrl + S` or `Cmd + S`.
+- In GitHub Copilot Chat, click the `Insert at Cursor` button to replace the build.yml file contents.
 
 - Now the pipeline first builds the application, then deploys it to Azure.
 
-- Click commit and push your changes.
+- Open the Source Control tab in VS Code
+
+- Click on the `Magic` icon to generate a commit message
+
+- In the `Changes` area, click the `+` icon to `Stage all changes`
+
+- Click the `✓ Commit` button commit the changes.
+
+- Click the `Sync Changes` button to push the changes.
+
+
 
 > [!IMPORTANT]
 > GitHub Copilot Chat will suggest creating a Bicep files for the infrastructure. If Copilot suggested multiple files, save all of them accordingly.
@@ -251,21 +249,27 @@ Pull requests are a critical part of the development process, enabling collabora
 
 - Push your feature branch to GitHub.
 
-- Create a Pull Request on **GitHub.com** from `feature/health-checks` into `main`.
+- Navigate to your repo `home` or `code` tab in the browswer.
 
-- Click the Copilot icon in the **PR view** and select **Summary** to auto-generate a pull request summary.
+- Create a PR by clicking `Compare & pull request` button.
 
-- Add **Copilot** as a reviewer to the PR.
+- You will see a message `✓ Able to merge` for the changes merging from `feature/health-checks` to `main`.
+
+- Above text box `Add a description`, click the `Copilot icon` <img width="13px" src="https://github.com/user-attachments/assets/98fd5d2e-ea29-4a4a-9212-c7050e177a69" /> and select **Summary** to auto-generate a pull request summary.
+
+- Under `Reviewers`, click **Copilot** as a reviewer to the PR.
 
 - Review and use **Copilot’s summary** to document your changes.
 
-- Complete the **PR merge when ready.**
+- Click `Create pull request` to create the PR.
 
 ## Optional
 
 ### Step 5. Advanced Flight Plan – Expand to Multi-Stage DevOps Pipeline
 
 Take it further by creating a more advanced pipeline with clearly defined Build, Infrastructure as Code, and Quality Assurance stages.
+
+- Close all open files in VS Code.
 
 - Open **GitHub Copilot Chat**.
 
@@ -276,6 +280,9 @@ Take it further by creating a more advanced pipeline with clearly defined Build,
    Create a multi-stage DevOps pipeline for .NET with Build, Bicep-based IaC deployment, and Quality Assurance stages. Scaffold all necessary YAML workflow files and explain each stage with comments.
    ```
 
+> [!NOTE]
+> If you see message `Workspace used /new (rerun without)`, click on the `Rerun without` button to continue.
+
 - In GitHub Copilot Chat, click the ellipses `...` and select `Insert into New File` for the suggested pipeline.
 
 - Copilot will add the code to a new empty file, but must be saved.
@@ -284,9 +291,18 @@ Take it further by creating a more advanced pipeline with clearly defined Build,
 
 - Change directory to the `.github/workflows` folder`.
 
-- Enter the file name `Build-Full.yml` and click `Save`.
+- Enter the file name `build-full.yml` and click `Save`.
 
-- Click commit and push your changes.
+- Open the Source Control tab in VS Code
+
+- Click on the `Magic` icon to generate a commit message
+
+- In the `Changes` area, click the `+` icon to `Stage all changes`
+
+- Click the `✓ Commit` button commit the changes.
+
+- Click the `Sync Changes` button to push the changes.
+
 
 > [!NOTE]
 > Creating a multi-stage pipeline can be complex, but GitHub Copilot can help you get started with the basic structure. You can then customize the pipeline to fit your specific needs.
