@@ -249,7 +249,7 @@ Pull requests are a critical part of the development process, enabling collabora
 
 - Push your feature branch to GitHub.
 
-- Navigate to your repo `home` or `code` tab in the browswer.
+- Navigate to your repo `home` or `code` tab in the browser.
 
 - Create a PR by clicking `Compare & pull request` button.
 
