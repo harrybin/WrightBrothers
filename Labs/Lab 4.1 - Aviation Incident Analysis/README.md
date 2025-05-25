@@ -1,22 +1,23 @@
-# Lab 4.1 - Aviation Incident Analysis ✈ Troubleshooting with GitHub Copilot
-The module simulates airplane crash scenarios using GitHub Copilot to identify and fix the root causes, enhancing understanding of Copilot's limitations and emphasizing human oversight in coding challenges.
+# Lab 4.1 – Aviation Incident Analysis ✈ Troubleshooting with GitHub Copilot
 
-A reference to the [Aviation Incident Analysis](<https://en.wikipedia.org/wiki/Mayday_(Canadian_TV_series)>) TV show, where the investigators try to find the root cause of an airplane crash. In this module, we will simulate a few airplane crashes and use GitHub Copilot to troubleshoot and fix the issues.
+In this lab, you'll investigate simulated aviation incidents using GitHub Copilot to identify and fix root causes in your code. Like an aviation investigator, you’ll analyze failures, ask Copilot for help, and apply human oversight to ensure high-quality results.
 
-## Prerequisites
-- The prerequisites steps must be completed, see [Labs Prerequisites](../Lab%201.1%20-%20Pre-Flight%20Checklist/README.md)
+A reference to the [Aviation Incident Analysis](<https://en.wikipedia.org/wiki/Mayday_(Canadian_TV_series)>) TV show, where the investigators try to find the root cause of an airplane crash.
+
+**Prerequisites:**  
+Complete all prior labs and ensure you have the project set up per the [Labs Prerequisites](../Lab%201.1%20-%20Pre-Flight%20Checklist/README.md).
 
 ## Estimated time to complete
 
-- 20 minutes, times may vary with optional labs.
+- 20 minutes.
 
-## Objectives
+## Objective
+- Understand Copilot’s strengths and limitations when debugging or fixing issues.
 
-- Understanding the limitations of GitHub Copilot and learning how to troubleshoot its suggestions.
-- Group challenge to fix a set of buggy codes using Copilot, highlighting the importance of human oversight.
-    - Step 1 - Flight Crash Investigation - Fuel Depletion Scenario
-    - Step 2 - Lightning Strikes, Unexpected Flight Crash - Stack Overflow Scenario
-    - Step 3 - Aerodynamics of an Airplane - Performance Optimization
+    - Step 1: Flight Crash Investigation – Fuel Depletion Scenario
+    - Step 2: Lightning Strikes – Stack Overflow Scenario
+    - Step 3: Aerodynamics of an Airplane – Performance Optimization (Optional)
+    - Step 4: Aerodynamics of an Airplane – Performance Optimization – Using Agent Mode (Optional)
 
 ### Step 1. Flight Crash Investigation - Fuel Depletion Scenario
 
@@ -71,6 +72,7 @@ public class FlightsController : ControllerBase
 > If you encounter an error message like `Project file does not exist.` or `Couldn't find a project to run.`, it's likely that you're executing the command from an incorrect directory. To resolve this, navigate to the correct directory using the command `cd ./WrightBrothersApi`. If you need to move one level up in the directory structure, use the command `cd ..`. The correct directory is the one that contains the `WrightBrothersApi.csproj` file.
 
 - Open the `Examples/Flights.http` file.
+
 - Click `Send Request` to execute the `takeFlight` request.
 
 ```
@@ -115,24 +117,30 @@ content-type: application/json
 
 - Now, let's debug it with GitHub Copilot
 
-- Navigate to the `Terminal` and `Select` all the content of the throw exception.
+- Click on the code tab `FlightsController.cs` to bring it into focus.
 
-- Open GitHub Copilot Chat, click `+` to clear prompt history, then ask the following question:
+- Select all the code for method `takeFlight` in `FlightsController.cs`.
 
-- Run the following command in the GitHub Copilot Chat:
+- Open **GitHub Copilot Chat**.
 
-  ```
-  @terminal #terminalSelection #file:FlightsController.cs how to fix this
-  ```
+- Click `+` to clear prompt history.
+
+- Type the following prompt:
+
+```
+How should I fix this exception in the takeFlight method in FlightsController.cs?
+```
 
 <img src="../../Images/Screenshot-LackOfFuel-Chat.png" width="800">
   
 > [!NOTE]
-> `@workspace` does not work in combination with `@terminal`. So it does not have additional context to generate the suggestion. To add more context to the suggestion you can use `#file:FlightsController.cs`.
+> When asking Copilot for help, provide the necessary context to help it understand the problem. Simply select the problematic code in the editor or mention the filename if you have multiple files open.
 
 - Copilot will suggest a possible fix on how to handle the exception.
 
 - You can go ahead and replace the `takeFlight` method with the new one and run the application again.
+
+- In the Chat window, click on the `Insert at Cursor` button to replace the `takeFlight` method with the new one.
 
 - Run the application
 
@@ -142,9 +150,16 @@ content-type: application/json
 
 - Now go to `Examples/Flights.http` file, click `Send Request` to execute the `takeFlight` request again.
 
-## Optional
+```
+POST http://localhost:1903/flights/3/takeFlight/75 HTTP/1.1
+content-type: application/json
+```
 
-### Step 2. Lightning Strikes, Unexpected Flight Crash - Stack Overflow Scenario
+- You will see that the flight is taking off and the response is `409 Conflict`. Plane crashed, due to lack of fuel.
+
+- Stop the app by pressing `Ctrl + C` or `Cmd + C` in the terminal, or by clicking on the 'Stop' button in the debugger panel.
+
+## Step 2. Lightning Strikes, Unexpected Flight Crash - Stack Overflow Scenario
 
 - Open `FlightsController.cs` file located in the `Controllers` folder.
 
@@ -199,44 +214,24 @@ public class FlightsController : ControllerBase
 
 - Now, let's debug it with GitHub Copilot
 
-- Navigate to the `Terminal` and `select` all the content of the thrown exception.
+- Click on the code tab `FlightsController.cs` to bring it into focus.
 
-- Open GitHub Copilot Chat, click `+` to clear prompt, then ask the following question:
+- Select all the code for method `lightningStrike` in `FlightsController.cs`.
 
-- Run the following command in the GitHub Copilot Chat:
+- Open **GitHub Copilot Chat**.
 
-    ```
-    @terminal #terminalSelection #file:FlightsController.cs how to fix this
-    ```
+- Click `+` to clear prompt history.
 
-<img src="../../Images/Screenshot-lightningStrikeError-fix.png" width="800">
+- Type the following prompt:
 
-- Copilot will suggest how to handle recursion by adding a condition to stop the recursion:
-
-```csharp
-public class FlightsController : ControllerBase
-{
-    // Rest of the FlightsController.cs file
-
-    [HttpPost("{id}/lightningStrike")]
-    public ActionResult lightningStrike(int id, int recursionDepth = 10)
-    {
-        if (recursionDepth == 0)
-        {
-            return Ok($"Recovers from lightning strike.");
-        }
-
-        // Lightning caused recursion on an inflight instrument
-        lightningStrike(id, recursionDepth - 1);
-
-        return Ok($"Recovers from lightning strike.");
-    }
 ```
-
-> [!NOTE]
-> This is an extreme example. In the real world you will probably not see this often. This example does show how GitHub Copilot can help with debugging and troubleshooting and this technique is applicable to other scenarios as well.
+How should I fix this exception in the lightningStrike method in FlightsController.cs?
+```
+- Copilot will suggest a possible fix on how to handle the exception.
 
 - You can go ahead and replace the `lightningStrike` method with the new one and run the application again.
+
+- In the Chat window, click on the `Insert at Cursor` button to replace the `lightningStrike` method with the new one.
 
 - Run the application
 
@@ -254,13 +249,15 @@ public class FlightsController : ControllerBase
 
 - The application will now recover from the lightning strike.
 
+- Stop the app by pressing `Ctrl + C` or `Cmd + C` in the terminal, or by clicking on the 'Stop' button in the debugger panel.
+
 ## Optional
 
 ### Step 3. Aerodynamics of an Airplane - Performance Optimization
 
 - Open `FlightsController.cs` file located in the `Controllers` folder.
 
-- Navigate to the `calculateAerodynamics` method.
+- Review the `calculateAerodynamics`, `CalculatePrimes`, and `IsPrime` methods.
 
 > [!NOTE]
 > The method is calculating prime numbers.
@@ -347,8 +344,6 @@ public class FlightsController : ControllerBase
 
 - Now, let's use GitHub Copilot to optimize the code.
 
-- Open the Copilot Chat .
-
 - Open `FlightsController.cs` and select all the code for the 3 following methods:
 
     - `calculateAerodynamics` method.
@@ -357,15 +352,27 @@ public class FlightsController : ControllerBase
 
     <img src="../../Images/Screenshot-calculateAerodynamicsSelected3.png" width="800">
 
-- Ask the following question in GitHub Copilot Chat:
+- Open **GitHub Copilot Chat**.
+
+- Click `+` to clear prompt history.
+
+- Type the following prompt:
+
+```
+What is a more efficient algorithm for finding all prime numbers in a range than checking each number with IsPrime? Please explain how it works.
+```
+
+- Read Copilot’s answer. Expect a recommendation for the “Sieve of Eratosthenes” or similar, along with an explanation of how it works.
+
+- Type the following prompt:
 
     ```
-    Can you optimize the selected code?
+    Can you help me implement the Sieve of Eratosthenes in C#? Please include detailed comments explaining each part. Solve this in a novel way that does not match public code.
     ```
 
 - Copilot will optimize the code.
 
-- Click on the `Apply in Editor` to replace the `calculateAerodynamics` method with the new one.
+- Click on the `Apply in Editor` to replace the `calculateAerodynamics` methods with the new one.
 
 - Run the application
 
@@ -392,6 +399,40 @@ public class FlightsController : ControllerBase
 
 > [!NOTE]
 > GitHub Copilot has knowledge of many algorithmic optimizations and can help you optimize your code performance.
+
+## Optional
+
+### Step 4. Performance Optimization - Using Agent Mode (for advanced users)
+
+- Close the `FlightsController.cs` file.
+
+- Open **GitHub Agent Mode**.
+
+- Click `+` to clear prompt history.
+
+- Type the following prompt:
+
+    ```
+    Optimize all recursive methods in FlightsController.cs to include a recursion depth limit and proper error handling.
+    ```
+
+**Where to Use Edits or Agent Mode:**  
+- **Exception handling and error messaging** (multiple methods)
+- **Adding recursion depth checks** (any/all recursive methods)
+- **Bulk code optimizations** (multiple calculation or utility methods)
+
+**Agent Mode** could be used to automate all these steps with a single prompt, e.g.,
+
+- Click `+` to clear prompt history.
+
+- Type the following prompt:
+
+```
+Scan FlightsController.cs for all crash-prone or inefficient code and generate fixes and performance improvements.
+```
+- Copilot will optimize the code.
+
+- Click on the `Apply in Editor` to replace the `calculateAerodynamics` methods with the new one.
 
 ### Congratulations you've made it to the end! &#9992; &#9992; &#9992;
 
