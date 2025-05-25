@@ -94,7 +94,7 @@ In this lab, you’ll use GitHub Copilot to automate health checks, set up a CI/
     GET http://localhost:1903/health HTTP/1.1
     ```
 
-- The response should be `200 OK` and show `"Healthy"`, `"Degraded"`, or `"Unhealthy"`with the following body:
+- The response should be `200 OK` and show `"Healthy"`, `"Degraded"`, or `"Unhealthy"` with the following body:
 
     ```json
     {
