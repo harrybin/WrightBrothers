@@ -257,7 +257,7 @@ How should I fix this exception in the lightningStrike method in FlightsControll
 
 - Open `FlightsController.cs` file located in the `Controllers` folder.
 
-- Review the `calculateAerodynamics`, 'CaluldatePrimes', and `IsPrime` methods.
+- Review the `calculateAerodynamics`, `CalculatePrimes`, and `IsPrime` methods.
 
 > [!NOTE]
 > The method is calculating prime numbers.
