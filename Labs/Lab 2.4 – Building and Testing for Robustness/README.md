@@ -52,7 +52,7 @@ In `Plane.cs`, add some basic data annotations for validation, such as:
 - Type the following prompt:
 
 ```
-Add \[Required] to Name, \[Range(1900, 2025)] to Year, and \[StringLength(100)] to Description in the Plane class.
+Add [Required] to Name, [Range(1900, 2025)] to Year, and [StringLength(100)] to Description in the Plane class.
 ```
 
 Accept Copilot’s suggestions or adjust as needed.
