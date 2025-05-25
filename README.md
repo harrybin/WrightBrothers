@@ -74,6 +74,35 @@ Prepare for takeoff! Your journey concludes with a hands-on lab to apply these c
 
 - [Navigating the Code Clouds ✈ Advanced Features of Copilot](./Labs/Lab%202.3%20-%20Navigating%20the%20Code%20Clouds)
 
+### Lab 2.4 – Building and Testing for Robustness ✈ Strengthening Your API
+
+In this session, you’ll use GitHub Copilot Chat and Copilot Edits to create both positive and negative unit tests, enforce model validation with data annotations, and apply Copilot prompts to streamline the testing workflow. The lab walks you through practical, real-world scenarios that build confidence in writing reliable, well-tested code.
+
+Prepare for takeoff! Your journey concludes with a hands-on lab to apply these concepts in real-world scenarios.
+
+* [Building and Testing for Robustness ✈ Strengthening Your API](./Labs/Lab%202.4%20-%20Building%20and%20Testing%20for%20Robustness)
+
+---
+
+### Lab 2.5 – Mocking, Exception Handling, and Advanced Testing ✈ Resilient Code with Copilot
+
+This session focuses on using GitHub Copilot to build more resilient code by introducing mocking frameworks, handling exceptions, and writing advanced unit tests for edge cases. Participants will use targeted Copilot prompts to generate, refine, and expand their test suites, ensuring their APIs can handle unexpected situations smoothly.
+
+Prepare for takeoff! Your journey concludes with a hands-on lab to apply these concepts in real-world scenarios.
+
+* [Mocking, Exception Handling, and Advanced Testing ✈ Resilient Code with Copilot](./Labs/Lab%202.5%20-%20Mocking%2C%20Exception%20Handling%2C%20and%20Advanced%20Testing)
+
+---
+
+### Lab 2.6 – Automating Code Coverage ✈ Copilot Agent Mode in Action
+
+This optional session introduces GitHub Copilot Agent Mode, guiding you through automating code coverage reporting using natural language prompts. You’ll see how Agent Mode can install tools, run tests, generate coverage reports, and help you visualize your project’s test coverage—all with minimal manual setup.
+
+Prepare for takeoff! Your journey concludes with a hands-on lab to apply these concepts in real-world scenarios.
+
+* [Automating Code Coverage ✈ Copilot Agent Mode in Action](./Labs/Lab%202.6%20-%20Automating%20Code%20Coverage)
+
+
 ## Module 3
 
 ### Lab 3.1 - Dawn of Aviation ✈ Setting up the Front-End Project
