@@ -17,8 +17,8 @@ In this lab, you’ll use GitHub Copilot to automate health checks, set up a CI/
     - Step 1 - Fasten your seatbelts, turbulence incoming - Committing Code Changes
     - Step 2 - Smooth Flying in the Cloud - Automating GitHub Pipelines
     - Step 3 - Ground Control - How to assent to the Azure Cloud
-    - Step 4 - Flight Plan - Crafting a Detailed DevOps Pipeline with Bicep IaC (Optional)
-    - Step 5 - Turn on Autopilot Mode - Automating GitHub Pull Requests (Optional)
+    - Step 4 - Flight Plan - Crafting a Detailed DevOps Pipeline with Bicep IaC
+    - Step 5 - Turn on Autopilot Mode - Automating GitHub Pull Requests
 
 ### Step 1. Fasten your seatbelts, turbulence incoming - Committing Code Changes
 
@@ -262,8 +262,6 @@ Pull requests are a critical part of the development process, enabling collabora
 - Review and use **Copilot’s summary** to document your changes.
 
 - Click `Create pull request` to create the PR.
-
-## Optional
 
 ### Step 5. Advanced Flight Plan – Expand to Multi-Stage DevOps Pipeline
 
