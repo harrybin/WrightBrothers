@@ -21,7 +21,7 @@ This lab exercise explores how GitHub Copilot can assist in building robust unit
 
 ## Step 1: Exploring Mocking in Unit Tests
 
-Open `PlanesControllerTests.cs`.
+- Open `PlanesControllerTests.cs`.
 
 Notice the use of a mock logger via NSubstitute in the test constructor:
 ```csharp
@@ -39,9 +39,15 @@ _planesController = new PlanesController(_logger);
 Explain why we use a mock logger in PlanesControllerTests. Can Copilot show how to mock other dependencies, like repositories, using Moq?
 ```
 
-Ask Copilot to generate a basic test that mocks a dependency and explains the pattern.
+- Type the following prompt:
 
----
+Generate a unit test method for PlanesController that uses Moq to mock the ILogger<PlanesController> dependency. Add comments explaining how the mock works.
+
+- Accept Copilot’s suggestions or adjust as needed.
+
+- Click `Apply` to insert the unit test into `PlanesControllerTests.cs`.
+
+- Click `Keep` to accept the changes.
 
 ## Step 2: Adding a Negative Test for an Exception Scenario
 
@@ -49,11 +55,9 @@ Ask Copilot to generate a basic test that mocks a dependency and explains the pa
 
 - Highlight the `GetById` or `Post` method.
 
-- Press `Ctrl+I` to open the Inline Editor.
-
 - Add a line to throw an exception if a specific condition is met (for the exercise).
 
-- In **GitHub Copilot Chat**.
+- Press `Ctrl+I` to open the Inline Editor.
 
 - Type the following prompt:
 
@@ -61,9 +65,7 @@ Ask Copilot to generate a basic test that mocks a dependency and explains the pa
 Add logic in PlanesController.GetById to throw an InvalidOperationException if id == -1.
 ```
 
-- Accept the suggestion and save your changes.
-
----
+- Accept the suggestion to save your changes.
 
 ## Step 3: Writing a Unit Test for Exception Handling
 
@@ -74,23 +76,26 @@ Add logic in PlanesController.GetById to throw an InvalidOperationException if i
 - Type the following prompt:
 
 ```
-Write a unit test in PlanesControllerTests.cs that verifies GetById(-1) returns a 500 Internal Server Error if an exception is thrown.
+Write a unit test method in PlanesControllerTests.cs that verifies GetById(-1) returns a 500 Internal Server Error if an exception is thrown. 
+If the PlanesController constructor requires dependencies, use minimal dummy or fake objects as needed, but do not use any external mocking libraries.
+Only include the test method code, with a descriptive method name and a comment explaining what the test does.
 ```
 
-- Accept the suggestion, review the generated test.
+> [!TIP]
+> We’re using simple dummy objects for dependencies—not the full C# mocking libraries—so you can focus on learning Copilot and prompt engineering, not .NET setup details. This keeps the lab quick, clear, and all about Copilot!
 
-- Insert it into bottom of test file `PlanesControllerTests.cs`.
+- Accept Copilot’s suggestions or adjust as needed.
 
-- Review Copilot’s approach. Exception handling is important in controllers to ensure that errors are caught and handled gracefully.
+- Click `Apply` to insert the unit tests into `PlanesControllerTests.cs`.
 
----
+- Click `Keep` to accept the changes.
+
 
 ## Optional: Bulk Test Generation with Copilot Edits or Agent Mode
 
-Ready to take your unit testing further?
-Try one of these advanced options:
+Ready to take your unit testing further? Try one of these advanced options:
 
-### Using Copilot Edits
+### Using Copilot Edits (for most users)
 
 - Open **GitHub Copilot Edits**.
 
@@ -101,10 +106,14 @@ Try one of these advanced options:
 - Type the following prompt:
 
   ```
-  Generate all positive and negative test cases for the controllers, including tests for exception scenarios, and organize them with clear comments.
+  Generate all positive and negative test cases for the controllers, including tests for exception scenarios, and organize them with clear comments. Only include the test method code, with a descriptive method name.
   ```
 
-* Review and Accept the proposed tests.
+- Accept Copilot’s suggestions or adjust as needed.
+
+- Click `Keep` to apply the units test into `PlanesControllerTests.cs`.
+
+- Close all files.
 
 ### Using Agent Mode (for advanced users)
 
@@ -120,30 +129,126 @@ Try one of these advanced options:
 
 - Let Agent Mode automate these additions, then review and run the new tests.
 
+- Click `Keep` to accept the changes.
+
+- Click `Continue` to allow Agent Mode to run the tests.
+
 > **Why Try This?**
 > For larger projects, Copilot Edits and Agent Mode can generate or update a wide set of tests at once, helping you spot gaps and avoid repetitive manual work.
 
 ---
 
-## Step 4: Advanced Mocking (Optional)
+## Step 4: Advanced Mocking with Moq (Optional)
 
-- Open **GitHub Copilot Chat**.
+In this advanced step, you’ll use Copilot to scaffold a repository interface and then mock it in your unit tests with Moq. This is a real-world workflow in modern .NET testing.
 
-- Click `+` to clear prompt history.
+**Create the Repository Interface**
 
-- Type the following prompt:
+  - Open **GitHub Copilot Chat**.
 
-```
-Show how to use Moq to mock a repository dependency for PlanesController and verify that Post adds a plane using the repository.
-```
+  - Click `+` to clear prompt history.
 
-- GitHub Copilot will generate an example, reviewing the style and structure.
+  - Type the following prompt:
 
----
+    ```
+    Create an interface called `IPlaneRepository` with methods to Add, Get, and Delete Plane objects.
+    ```
+
+  - Click `...` and select `Insert` to add this file.
+  
+  - Click `Cntl+S` to save the file `IPlaneRepository.cs` in your `Models` folder.
+
+- It should look something like:
+
+  ```csharp
+  public interface IPlaneRepository
+  {
+      void Add(Plane plane);
+      Plane Get(int id);
+      void Delete(int id);
+      // ... Add any additional methods you want
+  }
+  ```
+
+  - Close the `IPlaneRepository.cs` file.
+
+**Update the PlanesController to Use IPlaneRepository**
+
+  - Open `PlanesController.cs` file.
+
+  - In **GitHub Copilot Chat**.
+
+  - Click `+` to clear prompt history.
+
+  - Type the following prompt:
+
+    ```
+    Update PlanesController to accept an IPlaneRepository in the constructor and use it to manage Plane objects.
+    ```
+
+  - Accept Copilot’s suggestions or adjust as needed.
+
+  - Click `Apply` to update the `PlanesController.cs` file.
+
+  - Click `Keep` to accept the changes.
+
+
+> [!NOTE]
+> Review Copilot’s changes to make sure your controller is now loosely coupled and testable.
+
+**Install Moq and Add the Using Statement**
+
+  - In the terminal, navigate to your test project directory.
+    - i.e. `cd WrightBrothersApi\WrightBrothersApi.Tests`
+
+  - Type the following prompt and run it:
+
+    ```sh
+    dotnet add package Moq
+    ```
+
+ - Add at the top of `PlanesControllerTests.cs`:
+
+    ```csharp
+    using Moq;
+    ```
+  
+  - Close the `PlanesController.cs` file.
+
+**Generate the Unit Test with Moq**
+
+  - Open `PlanesControllerTests.cs`.
+
+  - In **GitHub Copilot Chat**.
+
+  - Click `+` to clear prompt history.
+
+  - Type the following prompt:
+
+    ```
+    Write a unit test using Moq to mock IPlaneRepository for PlanesController. The test should verify that the Post action calls the repository’s Add method when adding a plane. Only include the test method, with a descriptive name and comments explaining how Moq is used.
+    ```
+
+  - Accept Copilot’s suggestions or adjust as needed.
+
+  - Click `Apply` to update the `PlanesControllerTests.cs` file.
+
+  - Click `Keep` to accept the changes.
+
+
+> [!TIP]
+> In real-world .NET projects, using interfaces and mocking libraries like Moq makes your code more testable and your tests more reliable—while letting Copilot do the heavy lifting!
+
 
 ## Step 5: Run and Review All Tests
 
 - Run your unit tests again.
+
+  - In the terminal, run your tests:
+
+    ```sh
+    dotnet test
+    ```
 
 * Did Copilot generate realistic negative and exception test cases?
 * How does mocking help in writing isolated and repeatable unit tests?

@@ -30,34 +30,32 @@ Open `Plane.cs` and review the model. Notice that there are currently no data an
 - Type the following prompt:
 
 ```
-@workspace What kind of validation can I add to the Plane model to prevent missing or invalid data?
+What kind of validation can I add to the Plane model to prevent missing or invalid data?
 ```
 
 Observe Copilot’s suggestions (e.g., `[Required]`, `[Range]`, `[StringLength]`).
 
----
-
 ## Step 2: Adding Data Annotations
 
-In `Plane.cs`, add some basic data annotations for validation, such as:
+- In `Plane.cs`, add some basic data annotations for validation, such as:
 
 - `[Required]` for `Name`
 - `[Range(1900, 2025)]` for `Year`
 - `[StringLength(100)]` for `Description`
 
-- Open **GitHub Copilot Chat**.
-
-- Click `+` to clear prompt history.
-
 - Type the following prompt:
 
 ```
-Add [Required] to Name, [Range(1900, 2025)] to Year, and [StringLength(100)] to Description in the Plane class.
+Add data annotations for validation to all properties in the Plane class.
 ```
 
-Accept Copilot’s suggestions or adjust as needed.
+- Accept Copilot’s suggestions or adjust as needed.
 
----
+- Click `Apply` to insert the annotations into `Plane.cs`.
+
+- Click `Keep` to accept the changes.
+
+- Close the `Plane.cs` file.
 
 ## Step 3: Generating Positive Unit Test with Copilot Chat
 
@@ -70,32 +68,41 @@ Open `PlanesControllerTests.cs`.
 - Type the following prompt:
 
 ```
-@workspace Generate a unit test for PlanesController.Post that verifies a valid Plane is accepted and added.
+ Create a unit test for PlanesController.Post that verifies a valid Plane is accepted and added. Only include the test method.
 ```
 
-Accept the suggestion, review the generated test, and insert it into bottom of test file `PlanesControllerTests.cs`.
+- Accept Copilot’s suggestions or adjust as needed.
 
----
+- Click `Apply` to insert the unit tests into `PlanesControllerTests.cs`.
+
+- Click `Keep` to accept the changes.
 
 ## Step 4: Generating Negative Unit Tests for Validation Errors
 
 Now prompt Copilot to create tests that check for invalid data.
 
-- Open **GitHub Copilot Chat**.
+- In **GitHub Copilot Chat**.
 
 - Click `+` to clear prompt history.
 
 - Type the following prompt:
 
 ```
-Create unit tests for PlanesController.Post that check when:
+Create unit test methods for PlanesController.Post that check the following invalid input scenarios:
+- Name is missing (null or empty)
+- Year is out of range (e.g., 1800)
+- Description is too long
 
-* Name is missing (null or empty)
-* Year is out of range (e.g., 1800)
-* Description is too long
+Only include the test methods, and use clear, descriptive method names. Add comments describing what each test is checking.
 ```
 
 Insert the suggested tests, reviewing Copilot’s reasoning and comments.
+
+- Accept Copilot’s suggestions or adjust as needed.
+
+- Click `Apply` to insert the unit tests into `PlanesControllerTests.cs`.
+
+- Click `Keep` to accept the changes.
 
 ---
 
@@ -108,18 +115,24 @@ dotnet test WrightBrothersApi/WrightBrothersApi.Tests/WrightBrothersApi.Tests.cs
 
 If any tests fail due to missing validation, ask Copilot:
 
-- Open **GitHub Copilot Chat**.
-
-- Click `+` to clear prompt history.
+- In **GitHub Copilot Chat**.
 
 - Type the following prompt:
 ```
-How do I make the Post action return BadRequest for invalid models?
+How do I make the PlanesController.Post action return BadRequest for invalid models?
 ```
 
-Follow Copilot’s guidance to update the controller so that it uses model validation (such as `if (!ModelState.IsValid) return BadRequest(ModelState);`).
+Insert the suggested tests, reviewing Copilot’s reasoning and comments.
+
+- Accept Copilot’s suggestions or adjust as needed.
+
+- Click `Apply` to update the PlanesController.Post in `PlanesController.cs`.
+
+- Click `Keep` to accept the changes.
 
 Rerun your tests and confirm that both positive and negative scenarios behave as expected.
+
+- Close the `PlanesController.cs` and `PlanesControllerTests.cs` files.
 
 ## Optional: Transition to Copilot Edits for Bulk Changes
 
@@ -127,7 +140,7 @@ Want to speed things up, or apply changes across multiple files at once?
 
 Now that you’ve used Copilot Chat for focused, step-by-step improvements, let’s explore how Copilot Edits can make larger or repetitive changes even faster!
 
-### Using Copilot Edits
+### Using Copilot Edits (for intermediate users)
 
 - Open **GitHub Copilot Edits**.
 
@@ -150,10 +163,23 @@ Add or update data annotations for validation on all properties in Plane.cs, and
 - Type the following prompt:
 
 ```
-Apply data annotations to all models for validation and update controllers to return BadRequest for invalid models. List any files changed.
+Apply appropriate data annotations (like [Required], [Range], [StringLength]) to all model classes for validation. Update all controller actions to return BadRequest for invalid models. At the end, list all files you changed.
 ```
 
 - Let Agent Mode automate these updates, then review the changes before committing.
+
+- Type the following prompt:
+
+```
+Create a unit test method for PlanesController.Post that verifies a valid Plane is accepted and added to the system. Only include the test method code, with a descriptive method name and a comment explaining what the test does.
+```
+
+- Type the following prompt:
+
+```
+Create a unit test method for FlightsController.Post add append to the FlightsControllerTest file. Make sure that verifies a valid Flight is accepted and added to the system. Only include the test method code, with a descriptive method name and a comment explaining what the test does.
+```
+- Close all files.
 
 > [TIP!]  
 > **Why Try This?** Copilot Edits and Agent Mode can handle bulk or repetitive tasks, giving you safe, reviewable updates with just one prompt.
