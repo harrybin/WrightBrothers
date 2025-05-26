@@ -17,8 +17,9 @@ This lab exercise guides participants through coding exercises using GitHub Copi
     - Step 1 - Taxying to the Runway - Run existing unit tests
     - Step 2 - Pre-takeoff Pilot Checks - Completing Unit Tests
     - Step 3 - Takeoff - Adding Unit Tests for Case Sensitivity
-    - Step 4 - Ascending to the Clouds: Creating the AirfieldController from thin air (Optional)
-    - Step 5 - Landing: Refactoring the AirfieldController (Optional)
+    - Step 4 - Understanding and Adding Model Validation
+    - Step 5 - Generating Positive and Negative Unit Tests
+    - Step 6 - Validating and Running Tests
 
 ### Step 1: Taxying to the Runway - Run existing unit tests
 
@@ -378,337 +379,170 @@ public class PlanesControllerTests
 > [!NOTE]
 > If all tests pass, you have successfully completed this step. If not, you will need to debug the tests. GitHub Copilot got you started, but you, the Pilot, must take charge to diagnose and fix the discrepancies.
 
-## Optional
+### Step 4: Understanding Model Validation with Copilot Chat
 
-### Step 4 - Ascending to the Clouds: Creating the AirfieldController
+Open `Plane.cs` and review the model. Notice that there are currently no data annotation attributes.
 
-- Open the `WrightBrothersApi` project in Visual Studio Code.
+- Open **GitHub Copilot Chat**.
 
-- Open GitHub Copilot `Edits` (Ctrl+Shift+I) (icon with a + next to Copilot Chat), then click `+` to start a `New Edit Session`.
+- Click `+` to clear prompt history.
 
-- Add the following files to the `Working Set` near the bottom of Copilot Edits window.
-
-- Click the `+ Add files` button, then select these:
-    - `PlanesControllerTests.cs`
-    - `Airfield.cs`
-
-> [!NOTE]
-> You can multiple select these files from the file explorer by holding the `Ctrl` down and clicking on each file. Then simply drag-n-drop them into the `Edit with Copilot` window.
-
-- Copy/Paste the following in the Copilot Edits Chat window:
-
-    ```md
-    ## Generate Controller
-    Create a new API Controller called "AirfieldController" with all the CRUD operations based on the Airfield class located in the file Airfield.cs.
-    
-    ## Test Data
-    Add test data to the AirfieldController for the first 3 airfields used by the Wright Brothers.
-    
-    ## Unit Tests
-    Generate a new unit test controller called "AirfieldControllerTests" similar to the existing unit test file PlanesControllerTests.cs. Include comprehensive unit tests to cover all the methods in the AirfieldController.
-    
-    ## Think step by step
-    - Include explanations as comments in the test methods.
-    - Use the xUnit framework for unit tests.
-    - Ensure the unit tests cover all CRUD operations.
-    - Use modern C# features such as pattern matching and async streams.
-    - Use var instead of explicit types when the type is obvious.
-    - Include error handling for asynchronous operations.
-    - Use async/await syntax for asynchronous programming.
-    ```
-- Submit the prompt by pressing Enter.
-
-- Copilot will generate a new controller and the unit tests for the `Airfield` class.
-
-- Review the updates in the file editor.
-
-#### <span style="color:red">Todo! Screenshot Update Needed</span>
-<img src="../../Images/Screenshot-AirfieldControllerCreate.png" width="600">
-
-- You can choose to `Keep` or `Discard` the changes in the file editor or the `Working Set` window.
-
-- Click `Accept` to save the changes, then click `Done` in the `Copilot Edits` window to complete this task.
-
-> [!NOTE]
-> Copilot is not only context aware, knows you need a list of items and knows the `Air Fields` used by the Wright Brothers, the `Huffman Prairie`, which is the first one used by the Wright Brothers.
-
-- Now that you have created the `AirfieldController` with CRUD operations, it's time to ensure that it's working as expected. In this step, you will run the new `AirfieldController` unit tests.
-
-- Let's run the unit tests in the terminal.
-
-    ```sh
-    dotnet test WrightBrothersApi/WrightBrothersApi.Tests/WrightBrothersApi.Tests.csproj
-    ```
-
-<img src="../../Images/Screenshot-SearchByName-Fix.png" width="600">
-
-- The tests should run and many will pass.
-
-    ```sh
-    Test summary: total: 15, failed: 2, succeeded: 13, skipped: 0
-    ```
-### Step 5 - Landing: Refactoring the AirfieldController
-In this step, we will refactor the AirfieldController and unit tests to improve its code quality and add additional functionalities. We will also enhance the unit tests to cover the new functionalities.
-
-- Open GitHub Copilot `Edits` (Ctrl+Shift+I) (icon with + on it next to Copilot Chat), then click `+` for `New Edit Session`.
-
-- Add the following files to the `Working Set` near the bottom of Copilot Edits window.
-
-- Click the `+ Add files` button, then select these:
-    - `AirfieldController.cs`
-    - `AirfieldControllerTests.cs`
-
-- Copy/Paste the following in the Copilot Edits Chat window:
-
-    ```md
-    Refactor to use async/await for all CRUD operations. Ensure that error handling is included for asynchronous operations.
-
-    ## AirfieldController.cs
-    - Use modern C# features such as pattern matching and async streams where applicable.
-
-    ## AirfieldControllerTests.cs
-    - Use the xUnit framework for the unit tests.
-    
-    ## Think step by step
-    - Include explanations as comments in the test methods.
-    ```
-
-<img src="../../Images/Screenshot-AirfieldControllerRefactor.png" width="600">
-
-- Submit the prompt by pressing Enter.
-
-- Copilot will update the controller and the unit tests for the `AirfieldController` class.
-
-- Review the updates in the file editor.
-
-- You can choose to `Accept` or `Discard` the changes in the file editor or the `Working Set` window.
-
-- Click `Accept` to save the changes, then click `Done` in the `Copilot Edits` window to complete this task.
-
-> [!NOTE]
-> GitHub Copilot will then generate the refactored code for the AirfieldController and AirFieldControllerTests using async/await for all CRUD operations, including error handling. You can review the generated code and make any necessary adjustments.
-
-<Br>
-
-<details>
-<summary>Click for Controller Solution</summary>
-
-```csharp
-using Microsoft.AspNetCore.Mvc;
-using WrightBrothersApi.Models;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace WrightBrothersApi.Controllers
-{
-    [Route("api/[controller]")]
-    [ApiController]
-    public class AirfieldController : ControllerBase
-    {
-        private static readonly List<Airfield> Airfields = new List<Airfield>
-        {
-            new Airfield("Kitty Hawk", "North Carolina, USA", "1900-1903", "First successful powered flights"),
-            new Airfield("Huffman Prairie", "Ohio, USA", "1904-1905", "Development of practical flying techniques"),
-            new Airfield("Le Mans", "France", "1908", "First public demonstration of flight")
-        };
-
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Airfield>>> GetAirfields()
-        {
-            return await Task.FromResult(Ok(Airfields));
-        }
-
-        [HttpGet("{name}")]
-        public async Task<ActionResult<Airfield>> GetAirfield(string name)
-        {
-            var airfield = await Task.Run(() => Airfields.FirstOrDefault(a => a.Name == name));
-            return airfield switch
-            {
-                null => NotFound(),
-                _ => Ok(airfield)
-            };
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<Airfield>> CreateAirfield(Airfield airfield)
-        {
-            await Task.Run(() => Airfields.Add(airfield));
-            return CreatedAtAction(nameof(GetAirfield), new { name = airfield.Name }, airfield);
-        }
-
-        [HttpPut("{name}")]
-        public async Task<IActionResult> UpdateAirfield(string name, Airfield updatedAirfield)
-        {
-            var airfield = await Task.Run(() => Airfields.FirstOrDefault(a => a.Name == name));
-            if (airfield is null)
-            {
-                return NotFound();
-            }
-
-            airfield.Location = updatedAirfield.Location;
-            airfield.DatesOfUse = updatedAirfield.DatesOfUse;
-            airfield.Significance = updatedAirfield.Significance;
-            return NoContent();
-        }
-
-        [HttpDelete("{name}")]
-        public async Task<IActionResult> DeleteAirfield(string name)
-        {
-            var airfield = await Task.Run(() => Airfields.FirstOrDefault(a => a.Name == name));
-            if (airfield is null)
-            {
-                return NotFound();
-            }
-
-            await Task.Run(() => Airfields.Remove(airfield));
-            return NoContent();
-        }
-    }
-}
+- Type the following prompt:
 
 ```
-</details>
-
-<Br>
-
-<details>
-<summary>Click for Unit Tests Solution</summary>
-
-```csharp
-using WrightBrothersApi.Controllers;
-using WrightBrothersApi.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Xunit;
-
-namespace WrightBrothersApi.Tests.Controllers
-{
-    public class AirfieldControllerTests
-    {
-        private readonly AirfieldController _controller;
-
-        public AirfieldControllerTests()
-        {
-            _controller = new AirfieldController();
-        }
-
-        [Fact]
-        public async Task GetAirfields_ReturnsAllAirfields()
-        {
-            // Act
-            var result = await _controller.GetAirfields();
-
-            // Assert
-            var actionResult = Assert.IsType<OkObjectResult>(result.Result);
-            var airfields = Assert.IsType<List<Airfield>>(actionResult.Value);
-            Assert.Equal(3, airfields.Count);
-        }
-
-        [Fact]
-        public async Task GetAirfield_ReturnsCorrectAirfield()
-        {
-            // Act
-            var result = await _controller.GetAirfield("Kitty Hawk");
-
-            // Assert
-            var actionResult = Assert.IsType<OkObjectResult>(result.Result);
-            var airfield = Assert.IsType<Airfield>(actionResult.Value);
-            Assert.Equal("Kitty Hawk", airfield.Name);
-        }
-
-        [Fact]
-        public async Task GetAirfield_ReturnsNotFound()
-        {
-            // Act
-            var result = await _controller.GetAirfield("Nonexistent Airfield");
-
-            // Assert
-            Assert.IsType<NotFoundResult>(result.Result);
-        }
-
-        [Fact]
-        public async Task CreateAirfield_AddsNewAirfield()
-        {
-            // Arrange
-            var newAirfield = new Airfield("New Airfield", "New Location", "2023", "New Significance");
-
-            // Act
-            var result = await _controller.CreateAirfield(newAirfield);
-
-            // Assert
-            var actionResult = Assert.IsType<CreatedAtActionResult>(result.Result);
-            var createdAirfield = Assert.IsType<Airfield>(actionResult.Value);
-            Assert.Equal("New Airfield", createdAirfield.Name);
-        }
-
-        [Fact]
-        public async Task UpdateAirfield_UpdatesExistingAirfield()
-        {
-            // Arrange
-            var updatedAirfield = new Airfield("Kitty Hawk", "Updated Location", "Updated Dates", "Updated Significance");
-
-            // Act
-            var result = await _controller.UpdateAirfield("Kitty Hawk", updatedAirfield);
-
-            // Assert
-            Assert.IsType<NoContentResult>(result);
-        }
-
-        [Fact]
-        public async Task UpdateAirfield_ReturnsNotFound()
-        {
-            // Arrange
-            var updatedAirfield = new Airfield("Nonexistent Airfield", "Updated Location", "Updated Dates", "Updated Significance");
-
-            // Act
-            var result = await _controller.UpdateAirfield("Nonexistent Airfield", updatedAirfield);
-
-            // Assert
-            Assert.IsType<NotFoundResult>(result);
-        }
-
-        [Fact]
-        public async Task DeleteAirfield_DeletesExistingAirfield()
-        {
-            // Act
-            var result = await _controller.DeleteAirfield("Kitty Hawk");
-
-            // Assert
-            Assert.IsType<NoContentResult>(result);
-        }
-
-        [Fact]
-        public async Task DeleteAirfield_ReturnsNotFound()
-        {
-            // Act
-            var result = await _controller.DeleteAirfield("Nonexistent Airfield");
-
-            // Assert
-            Assert.IsType<NotFoundResult>(result);
-        }
-    }
-}
+What kind of validation can I add to the Plane model to prevent missing or invalid data?
 ```
-</details>
 
-- Now that you have updated the `AirfieldController`, it's time to ensure that it's working as expected. In this step, you will run the `AirfieldControllerTests` unit tests.
+Observe Copilot’s suggestions (e.g., `[Required]`, `[Range]`, `[StringLength]`).
 
-- Let's run the unit tests in the terminal.
+- In `Plane.cs`, add some basic data annotations for validation, such as:
 
-    ```sh
-    dotnet test WrightBrothersApi/WrightBrothersApi.Tests/WrightBrothersApi.Tests.csproj
-    ```
+- `[Required]` for `Name`
+- `[Range(1900, 2025)]` for `Year`
+- `[StringLength(100)]` for `Description`
 
-- The tests should run and many will pass.
+- Type the following prompt:
 
-    ```sh
-    Test summary: total: 13, failed: 3, succeeded: 10, skipped: 0
-    ```
+```
+Add data annotations for validation to all properties in the Plane class.
+```
 
-> [!NOTE]
-> Sometimes not all tests succeed. Make sure `dotnet test` is run in the root of the project `WrightBrothersApi`. If the tests fail, you will need to debug the tests and correct the issues. Although tools like Copilot can assist greatly, you, the Pilot, must take charge to diagnose and fix the discrepancies.
+- Accept Copilot’s suggestions or adjust as needed.
+
+- Click `Apply` to insert the annotations into `Plane.cs`.
+
+- Click `Keep` to accept the changes.
+
+- Close the `Plane.cs` file.
+
+### Step 5: Generating Positive and Negative Unit Test
+
+**Generating Positive Unit Tests for Validation Errors**
+
+- Open `PlanesControllerTests.cs`.
+
+- Open **GitHub Copilot Chat**.
+
+- Click `+` to clear prompt history.
+
+- Type the following prompt:
+
+```
+ Create a unit test for PlanesController.Post that verifies a valid Plane is accepted and added. Only include the test method.
+```
+
+- Accept Copilot’s suggestions or adjust as needed.
+
+- Click `Apply` to insert the unit tests into `PlanesControllerTests.cs`.
+
+- Click `Keep` to accept the changes.
+
+**Generating Negative Unit Tests for Validation Errors**
+
+- Now prompt Copilot to create tests that check for invalid data.
+
+- In **GitHub Copilot Chat**.
+
+- Click `+` to clear prompt history.
+
+- Type the following prompt:
+
+```
+Create unit test methods for PlanesController.Post that check the following invalid input scenarios:
+- Name is missing (null or empty)
+- Year is out of range (e.g., 1800)
+- Description is too long
+
+Only include the test methods, and use clear, descriptive method names. Add comments describing what each test is checking.
+```
+
+Insert the suggested tests, reviewing Copilot’s reasoning and comments.
+
+- Accept Copilot’s suggestions or adjust as needed.
+
+- Click `Apply` to insert the unit tests into `PlanesControllerTests.cs`.
+
+- Click `Keep` to accept the changes.
+
+---
+
+### Step 6: Validating and Running Tests
+
+Run your tests in the terminal:
+```
+dotnet test WrightBrothersApi/WrightBrothersApi.Tests/WrightBrothersApi.Tests.csproj
+```
+
+If any tests fail due to missing validation, ask Copilot:
+
+- In **GitHub Copilot Chat**.
+
+- Type the following prompt:
+```
+How do I make the PlanesController.Post action return BadRequest for invalid models?
+```
+
+Insert the suggested tests, reviewing Copilot’s reasoning and comments.
+
+- Accept Copilot’s suggestions or adjust as needed.
+
+- Click `Apply` to update the PlanesController.Post in `PlanesController.cs`.
+
+- Click `Keep` to accept the changes.
+
+Rerun your tests and confirm that both positive and negative scenarios behave as expected.
+
+- Close the `PlanesController.cs` and `PlanesControllerTests.cs` files.
+
+## Optional: Transition to Copilot Edits for Bulk Changes
+
+Want to speed things up, or apply changes across multiple files at once?
+
+Now that you’ve used Copilot Chat for focused, step-by-step improvements, let’s explore how Copilot Edits can make larger or repetitive changes even faster!
+
+### Using Copilot Edits (for intermediate users)
+
+- Open **GitHub Copilot Edits**.
+
+- Click `+` to clear prompt history.
+
+- Add `Plane.cs` and `PlanesController.cs` to your working set.
+
+- Type the following prompt:
+
+```
+Add or update data annotations for validation on all properties in Plane.cs, and ensure the controller enforces model validation.
+```
+
+- Review Copilot’s suggested changes. Edits allows you to preview, accept, or adjust all changes at once—great for keeping code consistent across multiple files.
+
+- Click `Apply` to update your files with the new annotations and validation checks.
+
+### Using Agent Mode (for advanced users)
+
+- Type the following prompt:
+
+```
+Apply appropriate data annotations (like [Required], [Range], [StringLength]) to all model classes for validation. Update all controller actions to return BadRequest for invalid models. At the end, list all files you changed.
+```
+
+- Let Agent Mode automate these updates, then review the changes before committing.
+
+- Type the following prompt:
+
+```
+Create a unit test method for PlanesController.Post that verifies a valid Plane is accepted and added to the system. Only include the test method code, with a descriptive method name and a comment explaining what the test does.
+```
+
+- Type the following prompt:
+
+```
+Create a unit test method for FlightsController.Post add append to the FlightsControllerTest file. Make sure that verifies a valid Flight is accepted and added to the system. Only include the test method code, with a descriptive method name and a comment explaining what the test does.
+```
+- Close all files.
+
+> [TIP!]  
+> **Why Try This?** Copilot Edits and Agent Mode can handle bulk or repetitive tasks, giving you safe, reviewable updates with just one prompt.
 
 ### Congratulations you've made it to the end! &#9992; &#9992; &#9992;
 
