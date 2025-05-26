@@ -1,4 +1,4 @@
-## Lab 2.4 – Building and Testing for Robustness
+## Lab 2.3 – Building and Testing for Robustness
 
 In this lab, you will use GitHub Copilot Chat and Copilot Edits to create and improve unit test coverage for your backend API. You’ll add both positive and negative test cases, validate model data using annotations, and practice using Copilot prompts to streamline your testing workflow.
 
@@ -13,8 +13,8 @@ In this lab, you will use GitHub Copilot Chat and Copilot Edits to create and im
 - Build confidence in using Copilot to quickly add tests, enforce model validation, and improve code reliability with practical, real-world scenarios.
     - Step 1: Understanding Model Validation with Copilot Chat
     - Step 2: Adding Data Annotations
-    - Step 3: Generating Positive Unit Test with Copilot Chat
-    - Step 4: Generating Negative Unit Tests for Validation Errors
+    - Step 3: Generating Positive Unit Tests
+    - Step 4: Generating Negative Unit Tests
     - Step 5: Validating and Running Tests
 
 ---
