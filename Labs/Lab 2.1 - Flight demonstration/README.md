@@ -17,7 +17,7 @@ This module demonstrates how to utilize GitHub Copilot's Chat Extension and its 
     - Step 2 - Airplane Docking - Add new Flight Model
     - Step 3 - Test Flight - Autocompletion and Suggestions
     - Step 4 - Flight Plan - Code Completion and Style Adaptation
-    - Step 5 - Flight Control - Code Navigation and Documentation
+    - Step 5 - Flight Control - Logging - Consistency
     - Step 6 - Visualize the Wright Brothers Fleet
 
 > [!IMPORTANT]  

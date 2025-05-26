@@ -1,6 +1,5 @@
-# Lab 2.4 – Code Coverage Reporting with Copilot Agent Mode
-
-This **optional** lab introduces GitHub Copilot Agent Mode for automating common development tasks using natural language prompts. You will use Agent Mode to set up, generate, and view code coverage reports for your backend project—no prior experience with coverage tools required.
+# Lab 2.3 – Code Coverage Reporting: Tower Clearance
+This lab introduces GitHub Copilot Agent Mode for automating common development tasks using natural language prompts. You will use Agent Mode to set up, generate, and view code coverage reports for your backend project—no prior experience with coverage tools required.
 
 ## Prerequisites
 - The prerequisites steps must be completed, see [Labs Prerequisites](../Lab%201.1%20-%20Pre-Flight%20Checklist/README.md)

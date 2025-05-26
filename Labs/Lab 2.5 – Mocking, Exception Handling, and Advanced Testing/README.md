@@ -1,4 +1,4 @@
-## Lab 2.6 – (Optional) – Mocking, Exception Handling, and Advanced Testing
+## Lab 2.5 – (Optional) – Mocking, Exception Handling, and Advanced Testing
 
 This lab exercise explores how GitHub Copilot can assist in building robust unit tests, including scenarios for mocking dependencies, handling exceptions, and covering edge cases. You’ll use prompts and hands-on code updates to strengthen your backend’s reliability.
 
