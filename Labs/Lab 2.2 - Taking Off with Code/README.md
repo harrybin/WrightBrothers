@@ -7,7 +7,7 @@ This lab exercise guides participants through coding exercises using GitHub Copi
 
 ## Estimated time to complete
 
-- 15 minutes.
+- 20 minutes.
 
 ## Objectives
 

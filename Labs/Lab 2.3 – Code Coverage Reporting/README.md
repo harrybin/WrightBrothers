@@ -92,7 +92,7 @@ Once you’ve approved (or Agent Mode proceeds automatically), Copilot Agent Mod
 - Type the following prompt:
 
 ```plaintext
-Can you highlight any controllers or methods with low or zero test coverage?
+Highlight any controllers or methods with low or zero test coverage?
 ```
 
 Let Agent Mode summarize which parts of the backend could use more testing!
