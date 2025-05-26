@@ -1,4 +1,4 @@
-# Lab 2.6 – (Optional): Code Coverage Reporting with Copilot Agent Mode
+# Lab 2.5 – Code Coverage Reporting with Copilot Agent Mode
 
 This **optional** lab introduces GitHub Copilot Agent Mode for automating common development tasks using natural language prompts. You will use Agent Mode to set up, generate, and view code coverage reports for your backend project—no prior experience with coverage tools required.
 
