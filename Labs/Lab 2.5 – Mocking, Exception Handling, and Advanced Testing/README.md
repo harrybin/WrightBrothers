@@ -15,7 +15,7 @@ This lab exercise explores how GitHub Copilot can assist in building robust unit
   - Step 2: Adding a Negative Test for an Exception Scenario
   - Step 3: Writing a Unit Test for Exception Handling
   - Step 4: Advanced Mocking (Optional)
-  - Step 5: Run and Review All Tests
+  - Step 5: Run and Review All Tests (Optional)
 
 ---
 

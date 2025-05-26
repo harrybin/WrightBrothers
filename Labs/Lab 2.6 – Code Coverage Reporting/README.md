@@ -33,15 +33,11 @@ How do I get insights on test coverage for my backend project and how do I displ
 
 Copilot will respond with guidance on common tools and approaches for .NET code coverage (like Coverlet, ReportGenerator, or Cobertura reports).
 
----
-
 ## Step 2: Request a Complete Automated Setup
 
 Let’s see Agent Mode in action by requesting an end-to-end setup:
 
-- Open **GitHub Agent Mode**.
-
-- Click `+` to clear prompt history.
+- In **GitHub Agent Mode**.
 
 - Type the following prompt:
 
@@ -53,7 +49,8 @@ Add a .NET code coverage tool for unit tests, generate a Cobertura-style report,
 
 > *Tip:* Agent Mode understands step-by-step tasks, so it should offer to install dependencies, update your test workflow, and generate the report.
 
----
+- Click `Continue` to let Copilot proceed with task installations. Agent mode will ask for confirmation before making changes many times.
+
 
 ## Step 3: Approve or Guide the Agent
 
@@ -67,7 +64,12 @@ Depending on your Agent Mode settings, Copilot might pause for confirmation or o
   🛑 Stop after completing this step so I can review the project setup.
   ```
 
----
+- Click `Continue` to let Agent Mode `Open untrusted web page` for coverage_html/index.html report.
+
+- If the report doesn’t open automatically, you can view it by copying the URL from the Agent Mode panel and pasting it into your browser.
+  - Example: `/GitHubCopilot-BeyondTheBasics\coverage_html\index.html`
+
+- Review the report and make sure it displays correctly.
 
 ## Step 4: Watch Agent Mode Work
 
@@ -80,8 +82,6 @@ Once you’ve approved (or Agent Mode proceeds automatically), Copilot Agent Mod
 - You’ll see progress updates and instructions in the Agent Mode panel.
 
 - Wait for Agent Mode to complete all steps before moving on.
-
----
 
 ## Step 5: Review and Explore
 
@@ -97,8 +97,6 @@ Can you highlight any controllers or methods with low or zero test coverage?
 ```
 
 Let Agent Mode summarize which parts of the backend could use more testing!
-
----
 
 ## Why This Matters
 
