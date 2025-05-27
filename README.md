@@ -68,7 +68,7 @@ Prepare for takeoff! Your journey concludes with a hands-on lab to apply these c
 
 ### Lab 2.3 – Automating Code Coverage Reporting ✈ Tower Clearance
 
-This optional session introduces GitHub Copilot Agent Mode, guiding you through automating code coverage reporting using natural language prompts. You’ll see how Agent Mode can install tools, run tests, generate coverage reports, and help you visualize your project’s test coverage—all with minimal manual setup.
+This session introduces GitHub Copilot Agent Mode, guiding you through automating code coverage reporting using natural language prompts. You’ll see how Agent Mode can install tools, run tests, generate coverage reports, and help you visualize your project’s test coverage—all with minimal manual setup.
 
 Prepare for takeoff! Your journey concludes with a hands-on lab to apply these concepts in real-world scenarios.
 
