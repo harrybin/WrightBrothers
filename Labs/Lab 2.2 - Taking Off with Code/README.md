@@ -208,7 +208,7 @@ public class PlanesControllerTests
 
 ### Step 3: Taking Off - Developing Robust Tests
 
-- Open the `PlanesController.cs` file.
+- Open the `/WrightBrothersApi/Controllers/PlanesController.cs` file.
 
 - Make sure to have the `SetupPlanesData()` and `SearchByName()` method to the `PlanesController.cs` file if you haven't already in the previous lab. If not, use the following code snippet to add the method at bottom of the file.
 

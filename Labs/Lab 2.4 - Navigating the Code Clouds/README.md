@@ -33,7 +33,7 @@ Each section follows a **progressive structure**, introducing:
 #### Scenario 1: Simple Documentation using /doc
 Quickly generate documentation using GitHub Copilot’s /doc feature for individual methods or an entire file.
 
-- Open the `PlanesController.cs` file.
+- Open the `/WrightBrothersApi/Controllers/PlanesController.cs` file.
 
 - Select all content of the method **`GetById()`** in `PlanesController.cs`.
 

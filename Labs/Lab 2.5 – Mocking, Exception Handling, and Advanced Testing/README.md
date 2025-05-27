@@ -1,6 +1,6 @@
 ## Lab 2.5 – (Optional) – Mocking, Exception Handling, and Advanced Testing
 
-This lab exercise explores how GitHub Copilot can assist in building robust unit tests, including scenarios for mocking dependencies, handling exceptions, and covering edge cases. You’ll use prompts and hands-on code updates to strengthen your backend’s reliability.
+This lab exercise explores how GitHub Copilot can assist in building robust unit tests, including scenarios for mocking dependencies, handling exceptions, and covering edge cases. You’ll practice writing prompts and making hands-on code updates to strengthen your backend’s reliability.
 
 ## Prerequisites
 - The prerequisites steps must be completed, see [Labs Prerequisites](../Lab%201.1%20-%20Pre-Flight%20Checklist/README.md)
@@ -21,7 +21,7 @@ This lab exercise explores how GitHub Copilot can assist in building robust unit
 
 ## Step 1: Exploring Mocking in Unit Tests
 
-- Open `PlanesControllerTests.cs`.
+- Open `/WrightBrothersApi.Tests/Controllers/PlanesControllerTests.cs`.
 
 Notice the use of a mock logger via NSubstitute in the test constructor:
 ```csharp
@@ -217,7 +217,7 @@ In this advanced step, you’ll use Copilot to scaffold a repository interface a
 
 **Generate the Unit Test with Moq**
 
-  - Open `PlanesControllerTests.cs`.
+  - Open `/WrightBrothersApi.Tests/Controllers/PlanesControllerTests.cs`.
 
   - In **GitHub Copilot Chat**.
 
