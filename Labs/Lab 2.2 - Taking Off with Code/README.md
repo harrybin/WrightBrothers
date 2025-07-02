@@ -241,7 +241,7 @@ public class PlanesControllerTests
 
 - In the following exercise you will combine everything you learned in the previous steps, but then for the `SearchByName` method. The following prompt is a more detailed description of a problem and the expected solution. You will prompt GitHub Copilot to make it use a `#selection`. besides that you will use `#file` two times in the prompt to make sure Copilot knows the context of the problem.
 
-- Open GitHub Copilot `Edits` (Ctrl+Shift+I) (icon with + on it next to Copilot Chat), then click `+` for `New Edit Session`.
+- Open `GitHub Copilot Edits`, then click `+` for `New Edit Session`.
 
 - Add the following files to the `Working Set` near the bottom of Copilot Edits window.
 
@@ -269,8 +269,7 @@ public class PlanesControllerTests
     - Use the [Theory] attribute for the tests.
     - Assert the number of planes returned using FluentAssertions.
     - Output only the test methods** to be added to #file:'PlanesControllerTests.cs'.
-
-    ## Think step by step and include explanations as comments in the test methods
+    - Include explanations as comments in the test methods.
     ```
 
 <img src="../../Images/Screenshot-SearchByName-Tests.png" width="600">
@@ -409,7 +408,7 @@ Add data annotations for validation to all properties in the Plane class.
 
 - Accept Copilot’s suggestions or adjust as needed.
 
-- Click `Apply` to insert the annotations into `Plane.cs`.
+- Click `Apply`  to insert the annotations into `Plane.cs`.
 
 - Click `Keep` to accept the changes.
 

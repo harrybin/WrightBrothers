@@ -78,17 +78,6 @@ Explain the WrightBrothers API?
 
 - It will give a suggestion to run the application in the terminal.
 
-- Next, try `@vscode` agent by typing the following in the chat window:
-
-```md
-@vscode how to install extensions?
-```
-
-- It will provide a corresponding setting or an action button to install extensions.
-
-> [!IMPORTANT]
-> The `@vscode` agent does not work in GitHub Codespaces. You will receive a `Bad Request` error message.
-
 ### Step 2: Airplane Docking - Add new Flight Model
 
 - Open GitHub Copilot Chat, click `+` to clear prompt history.
@@ -155,50 +144,19 @@ public class PlanesController : ControllerBase
     <---- Place your cursor here
 
     /* Rest of the methods */
-
 }
 ```
 
-- GitHub Copilot will automatically suggest the `[HttpPut]` method.
+- Sometimes GitHub Copilot will automatically suggest the `[HttpPut]` method. If that happens, press `ESC` to close the suggestion.
 
-- Accept the suggestion by pressing `Tab` to accept this attribute, then press `Enter`.
+    > [!NOTE]
+    > The reason GitHub Copilot suggests the `[HttpPut]` method is because it understands that the `PlanesController.cs` class is a REST API controller and that the `[HttpPut]` is currently missing. The `[HttpPut]` method is the next logical step in the REST API for updating a resource.
 
-- Next, Copilot will automatically suggest the method for the `[HttpPut]` attribute, press `Tab` to accept.
+- Type `[HttpDelete("{id}")]`, then press `Tab` to accept this attribute, then press `Enter`.
 
     ```csharp
-    // * Suggested by Copilot
-    [HttpPut("{id}")]
-    public ActionResult Put(int id, Plane plane)
-    {
-        if (id != plane.Id)
-        {
-            return BadRequest();
-        }
-
-        var existingPlane = Planes.Find(p => p.Id == id);
-
-        if (existingPlane == null)
-        {
-            return NotFound();
-        }
-
-        existingPlane.Name = plane.Name;
-        existingPlane.Year = plane.Year;
-        existingPlane.Description = plane.Description;
-        existingPlane.RangeInKm = plane.RangeInKm;
-
-        return NoContent();
-    }
-    // * Suggested by Copilot
+    [HttpDelete("{id}")]
     ```
-
-> [!WARNING]  
-> Copilot is powered by AI, so mistakes are possible.  Try opening the GitHub Copilot Suggestions window by pressing `Ctrl+Enter`. This view will show up to 10 suggestions for you to choose from.
-
-> [!NOTE]
-> The reason GitHub Copilot suggests the `[HttpPut]` method is because it understand that the `PlanesController.cs` class is a REST API controller and that the `[HttpPut]` is currently missing. The `[HttpPut]` method is the next logical step in the REST API for updating a resource.
-
-- Let's do it again, place your cursor at the end of the `Put()` method, after the `}`, press `Enter` twice.
 
 - Accept the suggestion by pressing `Tab` to accept this attribute, then press `Enter`.
 
@@ -223,7 +181,7 @@ public class PlanesController : ControllerBase
     // * Suggested by Copilot
     ```
 
-- Let's do it again, place your cursor at the end of the `Delete()` method, after the `}`, press `Enter` twice.
+- Let's do it again, place your cursor at the end of the `Delete` method, after the `}`, press `Enter` twice.
 
 - Type `[HttpGet("count/{count}")]`, then press `Tab` to accept this attribute, then press `Enter`.
 
@@ -241,6 +199,10 @@ public class PlanesController : ControllerBase
         return Ok(planes);
     }
     ```
+
+> [!WARNING]  
+> Copilot is powered by AI, so mistakes are possible.  Try opening the GitHub Copilot Suggestions window by pressing `Ctrl+Enter`. This view will show up to 10 suggestions for you to choose from.
+
 
 ### Step 4: Test Flight Accelerate - Comments to Code
 

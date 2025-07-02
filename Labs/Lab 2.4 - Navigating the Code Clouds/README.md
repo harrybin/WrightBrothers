@@ -95,6 +95,10 @@ Generate structured API documentation with request parameters, response formats,
 
     - Note: To update the code, you would click `Apply in Editor` button if the documentation is correct.
 
+<Br>
+
+<details>
+<summary>Example Output</summary>
     **Example Output:**
     ```csharp
     /// <summary>
@@ -131,6 +135,8 @@ Generate structured API documentation with request parameters, response formats,
     }
     ```
 
+</details>
+
 > [!NOTE]
 > This **role-based prompt** ensures **detailed API documentation** with structured response explanations and inline comments.
 
@@ -164,6 +170,10 @@ Break down complex logic step-by-step, adding inline comments for clarity and be
     5. If an exception occurs, it logs the error and returns a `500 Internal Server Error`.
     ```
 
+<Br>
+
+<details>
+<summary>Example Output</summary>
     **Example Code with Enhanced Inline Comments**
     ```csharp
     public IActionResult GetById(int id)
@@ -191,6 +201,8 @@ Break down complex logic step-by-step, adding inline comments for clarity and be
         }
     }
     ```
+
+</details>
 
 > [!NOTE]
 > This **Chain-of-Thought** method helps **break down logic step-by-step** for complex functions.
@@ -238,6 +250,10 @@ Generate bulk documentation for an entire file, ideal for legacy codebases and l
 
     - Note: To update the code, you would click `Apply in Editor` button if the documentation is correct.
 
+<Br>
+
+<details>
+<summary>Example Output</summary>
     **Example Output:**
     ```csharp
     /// <summary>
@@ -280,6 +296,7 @@ Generate bulk documentation for an entire file, ideal for legacy codebases and l
         }
     }
     ```
+</details>
 
 
 #### Compare Copilot’s Documentation to Manual Documentation  
@@ -349,7 +366,7 @@ public class FlightsController : ControllerBase
 
 - Why? Refactoring the UpdateFlightStatus method is important because it improves code clarity and maintainability by isolating business logic, making the system easier to update and debug.
 
-- Open GitHub Copilot `Edits` (Ctrl+Shift+I) (icon with + on it next to Copilot Chat), then click `+` for `New Edit Session`.
+- Open `GitHub Copilot Edits`, then click `+` for `New Edit Session`.
 
 - Close the `FlightsController.cs` file.
 
@@ -365,10 +382,10 @@ public class FlightsController : ControllerBase
 - Copy/Paste the following in the Copilot Edits Chat window:
 
     ```md
-    Refactor the UpdateFlightStatus method in FlightsController.cs to improve readability and maintainability by moving status validation logic to a new method called StatusValidation in the models folder.
+    Refactor the UpdateFlightStatus method in FlightsController.cs to improve readability and maintainability by moving status validation logic to a new method called StatusValidation.
 
     ## Extract Status Validation Logic
-    Move the switch statement logic that checks flight status transitions to a new method, CanUpdateStatus(FlightStatus newStatus), inside the StatusValidation method. This method should return a boolean indicating whether the transition is valid and, if invalid, a reason.
+    Move the switch statement logic that checks flight status transitions to a new method, CanUpdateStatus(FlightStatus newStatus), inside the Flights.cs file. This method should return a boolean indicating whether the transition is valid and, if invalid, a reason.
 
     ## Simplify Controller Logic
     Modify UpdateFlightStatus in FlightsController.cs to call CanUpdateStatus(). If valid, update the status and return Ok(). If invalid, return BadRequest() with the appropriate message.
@@ -431,7 +448,7 @@ public ActionResult UpdateFlightStatus(int id, FlightStatus newStatus)
 
 - Open the `WrightBrothersApi` project in Visual Studio Code.
 
-- Open GitHub Copilot `Edits` (Ctrl+Shift+I) (icon with a + next to Copilot Chat), then click `+` to start a `New Edit Session`.
+- Open `GitHub Copilot Edits`, then click `+` for `New Edit Session`.
 
 - Add the following files to the `Working Set` near the bottom of Copilot Edits window.
 
@@ -454,7 +471,7 @@ public ActionResult UpdateFlightStatus(int id, FlightStatus newStatus)
     ## Unit Tests
     Generate a new unit test controller called "AirfieldControllerTests" similar to the existing unit test file PlanesControllerTests.cs. Include comprehensive unit tests to cover all the methods in the AirfieldController.
     
-    ## Think step by step
+    ## Details
     - Include explanations as comments in the test methods.
     - Use the xUnit framework for unit tests.
     - Ensure the unit tests cover all CRUD operations.
@@ -465,11 +482,13 @@ public ActionResult UpdateFlightStatus(int id, FlightStatus newStatus)
     ```
 - Submit the prompt by pressing Enter.
 
+> [!NOTE]
+> If you see **Sorry, the response matched public code so it was blocked. Please rephrase your prompt.** message, try asking Copilot to rephrase the prompt to avoid matching public code".
+
 - Copilot will generate a new controller and the unit tests for the `Airfield` class.
 
 - Review the updates in the file editor.
 
-#### <span style="color:red">Todo! Screenshot Update Needed</span>
 <img src="../../Images/Screenshot-AirfieldControllerCreate.png" width="600">
 
 - You can choose to `Keep` or `Discard` the changes in the file editor or the `Working Set` window.
@@ -497,7 +516,7 @@ public ActionResult UpdateFlightStatus(int id, FlightStatus newStatus)
 ### Step 4 - Landing: Refactoring the AirfieldController
 In this step, we will refactor the AirfieldController and unit tests to improve its code quality and add additional functionalities. We will also enhance the unit tests to cover the new functionalities.
 
-- Open GitHub Copilot `Edits` (Ctrl+Shift+I) (icon with + on it next to Copilot Chat), then click `+` for `New Edit Session`.
+- Open `GitHub Copilot Edits`, then click `+` for `New Edit Session`.
 
 - Add the following files to the `Working Set` near the bottom of Copilot Edits window.
 
@@ -775,7 +794,7 @@ namespace WrightBrothersApi.Tests.Controllers
 
 - This property is used in the `FlightsController` and assigned a hard to read value, i.e. **FlightLogSignature = "171203-DEP-ARR-WB001"**,
 
-- Open GitHub Copilot `Edits` (Ctrl+Shift+I) (icon with + on it next to Copilot Chat), then click `+` for `New Edit Session`.
+- Open `GitHub Copilot Edits`, then click `+` for `New Edit Session`.
 
 - Close the `Flight.cs` file.
 
@@ -812,8 +831,6 @@ namespace WrightBrothersApi.Tests.Controllers
     - Include necessary using statements at the top of the file.
     - Use a try-catch block inside Parse to catch and handle any parsing errors.
     - Add a read-only FlightLog property (getter only) to the Flight model.
-
-     ## Think step by step
     - Include explanations as comments.
     ```
 
@@ -977,7 +994,7 @@ public record FlightLog(DateTime Date, string Departure, string Arrival, string 
 
 - Let's prompt engineer Copilot to generate a solution for the `AerobaticSequenceSignature` property.
 
-- Open GitHub Copilot `Edits` (Ctrl+Shift+I) (icon with + on it next to Copilot Chat), then click `+` for `New Edit Session`.
+- Open `GitHub Copilot Edits`, then click `+` for `New Edit Session`.
 
 - Close the `Flight.cs` file.
 

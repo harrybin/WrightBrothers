@@ -30,7 +30,10 @@ This lab introduces GitHub Copilot Agent Mode for automating common development 
 How do I get insights on test coverage for my backend project and how do I display the test coverage in the browser?
 ```
 
-Copilot will respond with guidance on common tools and approaches for .NET code coverage (like Coverlet, ReportGenerator, or Cobertura reports).
+- Copilot will respond with guidance on common tools and approaches for .NET code coverage (like Coverlet, ReportGenerator, or Cobertura reports).
+
+> [!NOTE]
+> Copilot might ask "Let me know if you want me to run these commands for you, or if you need help automating this process! You can respond yes OR go to step 2.
 
 ## Step 2: Request a Complete Automated Setup
 
@@ -41,48 +44,29 @@ Let’s see Agent Mode in action by requesting an end-to-end setup:
 - Type the following prompt:
 
 ```plaintext
-Add a .NET code coverage tool for unit tests, generate a Cobertura-style report, and serve it in the browser. Install everything needed automatically.
-
-🛑 Stop after completing this step so I can review the project setup.
+Install any required .NET tools and NuGet packages, then run the commands to generate an HTML code coverage report for my .NET 8 solution using Coverlet and ReportGenerator (Cobertura style). When finished, open the HTML report automatically in my browser.
 ```
 
-> *Tip:* Agent Mode understands step-by-step tasks, so it should offer to install dependencies, update your test workflow, and generate the report.
+> [!TIP]
+> GitHub Copilot Agent Mode understands step-by-step tasks, so it should offer to install dependencies, update your test workflow, and generate the report.
 
-- Click `Continue` to let Copilot proceed with task installations. Agent mode will ask for confirmation before making changes many times.
-
-
-## Step 3: Approve or Guide the Agent
-
-Depending on your Agent Mode settings, Copilot might pause for confirmation or offer a summary before taking action.
-
-- If prompted, reply:
-
-  ```plaintext
-  Yes, install the coverage tools and set up the reporting.
-
-  🛑 Stop after completing this step so I can review the project setup.
-  ```
-
-- Click `Continue` to let Agent Mode `Open untrusted web page` for coverage_html/index.html report.
-
-- If the report doesn’t open automatically, you can view it by copying the URL from the Agent Mode panel and pasting it into your browser.
-  - Example: `/GitHubCopilot-BeyondTheBasics\coverage_html\index.html`
-
-- Review the report and make sure it displays correctly.
-
-## Step 4: Watch Agent Mode Work
-
-Once you’ve approved (or Agent Mode proceeds automatically), Copilot Agent Mode will
-
-- Install any necessary coverage tools for your backend project.
-- Run your test suite and generate a Cobertura-style coverage report.
-- Set up an easy way for you to view the report in your browser (such as generating an HTML report and launching it with a local server).
+- Once you’ve approved (or Agent Mode proceeds automatically), Copilot Agent Mode will
+  - Install any necessary coverage tools for your backend project.
+  - Run your test suite and generate a Cobertura-style coverage report.
+  - Set up an easy way for you to view the report in your browser (such as generating an HTML report and launching it with a local server).
 
 - You’ll see progress updates and instructions in the Agent Mode panel.
 
+- Click `Continue` to let Copilot proceed with each task installations.
+  - Agent mode will ask for confirmation before making changes many times.
+
 - Wait for Agent Mode to complete all steps before moving on.
 
-## Step 5: Review and Explore
+- Review the report and make sure it displays correctly.
+
+<img src="../../Images/CodeCoverageReport-Lightmode.png" width="600">
+
+## Step 3: Review and Explore
 
 - Open the code coverage report in your browser (the agent will tell you where).
 - Identify which parts of your code are tested and where you have gaps.
@@ -92,7 +76,7 @@ Once you’ve approved (or Agent Mode proceeds automatically), Copilot Agent Mod
 - Type the following prompt:
 
 ```plaintext
-Highlight any controllers or methods with low or zero test coverage?
+Highlight any controllers or methods with low or zero test coverage in my backend project.
 ```
 
 Let Agent Mode summarize which parts of the backend could use more testing!

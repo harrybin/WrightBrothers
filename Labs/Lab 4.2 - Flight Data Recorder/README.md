@@ -128,7 +128,7 @@ GO
 ### **Step 2 - Refining the Flight Plan**  
 Optimize the **database structure** by eliminating **redundant data**, improving **One-to-Many Relationships**, and enhancing **date usability**. Adjust tables for **better scalability** while keeping the database **lightweight and efficient**, ensuring data integrity and historical accuracy.
 
-- Open GitHub Copilot `Edits` (Ctrl+Shift+I) (icon with + on it next to Copilot Chat), then click `+` for `New Edit Session`
+- Open `GitHub Copilot Edits`, then click `+` for `New Edit Session`.
 
 - Add the following files to the `Working Set` near the bottom of Copilot Edits window.
 

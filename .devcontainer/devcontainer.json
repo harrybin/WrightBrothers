@@ -34,7 +34,8 @@
 				"ms-playwright.playwright",
 				"dbaeumer.vscode-eslint",
 				"ms-vscode.vscode-speech",
-				"ms-vscode.vscode-copilot-vision"
+				"ms-vscode.vscode-copilot-vision",
+				"george-alisson.html-preview-vscode"
 			]
 		}
 	},

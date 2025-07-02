@@ -193,7 +193,7 @@ module.exports = {
 
 - We are going to add tests to the already existing `PlaneList.spec.tsx` file in the `src/components` folder.
 
-- Open GitHub Copilot `Edits` (Ctrl+Shift+I) (icon with + on it next to Copilot Chat), then click `+` for `New Edit Session`.
+- Open `GitHub Copilot Edits`, then click `+` for `New Edit Session`.
 
 - Add the following files to the `Working Set` near the bottom of Copilot Edits window.
 

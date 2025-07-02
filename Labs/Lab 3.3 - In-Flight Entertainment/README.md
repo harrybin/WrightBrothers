@@ -24,7 +24,7 @@ This lab exercise is focused on integrating styled buttons and forms to enhance 
 
 - Close any files that are opened.
 
-- Open GitHub Copilot `Edits` (Ctrl+Shift+I) (icon with + on it next to Copilot Chat), then click `+` for `New Edit Session`.
+- Open `GitHub Copilot Edits`, then click `+` for `New Edit Session`.
 
 - Add the following files to the `Working Set` near the bottom of Copilot Edits window.
 
@@ -171,7 +171,7 @@ export default HomePage;
 
 - Close any files that are opened.
 
-- Open GitHub Copilot `Edits` (Ctrl+Shift+I) (icon with + on it next to Copilot Chat), then click `+` for `New Edit Session`.
+- Open `GitHub Copilot Edits`, then click `+` for `New Edit Session`.
 
 - Add the following files to the `Working Set` near the bottom of Copilot Edits window.
 
