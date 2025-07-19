@@ -38,7 +38,7 @@ Compare the difference between asking the two following things:
 1) Without @workspace:
 
 ```
-Explain the WrightBrothers API?
+Explain the WrightBrothers API application?
 ```
 
 2) With @workspace:
@@ -51,32 +51,35 @@ Explain the WrightBrothers API?
 > @workspace makes GitHub Copilot analyze your project's code instead of guessing. It scans your VS Code workspace (folder/project), checks relevant files based on names and content, and sends matching parts as extra context. You can review the referenced files in the "Used x references" section in the Chat interface.
 
 > [!IMPORTANT]  
-> When asking follow-up questions, the @agent needs to be provided again. For example, if you ask `@workspace` a question and then ask another question, you need to type `@workspace` again.
+> When asking follow-up questions, the `@agent` needs to be provided again. For example, if you ask `@workspace` a question and then ask another question, you need to type `@workspace` again.
+
+- Try `@workspace` again by typing the following in the chat window:
+
+    ```md
+    @workspace how do I run the backend WrightBrothersAPI application?
+    ```
 
 - There are two other Agents `@terminal` and `@vscode`. They are used to help navigate the terminal and VS Code settings respectively.
 
 - Try `@terminal` agent by typing the following in the chat window:
 
     ```md
-    @terminal how do I run the application?
+    @terminal show me the files using dir command.
     ```
 
-- GitHub Copilot might tell you a simple command or that it needs more information `dotnet run`
+- GitHub Copilot might tell you a simple command or that it needs more information `dir`.
 
 > [!NOTE]
 > `@terminal` agent is used to help navigate the terminal and does not have the context of the codebase. It is used to answer generic questions about how to do things in the terminal.
 
-- Try `@terminal` again by typing the following in the chat window:
+- Try `@vscode` agent by typing the following in the chat window:
 
-```md
-@terminal how do I run the backend API application during development?
-```
+    ```md
+    @vscode how do I change the theme?
+    ```
 
-- This is a generic question about running a application in the terminal. Copilot will give a suggestion to run the application in the terminal.
-
-    `To run a .NET application, you can use the dotnet run command in the terminal. This command will build and run the application in the terminal.`
-
-- It will give a suggestion to run the application in the terminal.
+> [!NOTE]
+> `@vscode` agent is used to help navigate the VS Code settings and does not have the context of the codebase. It is used to answer generic questions about how to do things in VS Code.
 
 ### Step 2: Airplane Docking - Add new Flight Model
 
@@ -117,7 +120,9 @@ public class PlanesController : ControllerBase
 }
 ```
 
-- Let's add a new plane to the list by placing your cursor at the end of the `Planes` list, after the `}` of `Plane` with `Id = 3`, type a `,` then press `Enter`.
+- Let's add a new plane to the end of list by placing your cursor at the end of the `Planes` list, after the `}`, see the code snippet above.
+
+- Type a `,` then press `Enter`.
 
 - GitHub Copilot will automatically suggest a `new Plane`.
 
@@ -128,7 +133,7 @@ public class PlanesController : ControllerBase
 
 ### Step 3: Test Flight - Autocompletion and Suggestions
 
-- Place your cursor at the end of the `HttpPost` method, after the `}` , press `Enter` twice.
+- Place your cursor at the end of the `[HttpPost("setup")]` method, after the `}` , press `Enter` twice.
 
 ```csharp
 public class PlanesController : ControllerBase
@@ -143,14 +148,14 @@ public class PlanesController : ControllerBase
 
     <---- Place your cursor here
 
-    /* Rest of the methods */
 }
 ```
 
-- Sometimes GitHub Copilot will automatically suggest the `[HttpPut]` method. If that happens, press `ESC` to close the suggestion.
+> [!IMPORTANT]
+> GitHub Copilot will suggest the `[HttpGet]` method. Press `ESC` to close the suggestion.
 
-    > [!NOTE]
-    > The reason GitHub Copilot suggests the `[HttpPut]` method is because it understands that the `PlanesController.cs` class is a REST API controller and that the `[HttpPut]` is currently missing. The `[HttpPut]` method is the next logical step in the REST API for updating a resource.
+> [!NOTE]
+> The reason GitHub Copilot suggests the `[HttpPut]` method is because it understands that the `PlanesController.cs` class is a REST API controller and that the `[HttpPut]` is currently missing. The `[HttpPut]` method is the next logical step in the REST API for updating a resource.
 
 - Type `[HttpDelete("{id}")]`, then press `Tab` to accept this attribute, then press `Enter`.
 
@@ -158,9 +163,7 @@ public class PlanesController : ControllerBase
     [HttpDelete("{id}")]
     ```
 
-- Accept the suggestion by pressing `Tab` to accept this attribute, then press `Enter`.
-
-- Next, Copilot will automatically suggest the method for the `[HttpDelete]` attribute, press `Tab` to accept.
+- Copilot will automatically suggest the method for the `[HttpDelete]` attribute, press `Tab` to accept this attribute, then press `Enter`.
 
     ```csharp
     // * Suggested by Copilot
@@ -189,7 +192,7 @@ public class PlanesController : ControllerBase
     [HttpGet("count/{count}")]
     ```
 
-- Next, Copilot will automatically suggest the method for the `[GetByCount]` attribute, press `Tab` to accept.
+- Copilot will automatically suggest the method for the `GetByCount()` attribute, press `Tab` to accept this attribute, then press `Enter`.
 
     ```csharp
     public ActionResult<List<Plane>> GetByCount(int count)
@@ -200,9 +203,8 @@ public class PlanesController : ControllerBase
     }
     ```
 
-> [!WARNING]  
-> Copilot is powered by AI, so mistakes are possible.  Try opening the GitHub Copilot Suggestions window by pressing `Ctrl+Enter`. This view will show up to 10 suggestions for you to choose from.
-
+> [!TIP]  
+> To get multiple suggestions from GitHub Copilot, you can type a comment in the editor and then press `Ctrl + Enter` to open the GitHub Copilot Suggestions window. This view will show up to 10 suggestions for you to choose from.
 
 ### Step 4: Test Flight Accelerate - Comments to Code
 
@@ -470,7 +472,7 @@ public class Plane
 - Type the following command
 
     ```
-    Add the new ImageUrl property to each plane and add the next 2 additional planes to complete the Wright Brothers Fleet.
+    Add the new ImageUrl property to each plane and add the next 2 additional planes to complete the Wright Brothers Fleet. Create in a trivial way to not match public code.
     ```
 
 <img src="../../Images/Screenshot-Planes-List.png" width="800">

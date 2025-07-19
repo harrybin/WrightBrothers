@@ -252,7 +252,7 @@ Populate the database with **realistic test data** based on the **Wright Brother
 - Type the following in the chat window:
 
 ```md
-Generate realistic test data for all tables, reflecting Wright Brothers aviation history (1903-1910). Use INSERT statements to create a diverse and representative dataset with between 3-6 records per table for historical accuracy.
+Refactor the AviationDB.sql file to generate realistic test data for all tables, reflecting Wright Brothers aviation history (1903-1910). Use INSERT statements to create a diverse and representative dataset with between 3-6 records per table for historical accuracy.
 ```
 
 - Press `Enter` to submit the prompt.
@@ -323,7 +323,7 @@ Develop **stored procedures**, that retrieves **comprehensive flight information
 - Type the following in the chat window:
 
 ```md
-Create stored procedures for the AviationDB to enhance data retrieval and reporting.
+Refactor the AviationDB.sql file. Create stored procedures for the AviationDB to enhance data retrieval and reporting.
 
 ## Stored Procedures
 - `GetPilotFlightHistory` to fetch all flights flown by a specific pilot.
@@ -413,7 +413,7 @@ Generate **realistic flight records** with randomized **departure and arrival ti
 - Type the following in the chat window:
 
 ```md
-Create a stored procedure named GenerateFlightData that generates sample flight records with randomized departure and arrival times, linking them to random pilots, planes, and airfields. Ensure the data reflects realistic aviation scenarios.
+Refactor the AviationDB.sql file. Create a stored procedure named GenerateFlightData that generates sample flight records with randomized departure and arrival times, linking them to random pilots, planes, and airfields. Ensure the data reflects realistic aviation scenarios.
 ```
 
 - Press `Enter` to submit the prompt.
@@ -482,7 +482,7 @@ Improve **query performance** by creating a **non-clustered indexs** in the **Fl
 - Type the following in the chat window:
 
 ```md
-Create non-clustered indexes to optimize query performance for the Flight table. 
+Refactor the AviationDB.sql file. Create non-clustered indexes to optimize query performance for the Flight table. 
 
 ## Indexes
 - `DepartureTime` to speed up flight scheduling queries.

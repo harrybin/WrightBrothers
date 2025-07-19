@@ -57,34 +57,21 @@ This practical lab designed to teach participants frontend setup and management 
 
 ### Step 2: Looking over the Horizon - Exploring the frontend application
 
-- Open GitHub Copilot Chat
+- Open GitHub Copilot Chat, then click `+` to clear prompt history.
 
 - Type the following in the chat window:
 
     ```bash
-    @workspace explain the frontend repository
+    @workspace provide a detailed explanation of the main responsibilities and features of the frontend in this project? Please include:
+    - The technology used to run the frontend application and why it was chosen.
+    - The technology used to style the frontend, with a brief explanation of its core basics.
+    - The key components or pages.
+    - How the frontend interacts with the backend.
+    - Any notable design or architectural patterns.
     ```
->[!NOTE]
-> @workspace scans the repository to find relevant information about the question asked. It will provide a summary of the repository, including the technologies used, the purpose of the repository, and the structure of the repository.
-
-- In the same chat window, type the following:
-
-    ```bash
-    What technology is used to run the frontend application and why?
-    ```
-
-- The frontend application uses Vite, a fast frontend build tool that provides a lightning-fast development experience. Currently it's one of the most popular tools for frontend development, replacing Webpack and Parcel.
-
-- In the same chat window, type the following:
-
-    ```bash
-    @workspace what technology is used to style the frontend and explain the core basics of this technology.
-    ```
-
-- GitHub Copilot will provide a summary about `Tailwind CSS`, a utility-first CSS framework that provides a set of utility classes to style the frontend application. This is a very popular CSS framework that is used to style components from scratch, for example for a custom design system.
 
 >[!NOTE]
-> If you encounter a new technology or concept it's always a good idea to understand the basics of it and how it works. GitHub Copilot can help you with that.
+> @workspace scans the repository to find relevant information about the question asked. It will provide a summary of the repository, including the technologies used, the purpose of the repository, and the structure of the repository. When you are using a new technology or concept it's always a good idea to understand the basics of it and how it works. GitHub Copilot can help you with that.
 
 - In the same chat window, type the following:
 
@@ -122,7 +109,7 @@ This practical lab designed to teach participants frontend setup and management 
 
 - Open the `WrightBrothersFrontend/src/components/Banner.tsx` file.
 
-- Open GitHub Copilot Chat, then click `+` to clear prompt history.
+- In GitHub Copilot Chat, then click `+` to clear prompt history.
 
 - Select all the contents of `Banner.tsx` file.
 
@@ -311,7 +298,7 @@ flights.
 
 - Stop the frontend application by pressing `Ctrl + C` in the terminal.
 
-### Step 6 (Optional): Notifying the Air Crew - Call to Action Buttons
+### Step 6: Notifying the Air Crew - Call to Action Buttons
 
 - The banner is missing call to action buttons.
 

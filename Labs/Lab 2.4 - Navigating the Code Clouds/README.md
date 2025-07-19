@@ -463,7 +463,7 @@ public ActionResult UpdateFlightStatus(int id, FlightStatus newStatus)
 
     ```md
     ## Generate Controller
-    Create a new API Controller called "AirfieldController" with all the CRUD operations based on the Airfield class located in the file Airfield.cs.
+    Create a new API Controller called "AirfieldController" with all the CRUD operations based on the Airfield class located in the file Airfield.cs. Ensure to follow the same style in PlanesController.
     
     ## Test Data
     Add test data to the AirfieldController for the first 3 airfields used by the Wright Brothers.
@@ -479,6 +479,9 @@ public ActionResult UpdateFlightStatus(int id, FlightStatus newStatus)
     - Use var instead of explicit types when the type is obvious.
     - Include error handling for asynchronous operations.
     - Use async/await syntax for asynchronous programming.
+
+    ## Public Code Matching
+    - Create in a trivial way to not match public code.
     ```
 - Submit the prompt by pressing Enter.
 
@@ -534,9 +537,9 @@ In this step, we will refactor the AirfieldController and unit tests to improve 
 
     ## AirfieldControllerTests.cs
     - Use the xUnit framework for the unit tests.
-    
-    ## Think step by step
-    - Include explanations as comments in the test methods.
+
+    ## Public Code Matching
+    - Create in a trivial way to not match public code.
     ```
 
 <img src="../../Images/Screenshot-AirfieldControllerRefactor.png" width="600">

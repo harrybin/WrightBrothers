@@ -87,7 +87,7 @@ This lab exercise guides participants through coding exercises using GitHub Copi
 - Next, open Copilot Chat and Copy/Paste the following
 
     ```md
-    Generate all unit test scenarios for this method using the existing list of planes for test data.
+    Generate all unit test scenarios for this method. Include only the individual tests, no usings.
     ```
 
 <img src="../../Images/Screenshot-WhereToAddUnitTests.png" width="800">

@@ -18,7 +18,6 @@ This lab exercise is a focused session that instructs participants on integratin
     ### Journey
     - Step 1: What's the WiFi Password - Simple backend integration
     - Step 2: Unstable Internet - State Management through React-Query (Optional).
-    ~~- Step 3: Advanced backend integration with Open API (Optional).~~
 
 ### Step 1: What's the WiFi Password - Simple backend integration
 
@@ -27,8 +26,6 @@ This lab exercise is a focused session that instructs participants on integratin
 - Start by opening `HomePage.tsx` in the `WrightBrothersFrontend/src/pages` folder.
 
 - Open GitHub Copilot Chat, then click `+` to clear prompt history.
-
-- Select all the contents of `HomePage.tsx` file.
 
 - Type the following in the chat window:
 
@@ -146,11 +143,10 @@ npm run frontend-and-backend
 
 - In this lab, we will manage the error and loading states of the component using react-query.
 
-- Start by opening `HomePage.tsx` in the `WrightBrothersFrontend/src/pages` folder
+- Start by opening `HomePage.tsx` in the `WrightBrothersFrontend/src/pages` folder.
 
 - Open GitHub Copilot Chat, then click `+` to clear prompt history.
 
-- Select all the contents of `HomePage.tsx` file.
 
 - Type the following in the chat window:
 
