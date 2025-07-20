@@ -1,4 +1,4 @@
-# Lab 3.1 - Dawn of Aviation ✈ Setting up the Front-End Project
+# Lab 4.1 - Dawn of Aviation ✈ Setting up the Front-End Project
 This practical lab designed to teach participants frontend setup and management using GitHub Copilot. It focuses on implementing and adjusting UI components, exploring frontend technologies, and enhancing usability and accessibility, all facilitated by GitHub Copilot's interactive coding assistance.
 
 ## Prerequisites

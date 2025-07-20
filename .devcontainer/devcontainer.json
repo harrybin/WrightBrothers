@@ -36,13 +36,6 @@
 				"ms-vscode.vscode-speech",
 				"ms-vscode.vscode-copilot-vision",
 				"george-alisson.html-preview-vscode"
-			],
-			"keybindings": [
-				{
-				"key": "ctrl+enter",
-				"command": "github.copilot.generate",
-				"when": "editorTextFocus && inlineSuggestionVisible"
-				}
 			]
 		}
 	},

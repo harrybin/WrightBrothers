@@ -1,4 +1,4 @@
-# Lab 3.4 - Carbon Reinforced Fuselage ✈ Hardening the frontend
+# Lab 4.4 - Carbon Reinforced Fuselage ✈ Hardening the frontend
 This lab focuses on configuring eslint to identify and fix lint issues, updating package dependencies, and optionally creating a Playwright UI Test project. 
 
 ## Prerequisites

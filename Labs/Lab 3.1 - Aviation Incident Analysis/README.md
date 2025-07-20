@@ -1,4 +1,4 @@
-# Lab 4.1 – Aviation Incident Analysis ✈ Troubleshooting with GitHub Copilot
+# Lab 3.1 – Aviation Incident Analysis ✈ Troubleshooting with GitHub Copilot
 
 In this lab, you'll investigate simulated aviation incidents using GitHub Copilot to identify and fix root causes in your code. Like an aviation investigator, you’ll analyze failures, ask Copilot for help, and apply human oversight to ensure high-quality results.
 

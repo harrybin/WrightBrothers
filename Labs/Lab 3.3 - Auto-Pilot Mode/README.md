@@ -1,4 +1,4 @@
-# Lab 4.3 - Auto-Pilot Mode ✈ AI Assistance in Software Development
+# Lab 3.3 - Auto-Pilot Mode ✈ AI Assistance in Software Development
 
 In this lab, you’ll use GitHub Copilot to automate health checks, set up a CI/CD pipeline, provision and deploy to Azure with Infrastructure as Code, and use Copilot’s built-in PR summaries. Each step uses clear, conversational prompts and highlights Copilot’s strengths in a real .NET/Cloud workflow.
 

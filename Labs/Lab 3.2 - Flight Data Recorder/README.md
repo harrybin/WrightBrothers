@@ -1,4 +1,4 @@
-# Lab 4.2 - Flight Data Recorder ✈ Capturing and Analyzing Code Changes
+# Lab 3.2 - Flight Data Recorder ✈ Capturing and Analyzing Code Changes
 This lab exercise demonstrates integrating GitHub Copilot into database development and testing by implementing audit logging, query optimization, and data integrity checks. Participants will explore how AI-powered assistance enhances flight data tracking, debugging workflows, and maintaining historical records in an aviation-themed database.
 
 ## Prerequisites
