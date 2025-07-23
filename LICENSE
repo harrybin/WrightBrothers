@@ -2,17 +2,6 @@
 
 This work is licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License. To view a copy of this license, visit [http://creativecommons.org/licenses/by-nc-nd/4.0/](http://creativecommons.org/licenses/by-nc-nd/4.0/).
 
-------------------
-
-
-Given your requirements—**no forking, copying, cloning, or use outside of training**—the Creative Commons BY-NC-ND 4.0 license is a good start, but it does not fully enforce your specific needs, especially in a software context. Creative Commons licenses are usually intended for creative works (writing, media, etc.), not code, and don't explicitly restrict cloning or forking on a platform like GitHub.
-
-**Key gaps with your current license:**
-
-* It prohibits commercial use and modification, but **it does not ban cloning or forking** at the platform level (GitHub, for example, doesn't read license terms to prevent forks).
-* It doesn't mention internal-only use or prohibit use outside of training.
-
-**What you need is a custom license notice that clearly states your rules**—placed in your README and, ideally, in a LICENSE file. Here’s a sample you can use or adapt:
 
 ---
 
