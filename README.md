@@ -145,7 +145,26 @@ The session ends with a summary of how AI helps in coding. It highlights better 
 ## License
 This work is licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License. To view a copy of this license, visit [http://creativecommons.org/licenses/by-nc-nd/4.0/](http://creativecommons.org/licenses/by-nc-nd/4.0/).
 
-## Legal Disclaimer
-This repo and its contents, including slide decks, labs, and demonstration code, are strictly for internal use during training and remain the exclusive property of Xebia Group B.V.
 
-All rights are protected under copyright law. No part of these materials may be reproduced, distributed, transmitted, displayed, performed, or used in any manner without prior written permission from Xebia Group B.V.
+---
+
+## Legal Disclaimer and License Restrictions
+
+This repository and its contents including slide decks, labs, and demonstration code are confidential and proprietary to Xebia.
+All materials are strictly for internal use during authorized training and remain the exclusive property of Xebia.
+
+All rights reserved under copyright law.
+**No part of these materials may be reproduced, distributed, transmitted, displayed, performed, or used in any manner outside approved training without prior written permission from Xebia.**
+
+**Use Restrictions:**
+
+* **Internal Training Only:** Use is limited to authorized internal training sessions.
+* **No Forking:** Do not fork this repository to any public or private location outside of approved Xebia GitHub organizations.
+* **No Cloning or Copying:** Do not clone, copy, or download this repository outside approved training contexts.
+* **No Distribution:** Do not distribute, share, or publish any part of this repository outside Xebia.
+* **No Commercial Use:** Commercial use of these materials is prohibited.
+* **No Derivative Works:** Do not modify, adapt, or create derivative works for any purpose outside internal training.
+
+Any unauthorized use, copying, or distribution is strictly prohibited and may result in disciplinary action or legal consequences.
+
+Questions about permitted use? Contact [randy.pagels@xebia.com](mailto:randy.pagels@xebia.com).
