@@ -15,9 +15,11 @@ This lab exercise is a focused session that instructs participants on integratin
 - Learn the basics of fetching data from an API and managing state.
 - Enhance understanding of API integration in a React application.
 
-    ### Journey
-    - Step 1: What's the WiFi Password - Simple backend integration
-    - Step 2: Unstable Internet - State Management through React-Query (Optional).
+### Journey
+- Step 1: What's the WiFi Password - Simple backend integration
+- Step 2: Unstable Internet - State Management through React-Query (Optional).
+
+---
 
 ### Step 1: What's the WiFi Password - Simple backend integration
 
@@ -134,6 +136,8 @@ npm run frontend-and-backend
 - You should now see a list of planes from the API, instead of the static list
 
 - Now stop the Frontend and API by pressing `Ctrl + C` in the terminal.
+
+---
 
 ## Optional
 
@@ -267,6 +271,8 @@ npm run frontend-and-backend
 - After 3 seconds you should see the list of planes from the API that was fetched through the `react-query` hook.
 
 - Now stop the Frontend and API by pressing `Ctrl + C` in the terminal.
+
+---
 
 ### Congratulations you've made it to the end! &#9992; &#9992; &#9992;
 

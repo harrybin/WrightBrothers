@@ -11,6 +11,8 @@ This session offers a comprehensive overview of AI's evolution, key terms, and c
 
 Welcome to the Copilot Bootcamp, where we embark on an exciting journey in the world of coding, guided by GitHub Copilot, our trusty navigator much like an airplane's copilot. Imagine yourself as a pilot, akin to the pioneering Wright Brothers, stepping into the cockpit of modern software development. GitHub Copilot, your co-pilot, is there to assist you in navigating the vast and often turbulent skies of coding challenges.
 
+The Wright Brothers took their first historic flight on December 17, 1903. It lasted only 12 seconds, but those few seconds changed the course of history. In much the same way, your first steps with GitHub Copilot may seem small, but they can open up a new era in how you build software.
+
 Just as the Wright Brothers revolutionized travel by mastering the skies, GitHub Copilot is set to revolutionize coding by harnessing the power of AI. In this bootcamp, you'll learn how to seamlessly integrate GitHub Copilot into your coding practice, allowing it to guide you through complex codebases, offer real-time suggestions, and help troubleshoot tricky segments of code, much like a copilot would assist in navigating difficult flight paths.
 
 As you become more proficient with GitHub Copilot, you'll find it's not just an assistant but a co-creator, propelling your projects forward with the speed and precision that would make the Wright Brothers proud. This bootcamp is your runway to mastering this AI-powered tool, helping you soar to new heights in your coding endeavors.

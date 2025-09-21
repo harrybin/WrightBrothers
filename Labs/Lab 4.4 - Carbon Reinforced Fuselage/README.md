@@ -13,10 +13,12 @@ This lab focuses on configuring eslint to identify and fix lint issues, updating
 ## Objectives
 - This lab focuses on configuring ESLint for identifying and resolving lint issues, updating package dependencies, and optionally setting up a Playwright UI testing project
 
-    ### Journey
-    - Step 1: Eslint configuration and fix lint issues.
-    - Step 2: Upgrade to Business Class - Update Package Dependencies.
-    - Step 3: PlayWright UI Test project using **/new** command.
+### Journey
+- Step 1: Eslint configuration and fix lint issues.
+- Step 2: Upgrade to Business Class - Update Package Dependencies.
+- Step 3: PlayWright UI Test project using **/new** command.
+
+---
 
 ### Step 1: Eslint configuration and fix lint issues
 
@@ -146,6 +148,8 @@ module.exports = {
 - GitHub Copilot will now open a Inline Editor window with the suggested fix. Review the fix and click `Accept` to apply the fix.
 
 - Repeat for the other lint issues. You can also try `Explain using Copilot` to understand why the rule is important.
+
+---
 
 ### Step 2: Navigating the Touch Screen - Visual Component Testing
 
@@ -344,6 +348,8 @@ test('should add flying class to image when clicking on a plane', async ({ mount
 - Not all tests will pass. You can now debug the tests in the PlayWright UI and fine-tune the tests to make them pass.
 
 - Now stop the Frontend and API by pressing `Ctrl + C` in the terminal.
+
+---
 
 ## Optional
 
@@ -544,6 +550,8 @@ test('should add flying class to image when clicking on a plane', async ({ mount
   ```
 
 - GitHub Copilot just created a new Playwright UI Test project for you with successful tests. You can now use this project to create more tests for the WrightBrothersFrontend project.
+
+---
 
 ### Congratulations you've made it to the end! &#9992; &#9992; &#9992;
 

@@ -1,4 +1,4 @@
-# Lab 3.1 – Aviation Incident Analysis ✈ Troubleshooting with GitHub Copilot
+# Lab 3.1 – Aviation Incident Analysis ✈ Troubleshooting
 
 In this lab, you'll investigate simulated aviation incidents using GitHub Copilot to identify and fix root causes in your code. Like an aviation investigator, you’ll analyze failures, ask Copilot for help, and apply human oversight to ensure high-quality results.
 
@@ -12,14 +12,16 @@ Complete all prior labs and ensure you have the project set up per the [Labs Pre
 - 20 minutes.
 
 ## Objective
-- Understand Copilot’s strengths and limitations when debugging or fixing issues.
+Build skill in using GitHub Copilot to reproduce, diagnose, and fix real failures, then validate your changes through HTTP calls and optional performance work. In this lab you will complete:
 
-    - Step 1: Flight Crash Investigation – Fuel Depletion Scenario
-    - Step 2: Lightning Strikes – Stack Overflow Scenario
-    - Step 3: Aerodynamics of an Airplane – Performance Optimization (Optional)
-    - Step 4: Aerodynamics of an Airplane – Performance Optimization – Using Agent Mode (Optional)
+- Step 1: Flight Crash Investigation – Fuel Depletion Scenario
+- Step 2: Lightning Strikes – Stack Overflow Scenario
+- Step 3: False Horizon - Runtime Regression Check
+- Step 4: Aerodynamics of an Airplane – Performance Optimization
 
-### Step 1. Flight Crash Investigation - Fuel Depletion Scenario
+---
+
+### Step 1 - Fixing a Flight Crash - Fuel Depletion Scenario
 
 - Open `FlightsController.cs` file located in the `Controllers` folder.
 
@@ -125,7 +127,7 @@ content-type: application/json
 
 - Click `+` to clear prompt history.
 
-- Type the following prompt:
+- Paste the following prompt:
 
 ```
 How should I fix this exception in the takeFlight method in FlightsController.cs?
@@ -159,7 +161,9 @@ content-type: application/json
 
 - Stop the app by pressing `Ctrl + C` or `Cmd + C` in the terminal, or by clicking on the 'Stop' button in the debugger panel.
 
-## Step 2. Lightning Strikes, Unexpected Flight Crash - Stack Overflow Scenario
+---
+
+## Step 2 - Lightning Strikes, Unexpected Flight Crash - Stack Overflow Scenario
 
 - Open `FlightsController.cs` file located in the `Controllers` folder.
 
@@ -192,9 +196,6 @@ public class FlightsController : ControllerBase
     dotnet run
     ```
 
-> [!NOTE]
-> If you encounter an error message like `Project file does not exist.` or `Couldn't find a project to run.`, it's likely that you're executing the command from an incorrect directory. To resolve this, navigate to the correct directory using the command `cd ./WrightBrothersApi`. If you need to move one level up in the directory structure, use the command `cd ..`. The corrcect directory is the one that contains the `WrightBrothersApi.csproj` file.
-
 - Go to the `Examples/Flights.http` file, click `Send Request` to execute the `lightningStrike` request.
 
     ```
@@ -222,7 +223,7 @@ public class FlightsController : ControllerBase
 
 - Click `+` to clear prompt history.
 
-- Type the following prompt:
+- Paste the following prompt:
 
 ```
 How should I fix this exception in the lightningStrike method in FlightsController.cs?
@@ -251,59 +252,100 @@ How should I fix this exception in the lightningStrike method in FlightsControll
 
 - Stop the app by pressing `Ctrl + C` or `Cmd + C` in the terminal, or by clicking on the 'Stop' button in the debugger panel.
 
-## Optional
+---
 
-### Step 3. Aerodynamics of an Airplane - Performance Optimization
+### Step 3 – False Horizon: Runtime Regression Check
 
-- Open `FlightsController.cs` file located in the `Controllers` folder.
+You will introduce a subtle bug that compiles, then use the HTTP file to trigger a runtime error and let Copilot Agent Mode fix it.
 
-- Review the `calculateAerodynamics`, `CalculatePrimes`, and `IsPrime` methods.
+- Introduce the regression. Open `Controllers/PlanesController.cs`, in `GetById` replace the safe lookup with a strict one:
+
+    ```csharp
+    var plane = Planes.First(p => p.Id == id); // throws if not found
+    if (plane == null) return NotFound();
+    return Ok(plane);
+    ```
+
+This compiles, but `First` throws when the id does not exist, which should be a 404, not a 500.
+
+- Run the application
+
+    ```sh
+    dotnet run
+    ```
+
+- Verify the happy path
+   Open `/Examples/Planes.http` in VS Code, find the `GET` for a single plane and run it as is:
+
+    ```http
+    GET http://localhost:1903/api/planes/1 HTTP/1.1
+    ```
+
+You should get `200 OK` with a plane payload.
+
+- Trigger the runtime error
+   In the same `Planes.http` file, change the id to a non existent value (i.e. 999) and send the request again:
+
+    ```http
+    GET http://localhost:1903/api/planes/999 HTTP/1.1
+    ```
+
+You should now see `500 Internal Server Error` and errors in the terminal window.
+
+- Press `Ctrl + C` or `Cmd + C` in the terminal to stop the app, but leave the terminal open.
+
+- Switch to the terminal where the API is running, hightlight the full exception, and copy it to clipboard.
+
+- Open **GitHub Copilot Chat**, switch to **Agent Mode**, start **New Edit Session**, paste the full exception from the terminal.
+
+- Now paste this prompt directly under the exception text:
+
+    ```
+    Fix this runtime error in #file:Controllers/PlanesController.cs.
+    - When a plane id does not exist, the API must return 404 NotFound, not 500.
+    - Explain the root cause in one sentence and show the exact code diff you will apply.
+    - Add or update a unit test that asserts 404 for a missing id.
+    ```
+
+Accept the proposed fix.
+
+- Run the application
+
+    ```sh
+    dotnet run
+    ```
+
+- Retest with `Planes.http`
+
+    ```http
+    GET http://localhost:1903/api/planes/999 HTTP/1.1
+    ```
+
+You should now get `404 Not Found`. Send the original request to confirm the happy path still works:
+
+- Retest with `Planes.http`
+
+    ```http
+    GET http://localhost:1903/api/planes/1 HTTP/1.1
+    ```
 
 > [!NOTE]
-> The method is calculating prime numbers.
+> Always paste the full terminal error and the exact HTTP request you used into the same Agent Mode chat. Keeping the context together makes Copilot’s fix more accurate and keeps the conversation history useful for follow up prompts.
 
-```csharp
-public class FlightsController : ControllerBase
-{
-    [HttpPost("{id}/calculateAerodynamics")]
-    public ActionResult calculateAerodynamics(int id)
-    {
-        Stopwatch stopwatch = new Stopwatch();
-        stopwatch.Start();
+---
 
-        List<int> primes = CalculatePrimes(2, 300000);
+### Step 4 – Aerodynamics of an Airplane - Performance Optimization
 
-        stopwatch.Stop();
-        Console.WriteLine($"Found {primes.Count} prime numbers.");
-        Console.WriteLine($"Elapsed Time: {stopwatch.ElapsedMilliseconds / 1000.0} seconds");
+You will optimize the `calculateAerodynamics` workflow. Choose one track, or do both if time allows.
 
-        return Ok($"Calculated aerodynamics.");
-    }
+> [!TIP]
+> If you plan to do both tracks, run **Track A** first, then let **Track B** run on top of it. Agent Mode fixes are cross-cutting and still apply cleanly after the algorithm upgrade, you get the faster hot path plus safety and resiliency improvements. If you are short on time, do Track B only.
 
-    public static List<int> CalculatePrimes(int start, int end)
-    {
-        List<int> primes = new List<int>();
-        for (int number = start; number <= end; number++)
-        {
-            if (IsPrime(number))
-            {
-                primes.Add(number);
-            }
-        }
-        return primes;
-    }
+#### Track A, Manual algorithm upgrade and timing.
 
-    public static bool IsPrime(int number)
-    {
-        if (number <= 1) return false;
-        for (int i = 2; i < number; i++)
-        {
-            if (number % i == 0) return false;
-        }
-        return true;
-    }
-}
-```
+You will switch from a slow prime check to a faster approach, then measure the result using the same HTTP request.
+
+- Open `FlightsController.cs` and review the three methods that drive this flow: `calculateAerodynamics`, `CalculatePrimes`, and `IsPrime`.
 
 - Open a terminal and navigate to the `WrightBrothersApi` folder
 
@@ -312,9 +354,6 @@ public class FlightsController : ControllerBase
     ```sh
     dotnet run
     ```
-
-> [!NOTE]
-> If you encounter an error message like `Project file does not exist.` or `Couldn't find a project to run.`, it's likely that you're executing the command from an incorrect directory. To resolve this, navigate to the correct directory using the command `cd ./WrightBrothersApi`. If you need to move one level up in the directory structure, use the command `cd ..`. The corrcect directory is the one that contains the `WrightBrothersApi.csproj` file.
 
 - Now go to `Examples/Flights.http` file, click `Send Request` to execute the `calculateAerodynamics` request.
 
@@ -356,21 +395,21 @@ public class FlightsController : ControllerBase
 
 - Click `+` to clear prompt history.
 
-- Type the following prompt:
+- Paste the following prompt:
 
-```
-What is a more efficient algorithm for finding all prime numbers in a range than checking each number with IsPrime? Please explain how it works.
-```
+    ```
+    What is a more efficient algorithm for finding all prime numbers in a range than checking each number with IsPrime? Please explain how it works.
+    ```
 
 - Read Copilot’s answer. Expect a recommendation for the “Sieve of Eratosthenes” or similar, along with an explanation of how it works.
 
-- Type the following prompt:
+- Paste the following prompt:
 
     ```
     Can you help me implement the Sieve of Eratosthenes in C#? Please include detailed comments explaining each part. Solve this in a novel way that does not match public code.
     ```
 
-- Copilot will optimize the code.
+- Apply the proposed changes.
 
 - Click on the `Apply in Editor` to replace the `calculateAerodynamics` methods with the new one.
 
@@ -398,41 +437,53 @@ What is a more efficient algorithm for finding all prime numbers in a range than
 - The application will now calculate the prime numbers in less than 50 milliseconds.
 
 > [!NOTE]
-> GitHub Copilot has knowledge of many algorithmic optimizations and can help you optimize your code performance.
+> **Track A** is about learning new algorithms. GitHub Copilot has knowledge of many algorithmic optimizations and can help you optimize your code performance.
 
-## Optional
+---
 
-### Step 4. Performance Optimization - Using Agent Mode (for advanced users)
+#### Track B, Agent Mode hardening and bulk improvements.
 
-- Close the `FlightsController.cs` file.
+You will use **GitHub Copilot Agent Mode** to apply cross-cutting fixes and resiliency patterns to the same controller.
 
-- Open **GitHub Agent Mode**.
+- Open GitHub **Agent Mode**, then run a targeted optimization prompt:
 
-- Click `+` to clear prompt history.
+   ```
+   Optimize all recursive methods in FlightsController.cs to include a recursion depth limit and proper error handling.
+   ```
 
-- Type the following prompt:
+This targets safety and resiliency concerns across methods.
+
+- For a broader pass, ask Agent Mode to scan the file and propose performance and stability improvements, then apply the changes:
+
+   ```
+   Scan FlightsController.cs for all crash-prone or inefficient code and generate fixes and performance improvements.
+   ```
+
+- Apply the proposed changes.
+
+- Run the application
+
+    ```sh
+    dotnet run
+    ```
+
+- Now go to `Examples/Flights.http` file, click `Send Request` to execute the `calculateAerodynamics` request again.
 
     ```
-    Optimize all recursive methods in FlightsController.cs to include a recursion depth limit and proper error handling.
+    POST http://localhost:1903/flights/1/calculateAerodynamics HTTP/1.1
     ```
 
-**Where to Use Edits or Agent Mode:**  
-- **Exception handling and error messaging** (multiple methods)
-- **Adding recursion depth checks** (any/all recursive methods)
-- **Bulk code optimizations** (multiple calculation or utility methods)
+    Example output
 
-**Agent Mode** could be used to automate all these steps with a single prompt, e.g.,
+    ```
+    Found 25997 prime numbers.
+    Elapsed Time: 0.014 seconds
+    ```
 
-- Click `+` to clear prompt history.
+> [!NOTE]
+> **Track B** is about automation at scale. Agent Mode can update multiple methods and patterns in one go, which is ideal when you need safety checks, better errors, and small speedups across the file.&#x20;
 
-- Type the following prompt:
-
-```
-Scan FlightsController.cs for all crash-prone or inefficient code and generate fixes and performance improvements.
-```
-- Copilot will optimize the code.
-
-- Click on the `Apply in Editor` to replace the `calculateAerodynamics` methods with the new one.
+---
 
 ### Congratulations you've made it to the end! &#9992; &#9992; &#9992;
 

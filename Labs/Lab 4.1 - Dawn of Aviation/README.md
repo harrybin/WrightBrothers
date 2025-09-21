@@ -15,14 +15,16 @@ This practical lab designed to teach participants frontend setup and management 
 - Implement and adjust UI components.
 - Explore frontend technologies while enhancing usability and accessibility.
 
-    ### Journey
-    - Step 1 - Sunset above the Clouds - Setup and Run the Frontend
-    - Step 2 - Looking over the Horizon - Exploring the frontend application.
-    - Step 3 - In-flight Correction - Centering a div.
-    - Step 4 - Request for Extra Legroom - Spacing UI elements
-    - Step 5 - Emergency Exit Lights - Color Contrast
-    - Step 6 - Notifying the Air Crew - Call to Action Buttons.
-    - Step 7 - Check for WCAG Guidelines (Optional)
+### Journey
+- Step 1 - Sunset above the Clouds - Setup and Run the Frontend
+- Step 2 - Looking over the Horizon - Exploring the frontend application.
+- Step 3 - In-flight Correction - Centering a div.
+- Step 4 - Request for Extra Legroom - Spacing UI elements
+- Step 5 - Emergency Exit Lights - Color Contrast
+- Step 6 - Notifying the Air Crew - Call to Action Buttons.
+- Step 7 - Check for WCAG Guidelines (Optional)
+
+---
 
 ### Step 1: Sunset above the Clouds - Setup and Run the Frontend
 
@@ -55,6 +57,8 @@ This practical lab designed to teach participants frontend setup and management 
 
 - Stop the frontend application by pressing `Ctrl + C` in the terminal.
 
+---
+
 ### Step 2: Looking over the Horizon - Exploring the frontend application
 
 - Open GitHub Copilot Chat, then click `+` to clear prompt history.
@@ -84,6 +88,8 @@ This practical lab designed to teach participants frontend setup and management 
 - In this lab you learned how to use GitHub Copilot to understand the frontend repository and its structure. You also learned how to ask questions about the frontend repository and the technologies used in it.
 
 - You are now ready to start coding the frontend.
+
+---
 
 ### Step 3: In-flight Correction - Centering a div
 
@@ -151,6 +157,8 @@ This practical lab designed to teach participants frontend setup and management 
 - The banner title should now be centered.
 
 - Stop the frontend application by pressing `Ctrl + C` in the terminal.
+
+---
 
 ### Step 4: Request for Extra Legroom - Spacing UI elements
 
@@ -250,6 +258,8 @@ export default Banner;
 > Copilot does not always provide the exact solution you are looking for. Try the prompt again or provide more context to get a better solution.
 
 - Stop the frontend application by pressing `Ctrl + C` in the terminal.
+
+---
 
 ### Step 5: Emergency Exit Lights - Color Contrast
 
@@ -362,6 +372,8 @@ flights.
 
 - Hover over the buttons to see the hover effect.
 
+---
+
 ## Optional
 
 ### Step 7 (Optional) - Check for WCAG Guidelines (Optional)
@@ -393,6 +405,8 @@ These guidelines ensure web content is accessible to people with various disabil
 - Copilot will provide you with guidance and suggestions on how to make the UI WCAG compliant.
 
 - Free free to click "Apply in Editor" to make the changes.
+
+---
 
 ### Congratulations you've made it to the end! &#9992; &#9992; &#9992;
 

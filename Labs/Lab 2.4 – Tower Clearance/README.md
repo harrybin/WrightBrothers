@@ -1,6 +1,6 @@
-# Lab 2.4 - Navigating the Code Clouds: Additional Features of GitHub Copilot
+# Lab 2.4 – Tower Clearance: Agent Mode in Action
 
-This lab exercise introduces GitHub Copilot's advanced features and shows you how to boost your coding efficiency. You'll practice tasks like adding new properties, generating documentation, refactoring code, and parsing strings. Optional labs will also cover context understanding and regex parsing.
+This lab introduces GitHub Copilot Agent Mode for automating common development tasks using natural language prompts. You will use Agent Mode to set up, generate, and view code coverage reports for your backend project—no prior experience with coverage tools required.
 
 ## Prerequisites
 - The prerequisites steps must be completed, see [Labs Prerequisites](../Lab%201.1%20-%20Pre-Flight%20Checklist/README.md)
@@ -9,452 +9,31 @@ This lab exercise introduces GitHub Copilot's advanced features and shows you ho
 
 - 30 minutes.
 
-## Objectives
-
-- To master GitHub Copilot's advanced features for solving complex coding exercises and optimizing code.
-    - Step 1 - Flight Logbook - Logging Your Coding Journey
-    - Step 2 - Flying in Formation - Code Refactoring
-    - Step 3 - Ascending to the Clouds - Creating the AirfieldController
-    - Step 4 - Landing - Refactoring the AirfieldController
-    - Step 5 - Parsing Flight Show - Prompt Engineering
-    - Step 6 - Regex Aerobatics Show - Advanced Prompt Engineering (Optional)
-
-### Step 1: - Flight Logbook - Logging Your Coding Journey
-This step explores different ways to **document code using GitHub Copilot**. We'll focus on **the `GetById()` method in `PlanesController.cs`**, testing various documentation prompts and approaches.
-
-Each section follows a **progressive structure**, introducing:
-1. Simple documentation generation.
-2. Instruction-based prompting.
-3. Role-based documentation for API endpoints.
-4. Chain-of-thought explanations for complex logic.
-5. Meta-prompts for custom documentation strategies.
-6. Automatic Documentation for Entire Files
-
-#### Scenario 1: Simple Documentation using /doc
-Quickly generate documentation using GitHub Copilot’s /doc feature for individual methods or an entire file.
-
-- Open the `/WrightBrothersApi/Controllers/PlanesController.cs` file.
-
-- Select all content of the method **`GetById()`** in `PlanesController.cs`.
-
-- Right-click and choose `Copilot` -> `Generate Docs`.
-
-- View the updates, then click `Discard` to try a different approach.
-
-> [!NOTE]
-> GitHub Copilot uses the `/doc` agent to generate documentation for a **single method or the entire file** within seconds. This is a fast way to document your codebase, but we will explore **more controlled methods** using Copilot Chat.
-
-#### Scenario 2: Simple Instruction-Based Prompt
-Use a direct Copilot Chat prompt to generate XML documentation, including method purpose, parameters, and return values.
-
-- Select all content of the method **`GetById()`** in `PlanesController.cs`.
-
-<img src="../../Images/Screenshot-PlanesController-docs2.png" width="350">
-
-Now that you’ve used Copilot Chat for focused, step-by-step improvements, let’s explore how Copilot Edits can make larger or repetitive changes even faster:
-
-    ```
-    Document this C# function, including its purpose, parameters, and return value.
-    ```
-
-- Review the generated XML documentation.
-
-- View the updates, then click `Discard` to try a different approach.
-
-    - Note: To update the code, you would click `Apply in Editor` button if the documentation is correct.
-
-    **Example Output:**
-    ```csharp
-    /// <summary>
-    /// Retrieves a plane by its unique identifier.
-    /// </summary>
-    /// <param name="id">The unique identifier of the plane.</param>
-    /// <returns>The plane object if found; otherwise, NotFound result.</returns>
-    ```
-
-> [!NOTE]
-> This approach provides a **quick** way to generate function-level doc comments. However, for **API documentation**, we will use a more structured role-based prompt.
-
-#### Scenario 3: Role-Based Prompt for API Documentation
-Generate structured API documentation with request parameters, response formats, and inline comments for better developer understanding.
-
-- Select all content of the method **`GetById()`** in `PlanesController.cs`.
-
-- Open **GitHub Copilot Chat**.
-
-- Click `+` to clear prompt history.
-
-- Type the following command.
-
-    ```
-    You are a technical writer. Write detailed documentation for this API endpoint, explaining its request parameters, response format, and usage examples. Additionally, add detailed comments to the GetById method in the PlanesController class, explaining each step and including error handling.
-    ```
-- Review the generated API documentation and inline comments.
-
-- View the updates, then click `Discard` to try a different approach.
-
-    - Note: To update the code, you would click `Apply in Editor` button if the documentation is correct.
-
-<Br>
-
-<details>
-<summary>Example Output</summary>
-    **Example Output:**
-    ```csharp
-    /// <summary>
-    /// Retrieves a plane by its unique identifier.
-    /// </summary>
-    /// <param name="id">The unique identifier of the plane.</param>
-    /// <returns>
-    /// Returns an HTTP 200 OK response with the plane object if found.
-    /// Returns an HTTP 404 Not Found response if the plane does not exist.
-    /// </returns>
-    [HttpGet("{id}")]
-    public IActionResult GetById(int id)
-    {
-        try
-        {
-            // Attempt to find the plane by ID.
-            var plane = _planeService.GetPlaneById(id);
-            
-            // If no plane is found, return 404 Not Found.
-            if (plane == null)
-            {
-                return NotFound($"Plane with ID {id} not found.");
-            }
-
-            // Return the found plane with an HTTP 200 OK response.
-            return Ok(plane);
-        }
-        catch (Exception ex)
-        {
-            // Log the exception and return an error response.
-            _logger.LogError($"Error retrieving plane: {ex.Message}");
-            return StatusCode(500, "Internal server error");
-        }
-    }
-    ```
-
-</details>
-
-> [!NOTE]
-> This **role-based prompt** ensures **detailed API documentation** with structured response explanations and inline comments.
-
-#### Scenario 4: Chain-of-Thought for Explaining Complex Logic
-Break down complex logic step-by-step, adding inline comments for clarity and better maintainability.
-
-- Select all content of the method **`GetById()`** in `PlanesController.cs`.
-
-- Open **GitHub Copilot Chat**.
-
-- Click `+` to clear prompt history.
-
-- Type the following prompt:
-
-    ```
-    Explain the logic of this function step-by-step, then add inline comments for clarity.
-    ```
-
-- Review Copilot’s explanation and inline comments.
-
-- View the updates, then click `Discard` to try a different approach.
-
-    - Note: To update the code, you would click `Apply in Editor` button if the documentation is correct.
-
-    **Example Explanation**
-    ```
-    1. The method receives an integer `id` as input.
-    2. It calls `_planeService.GetPlaneById(id)` to fetch the plane details.
-    3. If the plane is not found, it returns `NotFound()`.
-    4. If the plane is found, it returns the plane with `Ok()`.
-    5. If an exception occurs, it logs the error and returns a `500 Internal Server Error`.
-    ```
-
-<Br>
-
-<details>
-<summary>Example Output</summary>
-    **Example Code with Enhanced Inline Comments**
-    ```csharp
-    public IActionResult GetById(int id)
-    {
-        try
-        {
-            // Fetch the plane based on the provided ID.
-            var plane = _planeService.GetPlaneById(id);
-
-            // Check if the plane exists.
-            if (plane == null)
-            {
-                // If not found, return a 404 Not Found response.
-                return NotFound($"Plane with ID {id} not found.");
-            }
-
-            // If found, return the plane with an HTTP 200 OK response.
-            return Ok(plane);
-        }
-        catch (Exception ex)
-        {
-            // If an error occurs, log it and return a 500 Internal Server Error.
-            _logger.LogError($"Error retrieving plane: {ex.Message}");
-            return StatusCode(500, "Internal server error");
-        }
-    }
-    ```
-
-</details>
-
-> [!NOTE]
-> This **Chain-of-Thought** method helps **break down logic step-by-step** for complex functions.
-
-#### Scenario 5: Meta Prompt for Custom Documentation Needs
-Optimize Copilot prompts to generate clean, consistent documentation across large projects.
-
-- Close any files you have open.
-
-- Open **GitHub Copilot Chat**.
-
-- Click `+` to clear prompt history.
-
-- Type the following meta-prompt:
-
-    ```
-    What’s the best way to prompt you to generate clean, consistent code documentation for large projects?
-    ```
-
-- Review Copilot’s recommendations.
-
-- Use the suggested techniques to refine how you prompt Copilot for documentation.
-
-> [!NOTE]
-> This **meta-prompt** helps standardize documentation **across large projects**.
-
-##### Scenario 6: Automatic Documentation for Entire Files
-Generate bulk documentation for an entire file, ideal for legacy codebases and large projects.
-
-- Do not select any content of the method in `PlanesController.cs`.
-
-- Open **GitHub Copilot Chat**.
-
-- Click `+` to clear prompt history.
-
-- Type the following prompt:
-
-    ```
-    Generate OpenAPI-style documentation comments for this file, ensuring that all request parameters, response formats, and HTTP status codes are documented. Be sure to add inline comments for clarity where needed.
-    ```
-
-- Review the generated **class-level summary** and **method-level comments**.
-
-- View the updates, then click `Discard` to try a different approach.
-
-    - Note: To update the code, you would click `Apply in Editor` button if the documentation is correct.
-
-<Br>
-
-<details>
-<summary>Example Output</summary>
-    **Example Output:**
-    ```csharp
-    /// <summary>
-    /// Controller for managing aircraft data.
-    /// Provides endpoints for retrieving planes by ID.
-    /// </summary>
-    [ApiController]
-    [Route("api/[controller]")]
-    public class PlanesController : ControllerBase
-    {
-        /// <summary>
-        /// Retrieves a plane by its unique identifier.
-        /// </summary>
-        /// <param name="id">The unique identifier of the plane.</param>
-        /// <returns>
-        /// Returns an HTTP 200 OK response with the plane object if found.
-        /// Returns an HTTP 404 Not Found response if the plane does not exist.
-        /// </returns>
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
-        {
-            try
-            {
-                // Fetch the plane based on the provided ID.
-                var plane = _planeService.GetPlaneById(id);
-
-                // Check if the plane exists.
-                if (plane == null)
-                {
-                    return NotFound($"Plane with ID {id} not found.");
-                }
-
-                return Ok(plane);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Error retrieving plane: {ex.Message}");
-                return StatusCode(500, "Internal server error");
-            }
-        }
-    }
-    ```
-</details>
-
-
-#### Compare Copilot’s Documentation to Manual Documentation  
-
-- Review the **Copilot-generated documentation**.
-
-- Ask the following questions:
-    - **Is anything missing?** (e.g., exception handling, request examples)
-    - **Are all parameters and return types well explained?**
-    - **Does this match your team’s documentation style?**
-
-- If improvements are needed, manually refine the documentation.
-
-> [!NOTE]  
-> This **bulk documentation approach** is perfect for **onboarding new developers** or documenting **large, legacy codebases**.
-
-## Summary  
-
-By automating documentation for **entire files**, you can:  
-✅ Save time when working with **large codebases**.  
-✅ Ensure **consistent** documentation across **all methods**.  
-✅ Improve **API documentation** using OpenAPI-style comments.  
-
-For best results, **review and refine** the generated docs to align with your project’s standards.
-
-
-### Step 2: - Flying in Formation - Code Refactoring
-
-- Open the `Controllers/FlightsController.cs` file.
-
-- Navigate to the `UpdateFlightStatus` method.
-
-```csharp
-public class FlightsController : ControllerBase
-{
-    // Other methods
-
-    [HttpPost("{id}/status")]
-    public ActionResult UpdateFlightStatus(int id, FlightStatus newStatus)
-    {
-        var flight = Flights.Find(f => f.Id == id);
-        if (flight != null)
-
-    /* Rest of the method bpdy */
-
-    }
-}
-```
-
-> [!NOTE]
-> Note that the `UpdateFlightStatus` method has a high code complexity rating of 10+, calculated by the [Cyclomatic Complexity metric](https://en.wikipedia.org/wiki/Cyclomatic_complexity). This is a good candidate for refactoring.
-
-- Select all the contents of the `UpdateFlightStatus()` method.
-
-- Open GitHub Copilot Chat, click **+** to clear prompt history.
-
-- Ask the following question:
-
-  ```
-  What is the cyclomatic complexity of this method UpdateFlightStatus?
-  ```
-
-> [!NOTE]
-> In the case of the UpdateFlightStatus method, we can calculate the cyclomatic complexity by counting the number of decision points (if, switch-case, loops) plus 1. The cyclomatic complexity of the UpdateFlightStatus method is 10.
-
-- Let's go ahead and refactor the code to make it more readable and maintainable.
-
-- Why? Refactoring the UpdateFlightStatus method is important because it improves code clarity and maintainability by isolating business logic, making the system easier to update and debug.
-
-- Open `GitHub Copilot Edits`, then click `+` for `New Edit Session`.
-
-- Close the `FlightsController.cs` file.
-
-- Add the following files to the `Working Set` near the bottom of Copilot Edits window.
-
-- Click the `+ Add files` button, then select these:
-    - `Flight.cs`
-    - `FlightsController.cs`
-
-> [!NOTE]
-> You can multi-select these files from the file explorer by holding the `Ctrl` down and `Left-Clicking` on each file. Then simply drag-n-drop them into Copilot Edits working set window.
-
-- Copy/Paste the following in the Copilot Edits Chat window:
-
-    ```md
-    Refactor the UpdateFlightStatus method in FlightsController.cs to improve readability and maintainability by moving status validation logic to a new method called StatusValidation.
-
-    ## Extract Status Validation Logic
-    Move the switch statement logic that checks flight status transitions to a new method, CanUpdateStatus(FlightStatus newStatus), inside the Flights.cs file. This method should return a boolean indicating whether the transition is valid and, if invalid, a reason.
-
-    ## Simplify Controller Logic
-    Modify UpdateFlightStatus in FlightsController.cs to call CanUpdateStatus(). If valid, update the status and return Ok(). If invalid, return BadRequest() with the appropriate message.
-
-    ## Improve Readability & Maintainability
-    Ensure the refactored code follows the Single Responsibility Principle, keeping the controller focused on handling requests while delegating business logic to the Flight model.
-    ```
-- Submit the prompt by pressing Enter.
-
-- Copilot will update the `Flights` and `FlightsController` class.
-
-- Review the updates in the file editor.
-
-<img src="../../Images/Screenshot-UpdateFlightStatus-Refactor.png" width="800">
-
-- You can choose to `Accept` or `Discard` the changes in the file editor or the `Working Set` window.
-
-- Click `Accept` to save the changes, then click `Done` in the `Copilot Edits` window to complete this task.
-
-> [!NOTE]
-> This refactoring improves the readability and maintainability of the `UpdateFlightStatus` method by delegating the status validation logic to the `Flight` model. This keeps the controller focused on handling requests while the business logic is encapsulated within the model.
-
-<Br>
-
-<details>
-<summary>Click for Solution</summary>
-
-```csharp
-[HttpPost("{id}/status")]
-public ActionResult UpdateFlightStatus(int id, FlightStatus newStatus)
-{
-    var flight = Flights.Find(f => f.Id == id);
-    if (flight != null)
-    {
-        var (isValid, reason) = flight.CanUpdateStatus(newStatus);
-        if (!isValid)
-        {
-            return BadRequest(reason);
-        }
-
-        flight.Status = newStatus;
-        return Ok($"Flight status updated to {newStatus}.");
-    }
-    else
-    {
-        return NotFound("Flight not found.");
-    }
-}
-```
-
-</details>
-
-> [!NOTE]
-> The output of GitHub Copilot Chat can vary, but the output should be a refactored method that is more readable and maintainable.
-
-> [!NOTE]
-> Note that GitHub Copilot Chat can make mistakes sometimes. Best practice is to have the method covered with unit tests before refactoring it. This is not a requirement for this lab, but it is a good practice to follow. These unit tests can be generated by GitHub Copilot as well, which is covered in a previous lab.
-
-## Step 3 - Ascending to the Clouds: Creating the AirfieldController
-
-- Open the `WrightBrothersApi` project in Visual Studio Code.
-
-- Open `GitHub Copilot Edits`, then click `+` for `New Edit Session`.
-
-- Add the following files to the `Working Set` near the bottom of Copilot Edits window.
-
-- Click the `+ Add files` button, then select these:
-    - `PlanesControllerTests.cs`
-    - `Airfield.cs`
+## Objective
+- Experience how Copilot Agent Mode can automate repetitive tasks and streamline code quality reporting, all with simple, conversational prompts.
+
+  - Step 1 - Ascending to the Clouds - Creating the AirfieldController
+  - Step 2 - Landing - Refactoring the AirfieldController
+  - Step 3 - Test Flight Instrument Panel - Code Coverage Insights
+  - Step 4 - Tower Signal: Generating API Documentation
+  - Step 5 - Parsing Flight Show - Prompt Engineering
+  - Step 6 - Regex Aerobatics Show - Advanced Prompt Engineering (Optional)
+
+---
+
+## Step 1 - Ascending to the Clouds: Creating the AirfieldController
+
+In this step, you will use GitHub Copilot Edits to create a new AirfieldController with full CRUD and a matching test suite. The goal is to show how a focused prompt and a small working set can produce working code quickly, then give you a solid baseline for refactoring and coverage in later steps. When you finish, you will have a controller, sample data for historic airfields, and tests that confirm the basics.
+
+1. Open **GitHub Copilot Edits** and make sure you are in **Edits** mode, not Agent.
+   Use `Ctrl+Shift+I`, then select **+** for new edit session.
+
+2. Add the controller file to the **Copilot Edits working set**.
+    - Click **+ Add files** in the Edits panel, select the following:
+        - `/PlanesController.cs`
+        - `/PlanesControllerTests.cs`
+        - `/Airfield.cs`
+    - Confirm all 3 appear under **Working set**.
 
 > [!NOTE]
 > You can multiple select these files from the file explorer by holding the `Ctrl` down and clicking on each file. Then simply drag-n-drop them into the `Edit with Copilot` window.
@@ -485,8 +64,8 @@ public ActionResult UpdateFlightStatus(int id, FlightStatus newStatus)
     ```
 - Submit the prompt by pressing Enter.
 
-> [!NOTE]
-> If you see **Sorry, the response matched public code so it was blocked. Please rephrase your prompt.** message, try asking Copilot to rephrase the prompt to avoid matching public code".
+> [!WARNING]
+> If you see **Sorry, the response matched public code so it was blocked. Please rephrase your prompt.** message, try asking Copilot to rephrase the prompt to avoid matching public code".  You can also slightly modify the prompt and try again by appending "in a trivial way to not match public code" to the end of the prompt.
 
 - Copilot will generate a new controller and the unit tests for the `Airfield` class.
 
@@ -496,17 +75,17 @@ public ActionResult UpdateFlightStatus(int id, FlightStatus newStatus)
 
 - You can choose to `Keep` or `Discard` the changes in the file editor or the `Working Set` window.
 
-- Click `Accept` to save the changes, then click `Done` in the `Copilot Edits` window to complete this task.
+- Click `Keep` to save the changes in the `Copilot Edits`.
 
 > [!NOTE]
-> Copilot is not only context aware, knows you need a list of items and knows the `Air Fields` used by the Wright Brothers, the `Huffman Prairie`, which is the first one used by the Wright Brothers.
+> Copilot is not only context aware, knows you need a list of items and knows the historic`Air Fields` used by the Wright Brothers, like `Huffman Prairie`, which is the first one used by the Wright Brothers.
 
 - Now that you have created the `AirfieldController` with CRUD operations, it's time to ensure that it's working as expected. In this step, you will run the new `AirfieldController` unit tests.
 
-- Let's run the unit tests in the terminal.
+- Let's run the unit tests in the terminal.  From the terminal, run the following command:
 
     ```sh
-    dotnet test WrightBrothersApi/WrightBrothersApi.Tests/WrightBrothersApi.Tests.csproj
+    dotnet test ./WrightBrothersApi.Tests/WrightBrothersApi.Tests.csproj
     ```
 
 <img src="../../Images/Screenshot-SearchByName-Fix.png" width="600">
@@ -516,16 +95,28 @@ public ActionResult UpdateFlightStatus(int id, FlightStatus newStatus)
     ```sh
     Test summary: total: 15, failed: 2, succeeded: 13, skipped: 0
     ```
-### Step 4 - Landing: Refactoring the AirfieldController
+
+- If any tests fail, you can use Copilot to help fix them. Copy the following prompt and paste it into the Copilot Edits Chat window:
+
+    ```
+    Fix any failing tests in AirfieldControllerTests.cs. Review the test methods and ensure they correctly test the corresponding methods in AirfieldController.cs. Make sure to handle any exceptions or edge cases that might cause the tests to fail.
+    ```
+
+- If Copilot suggests changes, review them in the file editor, then click `Keep` to save the changes.
+
+- Rerun the tests again until all tests pass.
+
+---
+
+### Step 2 - Landing: Refactoring the AirfieldController
+
 In this step, we will refactor the AirfieldController and unit tests to improve its code quality and add additional functionalities. We will also enhance the unit tests to cover the new functionalities.
 
-- Open `GitHub Copilot Edits`, then click `+` for `New Edit Session`.
+- Open **GitHub Copilot Edits** and make sure you are in **Edits** mode, not Agent.
+   Use `Ctrl+Shift+I`, then select **+** for new edit session.
 
-- Add the following files to the `Working Set` near the bottom of Copilot Edits window.
-
-- Click the `+ Add files` button, then select these:
-    - `AirfieldController.cs`
-    - `AirfieldControllerTests.cs`
+- Add the controller file to the **Copilot Edits working set**.
+    - Click **+ Add files** in the Edits panel, select `AirfieldController.cs` and `AirfieldControllerTests.cs`, confirm it appears under **Working set**.
 
 - Copy/Paste the following in the Copilot Edits Chat window:
 
@@ -542,7 +133,7 @@ In this step, we will refactor the AirfieldController and unit tests to improve 
     - Create in a trivial way to not match public code.
     ```
 
-<img src="../../Images/Screenshot-AirfieldControllerRefactor.png" width="600">
+    <img src="../../Images/Screenshot-AirfieldControllerRefactor.png" width="600">
 
 - Submit the prompt by pressing Enter.
 
@@ -550,9 +141,7 @@ In this step, we will refactor the AirfieldController and unit tests to improve 
 
 - Review the updates in the file editor.
 
-- You can choose to `Accept` or `Discard` the changes in the file editor or the `Working Set` window.
-
-- Click `Accept` to save the changes, then click `Done` in the `Copilot Edits` window to complete this task.
+- Click `Keep` in the `working set` window to save the changes, then click `Done` in the `Copilot Edits` window to complete this task.
 
 > [!NOTE]
 > GitHub Copilot will then generate the refactored code for the AirfieldController and AirFieldControllerTests using async/await for all CRUD operations, including error handling. You can review the generated code and make any necessary adjustments.
@@ -762,24 +351,195 @@ namespace WrightBrothersApi.Tests.Controllers
 ```
 </details>
 
-- Now that you have updated the `AirfieldController`, it's time to ensure that it's working as expected. In this step, you will run the `AirfieldControllerTests` unit tests.
+<Br>
 
-- Let's run the unit tests in the terminal.
+Now that you have updated the `AirfieldController`, it's time to ensure that it works as expected by running the `AirfieldControllerTests` unit tests.
+
+- Switch **GitHub Copilot Chat** to **Agent Mode**, then click `+` for `New Edit Session`.
+
+- Paste in the following prompt:
+
+   ```
+    Run all the unit tests for the AirfieldControllerTests.  
+    - Run them using dotnet test and show me which ones pass or fail.  
+    - If any tests fail, fix them in AirfieldControllerTests.cs and rerun the tests until all tests pass.  
+   ```
+
+- If Copilot suggests changes, review them in the file editor, then click `Keep` to save the changes.
+
+- Rerun the tests again until all tests pass.
+
+- Most tests should pass, for example:
 
     ```sh
-    dotnet test WrightBrothersApi/WrightBrothersApi.Tests/WrightBrothersApi.Tests.csproj
-    ```
-
-- The tests should run and many will pass.
-
-    ```sh
-    Test summary: total: 13, failed: 3, succeeded: 10, skipped: 0
+    Test summary: total: 7, failed: 0, succeeded: 7, skipped: 0
     ```
 
 > [!NOTE]
-> Sometimes not all tests succeed. Make sure `dotnet test` is run in the root of the project `WrightBrothersApi`. If the tests fail, you will need to debug the tests and correct the issues. Although tools like Copilot can assist greatly, you, the Pilot, must take charge to diagnose and fix the discrepancies.
+> It’s normal for some tests to fail on the first run. Copilot can suggest fixes, but it’s your responsibility as the Pilot to debug, review, and finalize changes before considering the code ready
 
-### Step 5: - Parsing Flight Show - Prompt Engineering
+---
+
+## Step 3 - Test Flight Instrument Panel - Code Coverage Insights
+
+In this step, you will use GitHub Copilot Agent Mode to get insights on test coverage for your backend project and display the test coverage in the browser.
+
+- Open **GitHub Copilot Chat** and make sure you are in **Agent** mode, not Edits.
+   Use `Ctrl+Shift+I`, then select **+** for new edit session.
+
+- Paste the following prompt:
+
+```plaintext
+How do I get insights on test coverage for my backend project and how do I display the test coverage in the browser?
+```
+
+- Copilot will respond with guidance on common tools and approaches for .NET code coverage (like Coverlet, ReportGenerator, or Cobertura reports).
+
+> [!NOTE]
+> Copilot might ask "Let me know if you want me to run these commands for you, or if you need help automating this process! You can respond yes OR go to step 2.
+
+Let’s see Agent Mode in action by requesting an end-to-end setup:
+
+- In **GitHub Agent Mode**.
+
+- Paste the following prompt:
+
+    ```prompt
+    - Generate a .NET code coverage report for test project `WrightBrothersApi.Tests` project using Cobertura format and ReportGenerator.
+    - Run tests with coverage enabled (dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura).
+    - Install ReportGenerator if it’s not already installed (dotnet tool install -g dotnet-reportgenerator-globaltool).
+    - Generate an HTML report in a coveragereport folder.
+    - Open the coveragereport/index.html file in the default browser.
+    ```
+
+> [!TIP]
+> GitHub Copilot Agent Mode understands step-by-step tasks, so it should offer to install dependencies, update your test workflow, and generate the report.
+
+- Once you’ve approved (or Agent Mode proceeds automatically), Copilot Agent Mode will
+  - Install any necessary coverage tools for your backend project.
+  - Run your test suite and generate a Cobertura-style coverage report.
+  - Set up an easy way for you to view the report in your browser (such as generating an HTML report and launching it with a local server).
+
+- You’ll see progress updates and instructions in the Agent Mode panel.
+
+- Click `Continue` to let Copilot proceed with each task installations.
+  - Agent mode will ask for confirmation before making changes many times.
+
+- Wait for Agent Mode to complete all steps before moving on.
+
+- Review the report and make sure it displays correctly.
+
+<br>
+
+<details>
+<summary>Click for Code Coverage Solution</summary>
+    <img src="../../Images/screenshot-coveragereport.png" width="750">
+</details>
+
+<br>
+
+Now that you have generated the code coverage report, it's time to review and explore the results. Let's see how Copilot can help you identify which parts of your code are tested and where you have gaps.
+
+- Using **GitHub Copilot Chat**, **Agent Mode**.
+
+- Paste the following prompt:
+
+```plaintext
+Highlight any controllers or methods with low or zero test coverage in my backend project.
+```
+
+Agent Mode will summarize which parts of the backend could use more testing!
+
+## Why This Matters
+
+Copilot Agent Mode isn’t just about writing code—it can automate whole dev tasks from setup to reporting. In this lab, you’ve used Agent Mode to set up a full code coverage workflow with just a few prompts. This is a great example of how natural language can streamline developer productivity.
+
+---
+
+### Step 4 – Tower Signal: Generating API Documentation
+
+Now that you’ve created and refactored your controllers and verified code coverage, it’s time to generate **API-level documentation**.
+
+In a previous lab, you explored how Copilot can help write inline documentation comments for individual methods. In this step, we’ll go further by using **Agent Mode** to generate consistent XML summaries across your controllers and wire up Swagger/OpenAPI so your APIs are easy to explore in a browser. This moves beyond internal developer notes and provides a clear reference for anyone consuming your API.
+
+1. Switch GitHub Copilot Chat to **Agent Mode**, then click **+ New Edit Session**.
+
+1. Add the following files to your **Working Set** or open them in the editor:
+
+   * `PlanesController.cs`
+   * *(Optional)* `AirfieldController.cs`
+   * *(Optional)* `FlightsController.cs`
+   * *(Optional)* `FlightTrialsController.cs`
+
+1. Paste the following prompt into the Copilot Agent Mode chat:
+
+   ```plaintext
+   Generate OpenAPI-style documentation comments for all controllers in my project.  
+   - Add XML documentation comments to each method, describing its purpose, parameters, and return values.  
+   - Include HTTP status codes (200, 201, 400, 404, 500 where applicable).  
+   - Ensure summaries are clear and developer-friendly.  
+   - If possible, configure Swagger by adding a `swagger.json` file and enabling Swagger UI in the project.  
+   - Place generated XML comments directly into the relevant controller files.
+   ```
+
+- Click `Keep` to save the changes in the `Copilot Chat` window to complete this task.
+
+Next we need to enable XML docs in the project and wire them into Swagger by updating the `WrightBrothersApi.csproj` and `Program.cs`, this ensures your summaries and response codes show up in the UI instead of just route names.
+
+1. Rather than manually editing these files, let’s use Agent Mode to make these changes for us. Paste this follow-up prompt into the same chat:
+
+   ```plaintext
+   Update WrightBrothersApi.csproj to enable XML documentation with  
+   <GenerateDocumentationFile>true</GenerateDocumentationFile>  
+   <NoWarn>$(NoWarn);1591</NoWarn>  
+
+   Then update Program.cs to include the XML doc file in SwaggerGen using Assembly.GetExecutingAssembly().  
+   Ensure Swagger UI will display method summaries and response codes.
+   ```
+
+Copilot will now:
+
+✅ Add XML comments above your API methods.  
+✅ Enable XML documentation in the `WrightBrothersApi.csproj`.  
+✅ Update `Program.cs` so Swagger reads the XML doc file.  
+✅ Suggest return codes and response details for each endpoint.  
+
+
+   Example in `AirfieldController.cs`:
+
+   ```csharp
+   /// <summary>
+   /// Retrieves all available airfields.
+   /// </summary>
+   /// <returns>
+   /// HTTP 200 OK with a list of airfields.
+   /// </returns>
+   [HttpGet]
+   public async Task<ActionResult<IEnumerable<Airfield>>> GetAirfields()
+   {
+       return await Task.FromResult(Ok(Airfields));
+   }
+   ```
+
+1. Rebuild and run the project. Ensure your terminal is pointed to the root folder of the project (.\wright-brothers-backend\WrightBrothersApi), then run:
+
+   ```bash
+   dotnet run
+   ```
+
+1. Open the Swagger endpoint (default: `https://localhost:5001/swagger`).
+   You should now see controllers and routes with descriptions, parameters, and return values.
+
+   <img src="../../Images/Screenshot-SwaggerUI.png" width="750">  
+
+1. Press `Ctrl+C` in the terminal to stop the running project.
+
+> [!NOTE]
+> By letting Copilot update your project setup instead of editing by hand, you ensure every lab will display API documentation correctly in Swagger with minimal effort. Swagger integration makes your APIs self-explanatory and discoverable in the browser.
+
+---
+
+### Step 5 - Parsing Flight Show - Prompt Engineering
 
 - Open the `Models/Flight.cs` file.
 
@@ -856,13 +616,13 @@ namespace WrightBrothersApi.Tests.Controllers
 
 - Review the updates in the file editor.
 
-<img src="../../Images/Screenshot-Parse-FlightLog.png" width="800">
+    <img src="../../Images/Screenshot-Parse-FlightLog.png" width="750">
 
-- You can choose to `Accept` or `Discard` the changes in the file editor or the `Working Set` window.
+- You can choose to `Keep` or `Discard` the changes in the file editor or the `Working Set` window.
 
 - Copilot created a new class `FlightLog` file and updated the `Flight` model with the getter property.
 
-- Click `Accept` to save the changes, then click `Done` in the `Copilot Edits` window to complete this task.
+- Click `Keep` to save the changes, then click `Done` in the `Copilot Edits` window to complete this task.
 
 - If Copilot didn't suggest the code above, then update the code manually as follows:
 
@@ -966,9 +726,11 @@ public record FlightLog(DateTime Date, string Departure, string Arrival, string 
 
 - Stop the app by pressing `Ctrl + C` or `Cmd + C` in the terminal.
 
+---
+
 ## Optional
 
-### Step 6: - Regex Aerobatics Show - Advanced Prompt Engineering
+### Step 6 - Regex Aerobatics Show - Advanced Prompt Engineering
 
 > [!NOTE]
 > This is an advanced lab exercise. We take Copilot to the edge of its capabilities. Retry the prompt provided later in the lab if you are not successful the first time.
@@ -1061,9 +823,9 @@ public record FlightLog(DateTime Date, string Departure, string Arrival, string 
 
 <img src="../../Images/Screenshot-Parse-AerobaticSequence.png" width="800">
 
-- You can choose to `Accept` or `Discard` the changes in the file editor or the `Working Set` window.
+- You can choose to `Keep` or `Discard` the changes in the file editor or the `Working Set` window.
 
-- Click `Accept` to save the changes, then click `Done` in the `Copilot Edits` window to complete this task.
+- Click `Keep` to save the changes, then click `Done` in the `Copilot Edits` window to complete this task.
 
 > [!IMPORTANT]
 > Sometimes the Copilot doens't complete the output of the prompt. Make sure to try the prompt again if you are not successful the first time.
@@ -1274,6 +1036,8 @@ public class Flight
 - Note the `aerobaticSequence` property that is parsed based on the ` aerobaticSequenceSignature`
 
 - Stop the app by pressing `Ctrl + C` or `Cmd + C` in the terminal.
+
+---
 
 ### Congratulations you've made it to the end! &#9992; &#9992; &#9992;
 

@@ -23,6 +23,8 @@ This module demonstrates how to utilize GitHub Copilot's Chat Extension and its 
 > [!IMPORTANT]  
 > Please note that Copilot's responses are generated based on a mix of curated data, algorithms, and machine learning models, which means they may not always be accurate or reflect the most current information available. Users are advised to verify Copilot's outputs with trusted sources before making decisions based on them.
 
+---
+
 ### Step 1: Plane Inspection - Explain the Codebase with GitHub Copilot Chat
 
 - Open GitHub Copilot Chat
@@ -81,6 +83,8 @@ Explain the WrightBrothers API application?
 > [!NOTE]
 > `@vscode` agent is used to help navigate the VS Code settings and does not have the context of the codebase. It is used to answer generic questions about how to do things in VS Code.
 
+---
+
 ### Step 2: Airplane Docking - Add new Flight Model
 
 - Open GitHub Copilot Chat, click `+` to clear prompt history.
@@ -131,6 +135,8 @@ public class PlanesController : ControllerBase
 
 - Accept the suggestion by pressing `Tab` to accept this suggestion.
 
+---
+
 ### Step 3: Test Flight - Autocompletion and Suggestions
 
 - Place your cursor at the end of the `[HttpPost("setup")]` method, after the `}` , press `Enter` twice.
@@ -151,41 +157,6 @@ public class PlanesController : ControllerBase
 }
 ```
 
-> [!IMPORTANT]
-> GitHub Copilot will suggest the `[HttpGet]` method. Press `ESC` to close the suggestion.
-
-> [!NOTE]
-> The reason GitHub Copilot suggests the `[HttpPut]` method is because it understands that the `PlanesController.cs` class is a REST API controller and that the `[HttpPut]` is currently missing. The `[HttpPut]` method is the next logical step in the REST API for updating a resource.
-
-- Type `[HttpDelete("{id}")]`, then press `Tab` to accept this attribute, then press `Enter`.
-
-    ```csharp
-    [HttpDelete("{id}")]
-    ```
-
-- Copilot will automatically suggest the method for the `[HttpDelete]` attribute, press `Tab` to accept this attribute, then press `Enter`.
-
-    ```csharp
-    // * Suggested by Copilot
-    [HttpDelete("{id}")]
-    public ActionResult Delete(int id)
-    {
-        var plane = Planes.Find(p => p.Id == id);
-
-        if (plane == null)
-        {
-            return NotFound();
-        }
-
-        Planes.Remove(plane);
-
-        return NoContent();
-    }
-    // * Suggested by Copilot
-    ```
-
-- Let's do it again, place your cursor at the end of the `Delete` method, after the `}`, press `Enter` twice.
-
 - Type `[HttpGet("count/{count}")]`, then press `Tab` to accept this attribute, then press `Enter`.
 
     ```csharp
@@ -205,6 +176,8 @@ public class PlanesController : ControllerBase
 
 > [!TIP]  
 > To get multiple suggestions from GitHub Copilot, you can type a comment in the editor and then press `Ctrl + Enter` to open the GitHub Copilot Suggestions window. This view will show up to 10 suggestions for you to choose from.
+
+---
 
 ### Step 4: Test Flight Accelerate - Comments to Code
 
@@ -263,13 +236,10 @@ Create a method called SearchByName to search planes by name.
 > [!NOTE]
 > The reason GitHub Copilot suggests the `[HttpGet("search")]` method is because it understands that the comment is a description of the method. It also understands that the method is a GET method and that it has a parameter `name` of type `string`.
 
-- Place your cursor before the `if(plane == null)` line, after the `{` of the `Post(Plane plane)` method, press `Enter` twice.
 
-- Type `// Return BadRequest if plane already exists by name` in the comment block. Before the `if(plane == null)` of this method, press `Enter`.
 
-    ```csharp
-    // Return BadRequest if plane already exists by name
-    ```
+
+- Highlight the entire `public ActionResult<Plane> Post(Plane plane)` method.
 
     ```csharp
             [HttpPost]
@@ -288,6 +258,17 @@ Create a method called SearchByName to search planes by name.
         }
     ```
 
+- Open `GitHub Copilot Edits`, then click `+` for `New Edit Session`.
+
+- Type the following command in the chat window:
+
+    ```
+    Add a check to return BadRequest if the plane already exists by name.
+    ```
+
+- Accept the suggestion by selecting `Keep`.
+
+
 - Copilot will automatically suggest the `if` statement and return `BadRequest` if the plane already exists by name.
 
     ```csharp
@@ -301,9 +282,10 @@ Create a method called SearchByName to search planes by name.
                 return BadRequest();
             }
             
-            if(plane == null)
+            // Check if a plane with the same name already exists
+            if (Planes.Any(p => p.Name.Equals(plane.Name, StringComparison.OrdinalIgnoreCase)))
             {
-                return BadRequest();
+                return BadRequest($"A plane with the name '{plane.Name}' already exists.");
             }
 
             Planes.Add(plane);
@@ -313,7 +295,9 @@ Create a method called SearchByName to search planes by name.
     ```
 
 > [!NOTE]
-> Typing the comment directly in editor. Copilot passively suggests completions based on the comment, but it won't necessarily recognize that you're specifically requesting inline generation.
+> When using GitHub Copilot Edits, you trigger inline suggestions by typing a natural language command in the chat pane. In this exercise, Copilot reads the entire method and understands the intent behind your instruction. It proactively inserts new logic into your code rather than simply suggesting completions after a comment. This differs from passive suggestions based on inline comments in the editor.
+
+---
 
 ### Step 5: Testing your flying style - Logging - Consistency
 
@@ -438,6 +422,8 @@ Let's present a code completion task for adding a logger with specific syntax (e
         // Method body
     }
     ```
+
+---
 
 ### Step 6: - Visualize the Wright Brothers Fleet
 

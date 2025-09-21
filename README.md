@@ -66,29 +66,29 @@ Prepare for takeoff! Your journey concludes with a hands-on lab to apply these c
 
 - [Taking Off with Code ✈ Clearing the Runway](./Labs/Lab%202.2%20-%20Taking%20Off%20with%20Code)
 
-### Lab 2.3 – Automating Code Coverage Reporting ✈ Tower Clearance
+### Lab 2.3 – Navigating the Code Clouds ✈ From Spec to Code
 
-This session introduces GitHub Copilot Agent Mode, guiding you through automating code coverage reporting using natural language prompts. You’ll see how Agent Mode can install tools, run tests, generate coverage reports, and help you visualize your project’s test coverage—all with minimal manual setup.
-
-Prepare for takeoff! Your journey concludes with a hands-on lab to apply these concepts in real-world scenarios.
-
-* [Automating Code Coverage ✈ Copilot Agent Mode in Action](./Labs/Lab%202.6%20-%20Automating%20Code%20Coverage)
-
-### Lab 2.4 - Navigating the Code Clouds ✈ Advanced Features of Copilot
-
-This session begins with demonstrating how Copilot can generate meaningful comments and documentation, essential for code understanding and maintenance, then shows how it can enhance readability through documentation suggestions, assists in writing complex regex expressions, and finally, illustrates its utility in solving algorithmic challenges, showcasing its advanced problem-solving capabilities.
+This session introduces GitHub Copilot’s advanced features beyond simple code completion, guiding you through generating documentation, refactoring code for maintainability, creating a PUT endpoint from a screenshot, building models and controllers from Excel-based data, writing and running unit tests with Agent Mode, and polishing your APIs through clean design. By the end, you will have taken Copilot from writing inline comments all the way to producing fully tested, well-structured APIs
 
 Prepare for takeoff! Your journey concludes with a hands-on lab to apply these concepts in real-world scenarios.
 
-- [Navigating the Code Clouds ✈ Advanced Features of Copilot](./Labs/Lab%202.4%20-%20Navigating%20the%20Code%20Clouds)
+* [Navigating the Code Clouds ✈ From Spec to Code](./Labs/Lab%202.3%20-%20Navigating%20the%20Code%20Clouds/)
 
-### Lab 2.5 – Mocking, Exception Handling, and Advanced Testing ✈ Resilient Code with Copilot
+### Lab 2.4 - Tower Clearance ✈ Agent Mode in Action
+
+This session introduces GitHub Copilot Agent Mode as a way to automate entire development tasks, showing you how to generate and refactor controllers, run and analyze code coverage, create API-level documentation with Swagger, and apply prompt engineering techniques for parsing and advanced problem solving. By the end, you will see how Agent Mode can manage everything from scaffolding and testing to reporting and reasoning, all through natural language prompts
+
+Prepare for takeoff! Your journey concludes with a hands-on lab to apply these concepts in real-world scenarios.
+
+- [Tower Clearance ✈ Agent Mode in Action](./Labs/Lab%202.4%20–%20Tower%20Clearance/)
+
+### Lab 2.5 – Turbulence Training ✈ Mocking and Exceptions
 
 This session focuses on using GitHub Copilot to build more resilient code by introducing mocking frameworks, handling exceptions, and writing advanced unit tests for edge cases. Participants will use targeted Copilot prompts to generate, refine, and expand their test suites, ensuring their APIs can handle unexpected situations smoothly.
 
 Prepare for takeoff! Your journey concludes with a hands-on lab to apply these concepts in real-world scenarios.
 
-* [Mocking, Exception Handling, and Advanced Testing ✈ Resilient Code with Copilot](./Labs/Lab%202.5%20-%20Mocking%2C%20Exception%20Handling%2C%20and%20Advanced%20Testing)
+* [Turbulence Training ✈ Mocking and Exceptions](./Labs/Lab%202.5%20–%20Turbulence%20Training/)
 
 ## Module 3
 

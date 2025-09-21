@@ -6,20 +6,24 @@ This lab exercise demonstrates integrating GitHub Copilot into database developm
 
 ## Estimated time to complete
 
-- 20 min, times may vary with optional labs.
+- 20 min
 
 ## Objectives
 
 - This lab series guides participants through designing, optimizing, and testing an aviation-themed database while leveraging GitHub Copilot for AI-assisted development. By the end of these exercises, participants will have built a fully functional, well-structured aviation database with realistic data, optimized queries, and automated testing.
-    - Step 1 - Blueprinting the Aviation Database - Defining the schema and relationships
-    - Step 2 - Refining the Flight Plan - Optimizing table structure and improving data relationships
-    - Step 3 - Filling the Logbook with Historical Data - Generating realistic Wright Brothers aviation test data
-    - Step 4 - Navigating Flight Details - Developing a stored procedure for retrieving flight information
-    - Step 5 - Simulating Flight Operations - Creating randomized flight records linked to pilots, planes, and airfields
-    - Step 6 - Turbocharging Flight Scheduling - Optimizing query performance with indexing
-    - Step 7 - Flight Readiness Check with Automated Testing - Implementing tSQLt to verify database operations (Optional)
 
-### **Step 1 - Blueprinting the Aviation Database**  
+- Step 1 - Blueprinting the Aviation Database - Defining the schema and relationships
+- Step 2 - Refining the Flight Plan - Optimizing table structure and improving data relationships
+- Step 3 - Filling the Logbook with Historical Data - Generating realistic Wright Brothers aviation test data
+- Step 4 - Navigating Flight Details - Developing a stored procedure for retrieving flight information
+- Step 5 - Simulating Flight Operations - Creating randomized flight records linked to pilots, planes, and airfields
+- Step 6 - Turbocharging Flight Scheduling - Optimizing query performance with indexing
+- Step 7 - Flight Readiness Check with Automated Testing - Implementing tSQLt to verify database operations (Optional)
+
+---
+
+### Step 1 - Blueprinting the Aviation Database
+
 Lay the **foundation** for the Wright Brothers' aviation database. Define the schema with basic structure.
 
 - Open GitHub Copilot Chat, click `+` to clear prompt history.
@@ -125,7 +129,10 @@ GO
 
 </details>
 
-### **Step 2 - Refining the Flight Plan**  
+---
+
+### Step 2 - Refining the Flight Plan
+
 Optimize the **database structure** by eliminating **redundant data**, improving **One-to-Many Relationships**, and enhancing **date usability**. Adjust tables for **better scalability** while keeping the database **lightweight and efficient**, ensuring data integrity and historical accuracy.
 
 - Open `GitHub Copilot Edits`, then click `+` for `New Edit Session`.
@@ -311,7 +318,10 @@ VALUES
 
 </details>
 
-### **Step 4 - Navigating Flight Details**  
+---
+
+### Step 4 - Navigating Flight Details
+
 Develop **stored procedures**, that retrieves **comprehensive flight information**. This ensures smooth **data retrieval**, much like a well-executed flight plan.
 
 - Make sure following file is in the `Working Set` near the bottom of `Copilot Edits` window.
@@ -400,8 +410,10 @@ GO
 
 </details>
 
+---
 
-### **Step 5 Turbocharging Flight Scheduling**  
+### Step 5 Turbocharging Flight Scheduling
+
 Generate **realistic flight records** with randomized **departure and arrival times**, linking them to **random pilots, planes, and airfields**. This provides a **diverse and dynamic dataset**, mirroring the unpredictable conditions of early aviation.
 
 - Make sure following file is in the `Working Set` near the bottom of the `Copilot Edits` window.
@@ -469,8 +481,10 @@ GO
 ```
 </details>
 
+---
 
-### **Step 6 - Simulating Flight Operations**  
+### Step 6 - Simulating Flight Operations
+
 Improve **query performance** by creating a **non-clustered indexs** in the **Flight** table. This ensures that data is quickly accessible and reduces delays in data retrieval—just like optimizing takeoff efficiency.
 
 - Make sure following file is in the `Working Set` near the bottom of the `Copilot Edits` window.
@@ -529,7 +543,10 @@ GO
 
 </details>
 
-### **Step 7 - Flight Readiness Check with Automated Testing**  
+---
+
+### Step 7 - Flight Readiness Check with Automated Testing
+
 Implement **Unit Testing** to **validate flight record operations**. This ensures the database **accurately processes flight data**, just as pre-flight checks ensure a **safe takeoff**.
 
 - Make sure following file is in the `Working Set` near the bottom of the `Copilot Edits` window.
@@ -650,6 +667,8 @@ Ensuring data integrity and reliability in aviation systems is critical, just li
 - **`Faster Debugging & Troubleshooting`** – Detects issues early in development, reducing manual testing efforts and speeding up deployments.
 
 - **`Scalability & Maintainability`** – Establishes a testing framework that can be expanded for future database enhancements, ensuring continued data consistency.
+
+---
 
 ### Congratulations you've made it to the end! &#9992; &#9992; &#9992;
 

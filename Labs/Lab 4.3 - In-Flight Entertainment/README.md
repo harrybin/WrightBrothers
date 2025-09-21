@@ -15,10 +15,12 @@ This lab exercise is focused on integrating styled buttons and forms to enhance 
 - Improve skills in UI component creation.
 - Develop proficiency in event handling and API interactions.
 
-    ### Journey
-    - Step 1: Push to Start - Create a Styled Button
-    - Step 2: Fill in the Form - Create a Styled Form
-    - Step 3: Advanced Form Integration with Open API (Optional)
+### Journey
+- Step 1: Push to Start - Create a Styled Button
+- Step 2: Fill in the Form - Create a Styled Form
+- Step 3: Advanced Form Integration with Open API (Optional)
+
+---
 
 ### Step 1 - Push to Start - Create a Styled Button 
 
@@ -164,6 +166,8 @@ export default HomePage;
 - Now, Click the button to navigate to the new plane page.
 
 - Stop the Frontend and API by pressing `Ctrl + C` in the terminal.
+
+---
 
 ### Step 2 - Form Creation
 
@@ -392,6 +396,8 @@ export default NewPlane;
 
 - Now stop the Frontend and API by pressing `Ctrl + C` in the terminal.
 
+---
+
 ### Step 3 (Optional) - Flight Aerobatics Show - Advanced animation
 
 - In this lab, we will animate the aerobatics sequence that was introduced in lab 2.3 (Regex Aerobatics Show). We are going to explain the aerobatics sequence and how to animate it. GitHub Copilot will then generate the code for the animation.
@@ -561,6 +567,8 @@ const onSimulateAerobaticSequence = () => {
 - You have successfully animated the aerobatics sequence of the airplane. The animation should be displayed in the details of the plane.
 
 - Now stop the Frontend and API by pressing `Ctrl + C` in the terminal.
+
+---
 
 ### Congratulations you've made it to the end! &#9992; &#9992; &#9992;
 

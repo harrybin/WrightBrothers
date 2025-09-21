@@ -20,6 +20,8 @@ In this lab, you’ll use GitHub Copilot to automate health checks, set up a CI/
     - Step 4 - Flight Plan - Crafting a Detailed DevOps Pipeline with Bicep IaC
     - Step 5 - Turn on Autopilot Mode - Automating GitHub Pull Requests
 
+---
+
 ### Step 1. Fasten your seatbelts, turbulence incoming - Committing Code Changes
 
 - Open `Program.cs` in `WrightBrothersApi` folder
@@ -148,6 +150,8 @@ git checkout -b feature/health-checks
 
 - Close the file `Program.cs`.
 
+---
+
 ### Step 2. Smooth Flying in the Cloud - Automating GitHub Pipelines
 
 A build pipeline automates your software's build, test, and deployment processes, ensuring consistent and error-free releases while saving time and improving code quality. It streamlines development, enables quick feedback, and supports efficient version management. Let's begin by
@@ -157,7 +161,7 @@ automating CI/CD pipelines for deployment to Azure.
 
 - Click `+` to clear prompt history.
 
-- Type the following prompt:
+- Paste the following prompt:
 
     ```
     Create a GitHub Actions build pipeline for this .NET solution that restores dependencies, builds, and runs tests.
@@ -181,6 +185,8 @@ automating CI/CD pipelines for deployment to Azure.
 > [!NOTE]
 > With the @workspace agent, GitHub Copilot understands that the current workspace is a .NET application with a Test project in it. It also understands that the application is hosted in a folder called `WrightBrothersApi` and the test project is in a folder called `WrightBrothersApi.Tests`. This is a great example of how GitHub Copilot can understand the context of the current workspace and provide suggestions based on that context.
 
+---
+
 ### Step 3. Ground Control - How to assent to the Azure Cloud
 
 Deploying your application to Azure facilitates scalable, secure, and efficient hosting, leveraging Microsoft's cloud infrastructure. This allows for easy scaling, robust disaster recovery, and global reach, enhancing your app's performance and accessibility while minimizing maintenance efforts and costs.
@@ -190,7 +196,7 @@ Deploying your application to Azure facilitates scalable, secure, and efficient 
 
 - Pre-requisite is a valid `build.yaml` build pipeline from previous step.
 
-- With **GitHub Copilot Chat** open, type the following prompt:
+- With **GitHub Copilot Chat** open, paste the following prompt:
 
     ```
     Generate a Bicep template to provision an Azure Web App for this .NET API project.
@@ -209,7 +215,7 @@ Deploying your application to Azure facilitates scalable, secure, and efficient 
 
 - Click on tab for `build.yaml` file to bring it to focus.
 
-- With **GitHub Copilot Chat** open, type the following prompt:
+- With **GitHub Copilot Chat** open, paste the following prompt:
 
    ```
    Update the build.yml pipeline to deploy the infrastructure using main.bicep and then deploy the application to the Azure Web App.
@@ -243,6 +249,8 @@ Deploying your application to Azure facilitates scalable, secure, and efficient 
 > [!NOTE]
 > The results of Copilot might not be perfect, but it can be a great starting point for you to build upon. You are the pilot, you need to make sure the pipeline is correct.
 
+---
+
 ### Step 4. Autopilot for Pull Requests – Copilot PR Summaries
 
 Pull requests are a critical part of the development process, enabling collaboration, code review, and quality assurance. They help maintain code quality, ensure consistency, and facilitate knowledge sharing among team members. GitHub Copilot can assist in summarizing pull requests, making it easier to communicate changes and decisions effectively.
@@ -263,6 +271,8 @@ Pull requests are a critical part of the development process, enabling collabora
 
 - Click `Create pull request` to create the PR.
 
+---
+
 ### Step 5. Advanced Flight Plan – Expand to Multi-Stage DevOps Pipeline
 
 Take it further by creating a more advanced pipeline with clearly defined Build, Infrastructure as Code, and Quality Assurance stages.
@@ -273,7 +283,7 @@ Take it further by creating a more advanced pipeline with clearly defined Build,
 
 - Click `+` to clear prompt history.
 
-- Type the following prompt:
+- Paste the following prompt:
    ```
    Create a multi-stage DevOps pipeline for .NET with Build, Bicep-based IaC deployment, and Quality Assurance stages. Scaffold all necessary YAML workflow files and explain each stage with comments.
    ```
@@ -305,6 +315,7 @@ Take it further by creating a more advanced pipeline with clearly defined Build,
 > [!NOTE]
 > Creating a multi-stage pipeline can be complex, but GitHub Copilot can help you get started with the basic structure. You can then customize the pipeline to fit your specific needs.
 
+---
 
 ### Congratulations you've made it to the end! &#9992; &#9992; &#9992;
 

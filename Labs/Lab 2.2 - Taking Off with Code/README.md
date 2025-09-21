@@ -21,6 +21,8 @@ This lab exercise guides participants through coding exercises using GitHub Copi
     - Step 5 - Generating Positive and Negative Unit Tests
     - Step 6 - Validating and Running Tests
 
+---
+
 ### Step 1: Taxying to the Runway - Run existing unit tests
 
 - Open GitHub Copilot Chat, click `+` to clear prompt history.
@@ -63,6 +65,8 @@ This lab exercise guides participants through coding exercises using GitHub Copi
     A total of 1 test files matched the specified pattern.
     Test summary: total: 1, failed: 0, succeeded: 1, skipped: 0
     ```
+
+---
 
 ### Step 2: Pre-takeoff Pilot Checks - Completing Unit Tests
 
@@ -205,6 +209,8 @@ public class PlanesControllerTests
     A total of 1 test files matched the specified pattern.
     Test summary: total: 3, failed: 0, succeeded: 3, skipped: 0
     ```
+
+---
 
 ### Step 3: Taking Off - Developing Robust Tests
 
@@ -378,6 +384,8 @@ public class PlanesControllerTests
 > [!NOTE]
 > If all tests pass, you have successfully completed this step. If not, you will need to debug the tests. GitHub Copilot got you started, but you, the Pilot, must take charge to diagnose and fix the discrepancies.
 
+---
+
 ### Step 4: Understanding Model Validation with Copilot Chat
 
 Open `Plane.cs` and review the model. Notice that there are currently no data annotation attributes.
@@ -413,6 +421,8 @@ Add data annotations for validation to all properties in the Plane class.
 - Click `Keep` to accept the changes.
 
 - Close the `Plane.cs` file.
+
+---
 
 ### Step 5: Generating Positive and Negative Unit Test
 
@@ -542,6 +552,8 @@ Create a unit test method for FlightsController.Post add append to the FlightsCo
 
 > [TIP!]  
 > **Why Try This?** Copilot Edits and Agent Mode can handle bulk or repetitive tasks, giving you safe, reviewable updates with just one prompt.
+
+---
 
 ### Congratulations you've made it to the end! &#9992; &#9992; &#9992;
 
