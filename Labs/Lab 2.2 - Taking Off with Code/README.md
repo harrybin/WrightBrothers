@@ -7,7 +7,7 @@ This lab exercise guides participants through coding exercises using GitHub Copi
 
 ## Estimated time to complete
 
-- 20 minutes.
+- 30 minutes.
 
 ## Objectives
 
@@ -70,17 +70,7 @@ This lab exercise guides participants through coding exercises using GitHub Copi
 
 ### Step 2: Pre-takeoff Pilot Checks - Completing Unit Tests
 
-- Open GitHub Copilot Chat, click `+` to clear prompt history.
-
-- Type the following in the chat window:
-
-    ```sh
-    @workspace where do I add additional unit tests?
-    ```
-
-- Copilot will give a suggestion to add unit tests to the `Controllers/PlanesControllerTests.cs` file in the `WrightBrothersApi.Tests` project.
-
-- You can add additional unit tests in the `PlanesControllerTests` class in the `WrightBrothersApi.Tests/Controllers/PlanesControllerTests.cs` file.
+- Open GitHub Copilot Chat, select `Ask`, click `+` to clear prompt history.
 
 - Open the `PlaneController.cs` file.
 
@@ -88,7 +78,7 @@ This lab exercise guides participants through coding exercises using GitHub Copi
 
 <img src="../../Images/Screenshot-GetById-Selection.png" width="400">
 
-- Next, open Copilot Chat and Copy/Paste the following
+- Next, open Copilot Chat and Copy/Paste the following prompt.
 
     ```md
     Generate all unit test scenarios for this method. Include only the individual tests, no usings.
@@ -96,13 +86,13 @@ This lab exercise guides participants through coding exercises using GitHub Copi
 
 <img src="../../Images/Screenshot-WhereToAddUnitTests.png" width="800">
 
-
 - Press `Enter`, GitHub Copilot will automatically suggest the `[Test]` attributes.
-
 
 - The problem is that the generated test methods do not match with the style of the existing test methods in the `PlanesControllerTests.cs` file.
 
-- Let's fix this. Open Copilot Chat and Copy/Paste the following and place your cursor after `tests should match `:
+- Let's fix this. Open `Copilot Chat`, select `Edit`.
+
+- Paste the following prompt.
 
     ```md
     Generate all unit test scenarios for this method. Include only the individual tests, nothing else but [Fact] per test, no usings. Tests should match the style in #file:PlanesControllerTests.cs . Use the existing list of planes for test data.
@@ -122,7 +112,7 @@ This lab exercise guides participants through coding exercises using GitHub Copi
 - Select the file `PlanesControllerTests.cs` and press Enter.
 
 > [!NOTE]
-> With `#file` you can easily add a file to the Copilot Context. If you already know the filename, you can simply type #PlanesControllerTests.cs and avoid using the pop-up file selector.
+> With `#file` you can easily add a file to the Copilot Context. If you already know the filename, you can simply type **#PlanesControllerTests.cs** and avoid using the pop-up file selector.
 
 > [!IMPORTANT]
 > `#file` will not work with copy/pasting `#file:PlanesControllerTests.cs`. You need to select it from the pop-up window.
@@ -247,7 +237,7 @@ public class PlanesControllerTests
 
 - In the following exercise you will combine everything you learned in the previous steps, but then for the `SearchByName` method. The following prompt is a more detailed description of a problem and the expected solution. You will prompt GitHub Copilot to make it use a `#selection`. besides that you will use `#file` two times in the prompt to make sure Copilot knows the context of the problem.
 
-- Open `GitHub Copilot Edits`, then click `+` for `New Edit Session`.
+- Open `GitHub Copilot Chat`, select `Edit`, then click `+` for `New Session`.
 
 - Add the following files to the `Working Set` near the bottom of Copilot Edits window.
 
@@ -347,9 +337,9 @@ public class PlanesControllerTests
 
 - Let's now use the generated tests as a guide to fix the case sensitivity issue.
 
-- Open GitHub Copilot Edits, click `+` to clear prompt history.
+- Open `GitHub Copilot Chat`, select `Edit` click `+` to clear prompt history.
 
-- Click the `+ Add files` button, then select these:
+- Click the `+ Add Context` button, select `Files and Folders`, then select these:
     - `PlanesControllerTests.cs`
     - `PlanesController.cs`
 

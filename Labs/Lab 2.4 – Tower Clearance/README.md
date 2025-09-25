@@ -25,23 +25,20 @@ This lab introduces GitHub Copilot Agent Mode for automating common development 
 
 In this step, you will use GitHub Copilot Edits to create a new AirfieldController with full CRUD and a matching test suite. The goal is to show how a focused prompt and a small working set can produce working code quickly, then give you a solid baseline for refactoring and coverage in later steps. When you finish, you will have a controller, sample data for historic airfields, and tests that confirm the basics.
 
-1. Open **GitHub Copilot Edits** and make sure you are in **Edits** mode, not Agent.
-   Use `Ctrl+Shift+I`, then select **+** for new edit session.
+- Open `GitHub Copilot Chat`, select `Edit` click `+` to clear prompt history.
 
-2. Add the controller file to the **Copilot Edits working set**.
-    - Click **+ Add files** in the Edits panel, select the following:
-        - `/PlanesController.cs`
-        - `/PlanesControllerTests.cs`
-        - `/Airfield.cs`
+- Click the `+ Add Context` button, select `Files and Folders`, then select these:
+    - `/PlanesController.cs`
+    - `/PlanesControllerTests.cs`
+    - `/Airfield.cs`
     - Confirm all 3 appear under **Working set**.
 
 > [!NOTE]
 > You can multiple select these files from the file explorer by holding the `Ctrl` down and clicking on each file. Then simply drag-n-drop them into the `Edit with Copilot` window.
 
-- Copy/Paste the following in the Copilot Edits Chat window:
+- Copy/Paste the following in the Copilot Chat window:
 
-    ```md
-    ## Generate Controller
+    ```prompt
     Create a new API Controller called "AirfieldController" with all the CRUD operations based on the Airfield class located in the file Airfield.cs. Ensure to follow the same style in PlanesController.
     
     ## Test Data
@@ -62,6 +59,7 @@ In this step, you will use GitHub Copilot Edits to create a new AirfieldControll
     ## Public Code Matching
     - Create in a trivial way to not match public code.
     ```
+
 - Submit the prompt by pressing Enter.
 
 > [!WARNING]
@@ -72,8 +70,6 @@ In this step, you will use GitHub Copilot Edits to create a new AirfieldControll
 - Review the updates in the file editor.
 
 <img src="../../Images/Screenshot-AirfieldControllerCreate.png" width="600">
-
-- You can choose to `Keep` or `Discard` the changes in the file editor or the `Working Set` window.
 
 - Click `Keep` to save the changes in the `Copilot Edits`.
 
@@ -384,8 +380,7 @@ Now that you have updated the `AirfieldController`, it's time to ensure that it 
 
 In this step, you will use GitHub Copilot Agent Mode to get insights on test coverage for your backend project and display the test coverage in the browser.
 
-- Open **GitHub Copilot Chat** and make sure you are in **Agent** mode, not Edits.
-   Use `Ctrl+Shift+I`, then select **+** for new edit session.
+- Open `GitHub Copilot Chat`, select `Agent` click `+` to clear prompt history.
 
 - Paste the following prompt:
 
@@ -396,11 +391,9 @@ How do I get insights on test coverage for my backend project and how do I displ
 - Copilot will respond with guidance on common tools and approaches for .NET code coverage (like Coverlet, ReportGenerator, or Cobertura reports).
 
 > [!NOTE]
-> Copilot might ask "Let me know if you want me to run these commands for you, or if you need help automating this process! You can respond yes OR go to step 2.
+> Copilot might ask "Let me know if you want me to run these commands for you, or if you need help automating this process! You can respond yes.
 
-Let’s see Agent Mode in action by requesting an end-to-end setup:
-
-- In **GitHub Agent Mode**.
+Let’s see this in action by requesting an end-to-end setup:
 
 - Paste the following prompt:
 
@@ -464,11 +457,11 @@ In a previous lab, you explored how Copilot can help write inline documentation 
 
 1. Switch GitHub Copilot Chat to **Agent Mode**, then click **+ New Edit Session**.
 
-1. Add the following files to your **Working Set** or open them in the editor:
+1. Add the following file(s) to your **Working Set** or open them in the editor:
 
-   * `PlanesController.cs`
+   * `FlightsController.cs`
    * *(Optional)* `AirfieldController.cs`
-   * *(Optional)* `FlightsController.cs`
+   * *(Optional)* `PlanesController.cs`
    * *(Optional)* `FlightTrialsController.cs`
 
 1. Paste the following prompt into the Copilot Agent Mode chat:
@@ -521,7 +514,7 @@ Copilot will now:
    }
    ```
 
-1. Rebuild and run the project. Ensure your terminal is pointed to the root folder of the project (.\wright-brothers-backend\WrightBrothersApi), then run:
+1. Rebuild and run the project. Ensure your terminal is pointed to the root folder of the project (./WrightBrothersApi/WrightBrothersApi), then run:
 
    ```bash
    dotnet run
@@ -557,22 +550,19 @@ Copilot will now:
 
 - This property is used in the `FlightsController` and assigned a hard to read value, i.e. **FlightLogSignature = "171203-DEP-ARR-WB001"**,
 
-- Open `GitHub Copilot Edits`, then click `+` for `New Edit Session`.
+- Open `GitHub Copilot Chat`, select `Edit` click `+` to clear prompt history.
 
-- Close the `Flight.cs` file.
-
-- Add the following files to the `Working Set` near the bottom of Copilot Edits window.
-
-- Click the `+ Add files` button, then select these:
+- Click the `+ Add Context` button, select `Files and Folders`, then select these:
     - `Flight.cs`
     - `FlightsController.cs`
+    - Confirm both appear under **Working set**.
 
 > [!NOTE]
 > You can multi-select these files from the file explorer by holding the `Ctrl` down and `Left-Clicking` on each file. Then simply drag-n-drop them into Copilot Edits working set window.
 
 - Copy/Paste the following in the Copilot Edits Chat window:
 
-    ```
+    ```prompt
     Create a new C# model for a FlightLogSignature property.
 
     ## Example
@@ -757,24 +747,21 @@ public record FlightLog(DateTime Date, string Departure, string Arrival, string 
     - L1A-H1B-R1C-T1E
     - L2A-H2B-R2C
 
-- Let's prompt engineer Copilot to generate a solution for the `AerobaticSequenceSignature` property.
+- Use prompt engineering techniques to set intent, frame the task, and guide Copilot toward a clear, consistent implementation for the `AerobaticSequenceSignature` property. Keep the cue concise, prefer a brief plan followed by code, and let the prompt carry the specifics.
 
-- Open `GitHub Copilot Edits`, then click `+` for `New Edit Session`.
+- Open `GitHub Copilot Chat`, select `Edit` click `+` to clear prompt history.
 
-- Close the `Flight.cs` file.
-
-- Add the following files to the `Working Set` near the bottom of Copilot Edits window.
-
-- Click the `+ Add files` button, then select these:
+- Click the `+ Add Context` button, select `Files and Folders`, then select these:
     - `Flight.cs`
     - `FlightsController.cs`
+    - Confirm both appear under **Working set**.
 
 > [!NOTE]
 > You can multi-select these files from the file explorer by holding the `Ctrl` down and `Left-Clicking` on each file. Then simply drag-n-drop them into Copilot Edits working set window.
 
 - Copy/Paste the following in the Copilot Edits Chat window:
 
-    ```md
+    ```prompt
     Create a new C# model for a AerobaticSequenceSignature property.
 
     ## AerobaticSequence Examples
@@ -813,8 +800,9 @@ public record FlightLog(DateTime Date, string Departure, string Arrival, string 
     - Round the difficulty result to 2 decimal places.
     - Add the AerobaticSequence read-only property with only a getter to the existing Flight class.
 
-    Let's think step by step
+    Outline your approach in a few bullets, then implement.
     ```
+
 - Submit the prompt by pressing Enter.
 
 - Copilot will update the `Flights` and create a `AerobaticSequence` class.
@@ -822,8 +810,6 @@ public record FlightLog(DateTime Date, string Departure, string Arrival, string 
 - Review the updates in the file editor.
 
 <img src="../../Images/Screenshot-Parse-AerobaticSequence.png" width="800">
-
-- You can choose to `Keep` or `Discard` the changes in the file editor or the `Working Set` window.
 
 - Click `Keep` to save the changes, then click `Done` in the `Copilot Edits` window to complete this task.
 

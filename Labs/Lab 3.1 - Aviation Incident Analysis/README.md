@@ -123,15 +123,13 @@ content-type: application/json
 
 - Select all the code for method `takeFlight` in `FlightsController.cs`.
 
-- Open **GitHub Copilot Chat**.
-
-- Click `+` to clear prompt history.
+- Open `GitHub Copilot Chat`, select `Ask` click `+` to clear prompt history.
 
 - Paste the following prompt:
 
-```
-How should I fix this exception in the takeFlight method in FlightsController.cs?
-```
+    ```prompt
+    How should I fix this exception in @terminal for the takeFlight method in FlightsController.cs?
+    ```
 
 <img src="../../Images/Screenshot-LackOfFuel-Chat.png" width="800">
   
@@ -206,10 +204,7 @@ public class FlightsController : ControllerBase
 
 - The application will crash.
 
-    ```json
-    Stack overflow.
-    at FlightsController.lightningStrike(Int32)
-    ```
+    > Stack overflow at FlightsController.lightningStrike(Int32).
 
 <img src="../../Images/Screenshot-lightningStrikeError.png" width="800">
 
@@ -219,15 +214,14 @@ public class FlightsController : ControllerBase
 
 - Select all the code for method `lightningStrike` in `FlightsController.cs`.
 
-- Open **GitHub Copilot Chat**.
-
-- Click `+` to clear prompt history.
+- Open `GitHub Copilot Chat`, select `Ask` click `+` to clear prompt history.
 
 - Paste the following prompt:
 
-```
-How should I fix this exception in the lightningStrike method in FlightsController.cs?
-```
+    ```
+    How should I fix this exception in the lightningStrike method in FlightsController.cs?
+    ```
+
 - Copilot will suggest a possible fix on how to handle the exception.
 
 - You can go ahead and replace the `lightningStrike` method with the new one and run the application again.
@@ -260,10 +254,10 @@ You will introduce a subtle bug that compiles, then use the HTTP file to trigger
 
 - Introduce the regression. Open `Controllers/PlanesController.cs`, in `GetById` replace the safe lookup with a strict one:
 
+- On the first line, replace `FirstOrDefault`, with `First` so it reads:
+
     ```csharp
     var plane = Planes.First(p => p.Id == id); // throws if not found
-    if (plane == null) return NotFound();
-    return Ok(plane);
     ```
 
 This compiles, but `First` throws when the id does not exist, which should be a 404, not a 500.
@@ -284,7 +278,7 @@ This compiles, but `First` throws when the id does not exist, which should be a 
 You should get `200 OK` with a plane payload.
 
 - Trigger the runtime error
-   In the same `Planes.http` file, change the id to a non existent value (i.e. 999) and send the request again:
+   In the same `/Examples/Planes.http` file, change the id to a non existent value (i.e. 999) and send the request again:
 
     ```http
     GET http://localhost:1903/api/planes/999 HTTP/1.1
@@ -296,18 +290,20 @@ You should now see `500 Internal Server Error` and errors in the terminal window
 
 - Switch to the terminal where the API is running, hightlight the full exception, and copy it to clipboard.
 
-- Open **GitHub Copilot Chat**, switch to **Agent Mode**, start **New Edit Session**, paste the full exception from the terminal.
+- Open `GitHub Copilot Chat`, select `Agent` click `+` to clear prompt history.
 
-- Now paste this prompt directly under the exception text:
+- Paste the full exception from the terminal into the chat.
 
-    ```
+- Next, paste this prompt directly under the exception text:
+
+    ```prompt
     Fix this runtime error in #file:Controllers/PlanesController.cs.
     - When a plane id does not exist, the API must return 404 NotFound, not 500.
     - Explain the root cause in one sentence and show the exact code diff you will apply.
     - Add or update a unit test that asserts 404 for a missing id.
     ```
 
-Accept the proposed fix.
+- Accept the proposed fix.
 
 - Run the application
 
@@ -365,17 +361,13 @@ You will switch from a slow prime check to a faster approach, then measure the r
 
 - Response will be:
 
-    ```json
-    HTTP/1.1 200 OK
-    Connection: close
-    ```
+    > HTTP/1.1 200 OK  
+    > Connection: close
 
 - Terminal will show something like this:
 
-    ```json
-    Found 25997 prime numbers.
-    Elapsed Time: 4.863 seconds
-    ```
+    > Found 25997 prime numbers.  
+    > Elapsed Time: 4.863 seconds
 
 - The application will calculate the prime numbers in more than 5 seconds.
 
@@ -391,13 +383,11 @@ You will switch from a slow prime check to a faster approach, then measure the r
 
     <img src="../../Images/Screenshot-calculateAerodynamicsSelected3.png" width="800">
 
-- Open **GitHub Copilot Chat**.
-
-- Click `+` to clear prompt history.
+- Open `GitHub Copilot Chat`, select `Ask` click `+` to clear prompt history.
 
 - Paste the following prompt:
 
-    ```
+    ```prompt
     What is a more efficient algorithm for finding all prime numbers in a range than checking each number with IsPrime? Please explain how it works.
     ```
 
@@ -405,7 +395,7 @@ You will switch from a slow prime check to a faster approach, then measure the r
 
 - Paste the following prompt:
 
-    ```
+    ```prompt
     Can you help me implement the Sieve of Eratosthenes in C#? Please include detailed comments explaining each part. Solve this in a novel way that does not match public code.
     ```
 
@@ -429,10 +419,8 @@ You will switch from a slow prime check to a faster approach, then measure the r
 
     Example output
 
-    ```
-    Found 25997 prime numbers.
-    Elapsed Time: 0.014 seconds
-    ```
+    > Found 25997 prime numbers.  
+    > Elapsed Time: 0.014 seconds
 
 - The application will now calculate the prime numbers in less than 50 milliseconds.
 
@@ -445,9 +433,9 @@ You will switch from a slow prime check to a faster approach, then measure the r
 
 You will use **GitHub Copilot Agent Mode** to apply cross-cutting fixes and resiliency patterns to the same controller.
 
-- Open GitHub **Agent Mode**, then run a targeted optimization prompt:
+- Open `GitHub Copilot Chat`, select `Agent` click `+` to clear prompt history.
 
-   ```
+   ```prompt
    Optimize all recursive methods in FlightsController.cs to include a recursion depth limit and proper error handling.
    ```
 
@@ -455,7 +443,7 @@ This targets safety and resiliency concerns across methods.
 
 - For a broader pass, ask Agent Mode to scan the file and propose performance and stability improvements, then apply the changes:
 
-   ```
+   ```prompt
    Scan FlightsController.cs for all crash-prone or inefficient code and generate fixes and performance improvements.
    ```
 

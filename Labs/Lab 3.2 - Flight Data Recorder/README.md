@@ -10,7 +10,7 @@ This lab exercise demonstrates integrating GitHub Copilot into database developm
 
 ## Objectives
 
-- This lab series guides participants through designing, optimizing, and testing an aviation-themed database while leveraging GitHub Copilot for AI-assisted development. By the end of these exercises, participants will have built a fully functional, well-structured aviation database with realistic data, optimized queries, and automated testing.
+This lab series guides participants through designing, optimizing, and testing an aviation-themed database while leveraging GitHub Copilot for AI-assisted development. By the end of these exercises, participants will have built a fully functional, well-structured aviation database with realistic data, optimized queries, and automated testing.
 
 - Step 1 - Blueprinting the Aviation Database - Defining the schema and relationships
 - Step 2 - Refining the Flight Plan - Optimizing table structure and improving data relationships

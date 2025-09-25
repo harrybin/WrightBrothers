@@ -37,9 +37,9 @@ Quickly generate documentation using GitHub Copilot’s /doc feature for individ
 
 - Open the `/WrightBrothersApi/Controllers/PlanesController.cs` file.
 
-- Select all content of the method **`GetById()`** in `PlanesController.cs`.
+- Select all content of the method `GetById()` in `PlanesController.cs`.
 
-- Right-click and choose `Copilot` -> `Generate Docs`.
+- Right-click and choose `Generate Code` -> `Generate Docs`.
 
 - View the updates, then click `Discard` to try a different approach.
 
@@ -91,6 +91,10 @@ Generate structured API documentation with request parameters, response formats,
     ```
     You are a technical writer. Write detailed documentation for this API endpoint, explaining its request parameters, response format, and usage examples. Additionally, add detailed comments to the GetById method in the PlanesController class, explaining each step and including error handling.
     ```
+
+> [!NOTE]
+> A **role-based prompt** helps Copilot produce structured API docs and clear inline comments. Framing it as a **technical writer** sets the tone, depth, and format. Start with technical writer, then try **API documentation specialist** or **senior software engineer** to compare styles and pick the best fit.
+
 - Review the generated API documentation and inline comments.
 
 - View the updates, then click `Discard` to try a different approach.
@@ -138,9 +142,6 @@ Generate structured API documentation with request parameters, response formats,
     ```
 
 </details>
-
-> [!NOTE]
-> This **role-based prompt** ensures **detailed API documentation** with structured response explanations and inline comments.
 
 #### Scenario 4: Chain-of-Thought for Explaining Complex Logic
 Break down complex logic step-by-step, adding inline comments for clarity and better maintainability.
@@ -352,7 +353,7 @@ public class FlightsController : ControllerBase
 
 - Select all the contents of the `UpdateFlightStatus()` method.
 
-- Open GitHub Copilot Chat, click **+** to clear prompt history.
+- Open `GitHub Copilot Chat`, select `Agent` click `+` to clear prompt history.
 
 - Ask the following question:
 
@@ -367,33 +368,46 @@ public class FlightsController : ControllerBase
 
 - Why? Refactoring the UpdateFlightStatus method is important because it improves code clarity and maintainability by isolating business logic, making the system easier to update and debug.
 
-- Open `GitHub Copilot Edits`, then click `+` for `New Edit Session`.
-
-- Close the `FlightsController.cs` file.
+- Open `GitHub Copilot Chat`, select `Agent` click `+` to clear prompt history.
 
 - Add the following files to the `Working Set` near the bottom of Copilot Edits window.
 
-- Click the `+ Add files` button, then select these:
-    - `Flight.cs`
-    - `FlightsController.cs`
+- Click the `+ Add Context` button, select `Files and Folders`, then select these:
+    - `WrightBrothersApi/Models/Flight.cs`
+    - `WrightBrothersApi/Controllers/FlightsController.cs`
 
 > [!NOTE]
 > You can multi-select these files from the file explorer by holding the `Ctrl` down and `Left-Clicking` on each file. Then simply drag-n-drop them into Copilot Edits working set window.
 
-- Copy/Paste the following in the Copilot Chat - Edit mode:
+- Copy/Paste the following in the Copilot Chat - Agent mode:
 
-    ```md
-    Refactor the UpdateFlightStatus method in FlightsController.cs to improve readability and maintainability by moving status validation logic to a new method called StatusValidation.
+    ```prompt
+    Refactor to reduce cyclomatic complexity of FlightsController.UpdateFlightStatus.
 
-    ## Extract Status Validation Logic
-    Move the switch statement logic that checks flight status transitions to a new method, CanUpdateStatus(FlightStatus newStatus), inside the Flights.cs file. This method should return a boolean indicating whether the transition is valid and, if invalid, a reason.
+    Goal
+    Move all status-transition rules into the Flight model, keep the controller focused on request handling.
 
-    ## Simplify Controller Logic
-    Modify UpdateFlightStatus in FlightsController.cs to call CanUpdateStatus(). If valid, update the status and return Ok(). If invalid, return BadRequest() with the appropriate message.
+    Files
+    Edit only: Models/Flight.cs and Controllers/FlightsController.cs.
 
-    ## Improve Readability & Maintainability
-    Ensure the refactored code follows the Single Responsibility Principle, keeping the controller focused on handling requests while delegating business logic to the Flight model.
+    1) Flight model
+    Add exactly:
+    public bool CanUpdateStatus(FlightStatus newStatus, out string reason)
+    Use the existing FlightStatus enum, return true with empty reason when the transition from this.Status to newStatus is allowed, otherwise return false with a short reason string.
+
+    2) Controller action
+    Keep [HttpPost("{id}/status")] and the current method signature.
+    Replace only the method body to:
+    - find the flight by id, return NotFound if missing,
+    - call CanUpdateStatus, return BadRequest with the reason if invalid,
+    - if valid, set Status and return Ok with the updated flight.
+
+    Guardrails
+    No renames, no new files or DTOs, no namespace or route changes, compile must pass.
+    Outcome
+    Invalid transitions return 400 with a short message, valid transitions return 200 with the updated flight.
     ```
+
 - Submit the prompt by pressing Enter.
 
 - Copilot will update the `Flights` and `FlightsController` class.
@@ -402,9 +416,7 @@ public class FlightsController : ControllerBase
 
 <img src="../../Images/Screenshot-UpdateFlightStatus-Refactor.png" width="800">
 
-- You can choose to `Accept` or `Discard` the changes in the file editor or the `Working Set` window.
-
-- Click `Accept` to save the changes, then click `Done` in the `Copilot Edits` window to complete this task.
+- Click `Accept` to save the changes, then click `Done` in the `Copilot Chat` window to complete this task.
 
 > [!NOTE]
 > This refactoring improves the readability and maintainability of the `UpdateFlightStatus` method by delegating the status validation logic to the `Flight` model. This keeps the controller focused on handling requests while the business logic is encapsulated within the model.
