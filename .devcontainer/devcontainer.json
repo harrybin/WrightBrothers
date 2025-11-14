@@ -73,8 +73,8 @@
 	"remoteUser": "vscode",
 	"features": {
 		"docker-in-docker": "latest",
-		"kubectl-helm-minikube": "latest",
-		"azure-cli": "latest",
+		// "kubectl-helm-minikube": "latest",
+		// "azure-cli": "latest",
 		"ghcr.io/devcontainers/features/node:1": {
 			"nodeGypDependencies": true,
 			"version": "18",
