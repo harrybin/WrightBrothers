@@ -1,4 +1,4 @@
-# Lab 2.2 - Taking Off with Code: Clearing the Runway
+﻿# Lab 2.2 - Taking Off with Code: Clearing the Runway
 
 This lab exercise guides participants through coding exercises using GitHub Copilot to understand its suggestions and capabilities. It involves running and adding unit tests, with an emphasis on pair programming. The lab is structured in steps, starting with executing existing unit tests, followed by enhancing test coverage, and addressing specific functionalities like case sensitivity and trimming in search methods.
 
@@ -70,32 +70,16 @@ This lab exercise guides participants through coding exercises using GitHub Copi
 
 ### Step 2: Pre-takeoff Pilot Checks - Completing Unit Tests
 
-- Open GitHub Copilot Chat, select `Ask`, click `+` to clear prompt history.
+- Open GitHub Copilot Chat, select `Edit`, click `+` to clear prompt history.
 
 - Open the `PlaneController.cs` file.
 
 - Select all the code for the `GetById` method.
 
-<img src="../../Images/Screenshot-GetById-Selection.png" width="400">
-
-- Next, open Copilot Chat and Copy/Paste the following prompt.
-
-    ```md
-    Generate all unit test scenarios for this method. Include only the individual tests, no usings.
-    ```
-
-<img src="../../Images/Screenshot-WhereToAddUnitTests.png" width="800">
-
-- Press `Enter`, GitHub Copilot will automatically suggest the `[Test]` attributes.
-
-- The problem is that the generated test methods do not match with the style of the existing test methods in the `PlanesControllerTests.cs` file.
-
-- Let's fix this. Open `Copilot Chat`, select `Edit`.
-
 - Paste the following prompt.
 
     ```md
-    Generate all unit test scenarios for this method. Include only the individual tests, nothing else but [Fact] per test, no usings. Tests should match the style in #file:PlanesControllerTests.cs . Use the existing list of planes for test data.
+    Generate comprehensive tests for GetById in #file:PlanesControllerTests.cs
     ```
 
 > [!NOTE]
@@ -120,6 +104,10 @@ This lab exercise guides participants through coding exercises using GitHub Copi
 - Now submit the prompt by pressing Enter.
 
 - Copilot will give a suggestion to generate all unit test scenarios for the `GetById` method.
+
+
+> [!TIP]
+> Pro tip! Since GitHub Copilot can see your open files and their context, you can usually just say what you want to accomplish. GitHub Copilot will match the existing patterns, style, and data structures automatically.
 
 <Br>
 
@@ -343,7 +331,7 @@ public class PlanesControllerTests
     - `PlanesControllerTests.cs`
     - `PlanesController.cs`
 
-- Select the `SearchByName()` method in the `PlanesController.cs` file.
+- Select the entire `SearchByName()` method in the `PlanesController.cs` file.
 
 - Copy/Paste the following in the edits chat window:
 
@@ -362,13 +350,12 @@ public class PlanesControllerTests
     dotnet test WrightBrothersApi/WrightBrothersApi.Tests/WrightBrothersApi.Tests.csproj
     ```
 
-#### <span style="color:red">Todo! Screenshot Update Needed</span>
 <img src="../../Images/Screenshot-SearchByName-Fix.png" width="600">
 
 - The tests should run and many will pass.
 
     ```sh
-    Test summary: total: 7, failed: 1, succeeded: 6, skipped: 0
+    Test summary: total: 16, failed: 1, succeeded: 15, skipped: 0
     ```
 
 > [!NOTE]
@@ -380,28 +367,12 @@ public class PlanesControllerTests
 
 Open `Plane.cs` and review the model. Notice that there are currently no data annotation attributes.
 
-- Open **GitHub Copilot Chat**.
-
-- Click `+` to clear prompt history.
+- Open `GitHub Copilot Chat`, select `Edit`, click `+` to clear prompt history.
 
 - Type the following prompt:
 
 ```
-What kind of validation can I add to the Plane model to prevent missing or invalid data?
-```
-
-Observe Copilot’s suggestions (e.g., `[Required]`, `[Range]`, `[StringLength]`).
-
-- In `Plane.cs`, add some basic data annotations for validation, such as:
-
-- `[Required]` for `Name`
-- `[Range(1900, 2025)]` for `Year`
-- `[StringLength(100)]` for `Description`
-
-- Type the following prompt:
-
-```
-Add data annotations for validation to all properties in the Plane class.
+Add data annotations for validation to all properties in the Plane class. Explain what each annotation does and why it's important for data validation.
 ```
 
 - Accept Copilot’s suggestions or adjust as needed.
@@ -420,9 +391,7 @@ Add data annotations for validation to all properties in the Plane class.
 
 - Open `PlanesControllerTests.cs`.
 
-- Open **GitHub Copilot Chat**.
-
-- Click `+` to clear prompt history.
+- Open `GitHub Copilot Chat`, select `Edit`, click `+` to clear prompt history.
 
 - Type the following prompt:
 
@@ -467,39 +436,22 @@ Insert the suggested tests, reviewing Copilot’s reasoning and comments.
 
 ### Step 6: Validating and Running Tests
 
-Run your tests in the terminal:
-```
-dotnet test WrightBrothersApi/WrightBrothersApi.Tests/WrightBrothersApi.Tests.csproj
-```
-
-If any tests fail due to missing validation, ask Copilot:
-
-- In **GitHub Copilot Chat**.
+- Open `GitHub Copilot Chat`, select `Agent` click `+` to clear prompt history.
 
 - Type the following prompt:
+
 ```
-How do I make the PlanesController.Post action return BadRequest for invalid models?
+Run all the unit tests in #file:PlanesControllerTests.cs . Verify they pass. If they fail, fix them and re-run them.
 ```
-
-Insert the suggested tests, reviewing Copilot’s reasoning and comments.
-
-- Accept Copilot’s suggestions or adjust as needed.
-
-- Click `Apply` to update the PlanesController.Post in `PlanesController.cs`.
-
-- Click `Keep` to accept the changes.
-
-Rerun your tests and confirm that both positive and negative scenarios behave as expected.
-
 - Close the `PlanesController.cs` and `PlanesControllerTests.cs` files.
 
 ## Optional: Transition to Copilot Edits for Bulk Changes
 
-Want to speed things up, or apply changes across multiple files at once?
+Want to speed things up or apply changes across multiple files at once?
 
-Now that you’ve used Copilot Chat for focused, step-by-step improvements, let’s explore how Copilot Edits can make larger or repetitive changes even faster!
+Now that you’ve used Copilot Chat for focused, step-by-step improvements, let’s explore how Copilot Edits or Agent can make larger or repetitive changes even faster!
 
-### Using Copilot Edits (for intermediate users)
+### Using Copilot Edits
 
 - Open **GitHub Copilot Edits**.
 
@@ -517,7 +469,7 @@ Add or update data annotations for validation on all properties in Plane.cs, and
 
 - Click `Apply` to update your files with the new annotations and validation checks.
 
-### Using Agent Mode (for advanced users)
+### Using Agent Mode
 
 - Type the following prompt:
 
@@ -530,17 +482,11 @@ Apply appropriate data annotations (like [Required], [Range], [StringLength]) to
 - Type the following prompt:
 
 ```
-Create a unit test method for PlanesController.Post that verifies a valid Plane is accepted and added to the system. Only include the test method code, with a descriptive method name and a comment explaining what the test does.
-```
-
-- Type the following prompt:
-
-```
-Create a unit test method for FlightsController.Post add append to the FlightsControllerTest file. Make sure that verifies a valid Flight is accepted and added to the system. Only include the test method code, with a descriptive method name and a comment explaining what the test does.
+Create a unit test method for FlightsController.Post add append to the FlightsControllerTest file. Make sure that verifies a valid Flight is accepted and added to the system. Only include the test method code, with a descriptive method name and a comment explaining what the test does. Run the tests and fix any failures.
 ```
 - Close all files.
 
-> [TIP!]  
+> [!TIP]  
 > **Why Try This?** Copilot Edits and Agent Mode can handle bulk or repetitive tasks, giving you safe, reviewable updates with just one prompt.
 
 ---

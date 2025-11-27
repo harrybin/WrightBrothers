@@ -35,16 +35,6 @@ Compare the difference between asking the two following things:
 
 GitHub Copilot has the concept of Agents. `@workspace` is an agent that is specialized in answering questions about the currently open workspace.
 
-Compare the difference between asking the two following things:
-
-1) Without @workspace:
-
-```
-Explain the WrightBrothers API application?
-```
-
-2) With @workspace:
-
 ```
 @workspace what is this project about, what's the domain, tech stack, and overall functionality?
 ```
@@ -60,28 +50,6 @@ Explain the WrightBrothers API application?
     ```md
     @workspace how do I run the backend WrightBrothersAPI application?
     ```
-
-- There are two other Agents `@terminal` and `@vscode`. They are used to help navigate the terminal and VS Code settings respectively.
-
-- Try `@terminal` agent by typing the following in the chat window:
-
-    ```md
-    @terminal show me the files using dir command.
-    ```
-
-- GitHub Copilot might tell you a simple command or that it needs more information `dir`.
-
-> [!NOTE]
-> `@terminal` agent is used to help navigate the terminal and does not have the context of the codebase. It is used to answer generic questions about how to do things in the terminal.
-
-- Try `@vscode` agent by typing the following in the chat window:
-
-    ```md
-    @vscode how do I change the theme?
-    ```
-
-> [!NOTE]
-> `@vscode` agent is used to help navigate the VS Code settings and does not have the context of the codebase. It is used to answer generic questions about how to do things in VS Code.
 
 ---
 
@@ -128,7 +96,7 @@ public class PlanesController : ControllerBase
 
 - Type a `,` then press `Enter`.
 
-- GitHub Copilot will automatically suggest a `new Plane`.  Sometimes, you might need to press `Ctrl + Space` to trigger the suggestion.
+- GitHub Copilot will automatically suggest a `new Plane`.  Sometimes, you might need to start typing `new Plane` to trigger the suggestion.
 
 > [!NOTE]
 > GitHub Copilot will suggest a new `Plane` object with the next available `Id`. Also notice how Copilot understood that the next Plane is the Wright Model B and it automatically suggested the `Name`, `Year`, `Description`, and `RangeInKm` properties. The underlying LLM also learned from Wikipedia and other sources to understand the history of the Wright Brothers.
@@ -190,21 +158,21 @@ place your cursor at the end of the `SetupPlanesData()` method, after the `}`, p
 Create a method called SearchByName to search planes by name.
 ```
 
-    ```csharp
-    public class PlanesController : ControllerBase
+```csharp
+public class PlanesController : ControllerBase
+{
+    /* Rest of the methods */
+
+    [HttpPost("setup")]
+    public ActionResult SetupPlanesData(List<Plane> planes)
     {
-        /* Rest of the methods */
-
-        [HttpPost("setup")]
-        public ActionResult SetupPlanesData(List<Plane> planes)
-        {
-            // Method body
-        }
-
-        <---- Place your cursor here
-
+        // Method body
     }
-    ```
+
+    <---- Place your cursor here
+
+}
+```
 
 > [!NOTE]
 > Using Ctrl + I (Inline Copilot): This explicitly tells Copilot that you want an immediate suggestion for your comment as a function. Copilot treats it as a structured request and generates a more relevant, formatted response.
@@ -403,8 +371,6 @@ public class Plane
     ```
     Add the new ImageUrl property to each plane and add the next 2 additional planes to complete the Wright Brothers Fleet. Create in a trivial way to not match public code.
     ```
-
-<img src="../../Images/Screenshot-Planes-List.png" width="800">
 
 - Accept the suggestion by selecting `Accept` or pressing `Enter`.
 
