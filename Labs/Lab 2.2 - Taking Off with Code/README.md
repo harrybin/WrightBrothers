@@ -87,16 +87,12 @@ This lab exercise guides participants through coding exercises using GitHub Copi
 
 - First remove `#file:PlanesControllerTests.cs` and keep your cursor at the same position.
 
-- Next, type `#file` in the chat window and press Enter.
+- Next, type `#` in the chat window and type filename `PlanesControllerTests.cs` and press Enter.
 
 <img src="../../Images/Screenshot-GetById-File.png" width="600">
 
-- A pop-up will appear where you can search for files.
-
-- Select the file `PlanesControllerTests.cs` and press Enter.
-
 > [!NOTE]
-> With `#file` you can easily add a file to the Copilot Context. If you already know the filename, you can simply type **#PlanesControllerTests.cs** and avoid using the pop-up file selector.
+> With `#file` you can easily add a file to the Copilot Context. If you already know the filename, you can simply type **#PlanesControllerTests.cs** to add it directly.
 
 > [!IMPORTANT]
 > `#file` will not work with copy/pasting `#file:PlanesControllerTests.cs`. You need to select it from the pop-up window.

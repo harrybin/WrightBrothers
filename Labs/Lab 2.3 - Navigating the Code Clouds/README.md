@@ -465,8 +465,7 @@ Your architect has already defined the contract for a new API endpoint: `PUT /pl
 
 This time, instead of generating code from scratch, you’ll use **GitHub Copilot Edits** and describe what you want based on the visual API spec provided in the screenshot.
 
-1. Open **GitHub Copilot Edits** and make sure you are in **Edits** mode, not Agent.
-   Use `Ctrl+Shift+I`, then select **+** for new edit session.
+1. Open `GitHub Copilot Chat`, select `Edit`, then click `+` for `New Session`.
 
 2. Add the controller file to the **Copilot Edits working set**.
     - Click **+ Add Context** in the Edits panel, select `/Controllers/PlanesController.cs`, confirm it appears under **Working set**.
@@ -483,7 +482,7 @@ This time, instead of generating code from scratch, you’ll use **GitHub Copilo
 
 1. Paste the image directly into the **GitHub Copilot Edits** chat window.
 
-1. Paste the prompt below into the **GitHub Copilot Edits** chat window:
+1. Under the image, paste the prompt below into the **GitHub Copilot Edits** chat window:
 
    ```
    Create this API endpoint from the screenshot and append to end of #file:PlanesController.cs, after the existing code.
