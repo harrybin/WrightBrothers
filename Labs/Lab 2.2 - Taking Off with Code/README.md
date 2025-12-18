@@ -236,7 +236,7 @@ public class PlanesControllerTests
 - Copy/Paste the following in the Copilot Edits Chat window:
 
     ```md
-    # Generate new unit tests for the following scenarios:
+    Generate new unit tests and append them to the PlanesControllerTests file for the following scenarios:
     - Specific search for "Wright Flyer III"
     - General search for "Wright"
     - Case-insensitive search for "wright flyer"
