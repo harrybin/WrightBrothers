@@ -2,6 +2,7 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
+using WrightBrothersApi.Services;
 
 [ApiController]
 [Route("[controller]")]
@@ -207,6 +208,21 @@ public class FlightsController : ControllerBase
         Console.WriteLine($"Elapsed Time: {stopwatch.ElapsedMilliseconds / 1000.0} seconds");
 
         return Ok($"Calculated aerodynamics.");
+    }
+
+    [HttpGet("weather-impact")]
+    public async Task<ActionResult<WeatherImpactResult>> GetWeatherImpact([FromQuery] string weather, [FromQuery] double fuel)
+    {
+        try
+        {
+            var service = new WeatherCalculatorService();
+            var result = await service.CalculateImpactAsync(weather, fuel);
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Calculation failed: {ex.Message}");
+        }
     }
 
     public static List<int> CalculatePrimes(int start, int end)
