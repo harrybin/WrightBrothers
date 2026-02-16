@@ -140,6 +140,33 @@ namespace WrightBrothersApi.Tests.Controllers
         }
 
         [Fact]
+        public void Put_WithMismatchedId_ReturnsBadRequest()
+        {
+            // Arrange
+            var flight = new Flight
+            {
+                Id = 2,
+                FlightNumber = "WB002-UPDATED",
+                Origin = "Updated Origin",
+                Destination = "Updated Destination",
+                DepartureTime = new DateTime(1903, 12, 17, 10, 35, 0),
+                ArrivalTime = new DateTime(1903, 12, 17, 10, 47, 0),
+                Status = FlightStatus.Scheduled,
+                FuelRange = 150,
+                FuelTankLeak = false,
+                FlightLogSignature = "UPDATED",
+                AerobaticSequenceSignature = "UPDATED"
+            };
+
+            // Act
+            var result = _flightsController.Put(1, flight);
+
+            // Assert
+            var badRequestResult = result.Result.Should().BeOfType<BadRequestObjectResult>().Subject;
+            badRequestResult.Value.Should().Be("Flight ID in request body does not match the ID in the URL.");
+        }
+
+        [Fact]
         public void Delete_WithValidId_ReturnsNoContent()
         {
             // Act

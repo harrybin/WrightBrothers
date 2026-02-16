@@ -112,6 +112,27 @@ namespace WrightBrothersApi.Tests.Controllers
         }
 
         [Fact]
+        public void Put_WithMismatchedId_ReturnsBadRequest()
+        {
+            // Arrange
+            var plane = new Plane
+            {
+                Id = 2,
+                Name = "Updated Plane",
+                Year = 1904,
+                Description = "Updated description.",
+                RangeInKm = 20
+            };
+
+            // Act
+            var result = _planesController.Put(1, plane);
+
+            // Assert
+            var badRequestResult = result.Result.Should().BeOfType<BadRequestObjectResult>().Subject;
+            badRequestResult.Value.Should().Be("Plane ID in request body does not match the ID in the URL.");
+        }
+
+        [Fact]
         public void Delete_WithValidId_ReturnsNoContent()
         {
             // Act

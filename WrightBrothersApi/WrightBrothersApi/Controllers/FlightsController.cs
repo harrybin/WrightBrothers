@@ -106,6 +106,11 @@ public class FlightsController : ControllerBase
             return BadRequest();
         }
 
+        if (flight.Id != id)
+        {
+            return BadRequest("Flight ID in request body does not match the ID in the URL.");
+        }
+
         var existingFlight = Flights.Find(f => f.Id == id);
 
         if (existingFlight == null)

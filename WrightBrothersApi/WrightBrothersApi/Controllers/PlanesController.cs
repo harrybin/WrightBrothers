@@ -93,6 +93,11 @@ namespace WrightBrothersApi.Controllers
                 return BadRequest();
             }
 
+            if (plane.Id != id)
+            {
+                return BadRequest("Plane ID in request body does not match the ID in the URL.");
+            }
+
             var existingPlane = Planes.Find(p => p.Id == id);
 
             if (existingPlane == null)
