@@ -84,6 +84,44 @@ namespace WrightBrothersApi.Controllers
 
             return Ok();
         }
+
+        [HttpPut("{id}")]
+        public ActionResult<Plane> Put(int id, Plane plane)
+        {
+            if (plane == null)
+            {
+                return BadRequest();
+            }
+
+            var existingPlane = Planes.Find(p => p.Id == id);
+
+            if (existingPlane == null)
+            {
+                return NotFound();
+            }
+
+            existingPlane.Name = plane.Name;
+            existingPlane.Year = plane.Year;
+            existingPlane.Description = plane.Description;
+            existingPlane.RangeInKm = plane.RangeInKm;
+
+            return Ok(existingPlane);
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
+        {
+            var plane = Planes.Find(p => p.Id == id);
+
+            if (plane == null)
+            {
+                return NotFound();
+            }
+
+            Planes.Remove(plane);
+
+            return NoContent();
+        }
         
     }
 }
