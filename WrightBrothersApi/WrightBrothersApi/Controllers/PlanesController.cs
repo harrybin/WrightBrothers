@@ -76,6 +76,47 @@ namespace WrightBrothersApi.Controllers
             return CreatedAtAction(nameof(GetById), new { id = plane.Id }, plane);
         }
 
+        [HttpPut("{id}")]
+        public ActionResult<Plane> Put(int id, Plane plane)
+        {
+            if (plane == null)
+            {
+                return BadRequest();
+            }
+
+            if (id != plane.Id)
+            {
+                return BadRequest("ID mismatch");
+            }
+
+            var existingPlane = Planes.Find(p => p.Id == id);
+            if (existingPlane == null)
+            {
+                return NotFound();
+            }
+
+            existingPlane.Name = plane.Name;
+            existingPlane.Year = plane.Year;
+            existingPlane.Description = plane.Description;
+            existingPlane.RangeInKm = plane.RangeInKm;
+
+            return Ok(existingPlane);
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
+        {
+            var plane = Planes.Find(p => p.Id == id);
+            if (plane == null)
+            {
+                return NotFound();
+            }
+
+            Planes.Remove(plane);
+
+            return NoContent();
+        }
+
         [HttpPost("setup")]
         public ActionResult SetupPlanesData(List<Plane> planes)
         {
