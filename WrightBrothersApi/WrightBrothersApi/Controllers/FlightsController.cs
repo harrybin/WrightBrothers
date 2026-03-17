@@ -93,6 +93,8 @@ public class FlightsController : ControllerBase
     [HttpPost("{id}/status")]
     public ActionResult UpdateFlightStatus(int id, FlightStatus newStatus)
     {
+        _logger.LogInformation("POST ✈✈✈ Status Update {Id} to {NewStatus} ✈✈✈", id, newStatus);
+
         var flight = Flights.Find(f => f.Id == id);
         if (flight != null)
         {
@@ -162,6 +164,8 @@ public class FlightsController : ControllerBase
     [HttpPost("{id}/takeFlight/{flightLength}")]
     public ActionResult takeFlight(int id, int flightLength)
     {
+        _logger.LogInformation("POST ✈✈✈ Take Flight {Id} for {FlightLength} km/miles ✈✈✈", id, flightLength);
+
         var flight = Flights.Find(f => f.Id == id);
 
         for (int i = 0; i < flightLength; i++)
@@ -189,6 +193,8 @@ public class FlightsController : ControllerBase
     [HttpPost("{id}/lightningStrike")]
     public ActionResult lightningStrike(int id)
     {
+        _logger.LogInformation("POST ✈✈✈ Lightning Strike {Id} ✈✈✈", id);
+
         // Lightning caused recursion on an inflight instrument
         lightningStrike(id);
 
@@ -198,14 +204,16 @@ public class FlightsController : ControllerBase
     [HttpPost("{id}/calculateAerodynamics")]
     public ActionResult calculateAerodynamics(int id)
     {
+        _logger.LogInformation("POST ✈✈✈ Calculate Aerodynamics {Id} ✈✈✈", id);
+
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
 
         List<int> primes = CalculatePrimes(2, 300000);
 
         stopwatch.Stop();
-        Console.WriteLine($"Found {primes.Count} prime numbers.");
-        Console.WriteLine($"Elapsed Time: {stopwatch.ElapsedMilliseconds / 1000.0} seconds");
+        _logger.LogInformation("Found {PrimeCount} prime numbers.", primes.Count);
+        _logger.LogInformation("Elapsed Time: {ElapsedSeconds} seconds", stopwatch.ElapsedMilliseconds / 1000.0);
 
         return Ok($"Calculated aerodynamics.");
     }
@@ -213,6 +221,8 @@ public class FlightsController : ControllerBase
     [HttpGet("weather-impact")]
     public async Task<ActionResult<WeatherImpactResult>> GetWeatherImpact([FromQuery] string weather, [FromQuery] double fuel)
     {
+        _logger.LogInformation("GET ✈✈✈ Weather Impact {Weather} {Fuel} ✈✈✈", weather, fuel);
+
         try
         {
             var service = new WeatherCalculatorService();
@@ -221,6 +231,7 @@ public class FlightsController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Weather impact calculation failed for weather: {Weather}, fuel: {Fuel}", weather, fuel);
             return StatusCode(500, $"Calculation failed: {ex.Message}");
         }
     }
