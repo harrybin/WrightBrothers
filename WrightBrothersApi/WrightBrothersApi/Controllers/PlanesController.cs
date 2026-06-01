@@ -69,8 +69,6 @@ namespace WrightBrothersApi.Controllers
         [HttpPost]
         public ActionResult<Plane> Post(Plane plane)
         {
-            _logger.LogInformation("POST ✈✈✈ {id} ✈✈✈", plane?.Id);
-
             if(plane == null)
             {
                 _logger.LogWarning("POST ✈✈✈ INVALID PAYLOAD ✈✈✈");
@@ -78,6 +76,7 @@ namespace WrightBrothersApi.Controllers
             }
 
             Planes.Add(plane);
+            _logger.LogInformation("POST ✈✈✈ {id} ✈✈✈", plane.Id);
 
             return CreatedAtAction(nameof(GetById), new { id = plane.Id }, plane);
         }
@@ -85,10 +84,15 @@ namespace WrightBrothersApi.Controllers
         [HttpPost("setup")]
         public ActionResult SetupPlanesData(List<Plane> planes)
         {
-            _logger.LogInformation("POST setup ✈✈✈ {count} ✈✈✈", planes?.Count ?? 0);
+            if (planes == null)
+            {
+                _logger.LogWarning("POST setup ✈✈✈ INVALID PAYLOAD ✈✈✈");
+                return BadRequest();
+            }
 
             Planes.Clear();
             Planes.AddRange(planes);
+            _logger.LogInformation("POST setup ✈✈✈ {count} ✈✈✈", planes.Count);
 
             return Ok();
         }
