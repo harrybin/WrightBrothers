@@ -53,10 +53,13 @@ namespace WrightBrothersApi.Controllers
         [HttpGet("{id}")]
         public ActionResult<Plane> GetById(int id)
         {
+            _logger.LogInformation("GET ✈✈✈ {id} ✈✈✈", id);
+
             var plane = Planes.Find(p => p.Id == id);
 
             if (plane == null)
             {
+                _logger.LogWarning("GET ✈✈✈ {id} NOT FOUND ✈✈✈", id);
                 return NotFound();
             }
 
@@ -66,8 +69,11 @@ namespace WrightBrothersApi.Controllers
         [HttpPost]
         public ActionResult<Plane> Post(Plane plane)
         {
+            _logger.LogInformation("POST ✈✈✈ {id} ✈✈✈", plane?.Id);
+
             if(plane == null)
             {
+                _logger.LogWarning("POST ✈✈✈ INVALID PAYLOAD ✈✈✈");
                 return BadRequest();
             }
 
@@ -79,6 +85,8 @@ namespace WrightBrothersApi.Controllers
         [HttpPost("setup")]
         public ActionResult SetupPlanesData(List<Plane> planes)
         {
+            _logger.LogInformation("POST setup ✈✈✈ {count} ✈✈✈", planes?.Count ?? 0);
+
             Planes.Clear();
             Planes.AddRange(planes);
 
