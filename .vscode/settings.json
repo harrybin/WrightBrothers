@@ -14,4 +14,5 @@
             "text": "Use conventional commit message format."
         }
     ],
+    "chat.copilot.hydraFusion.enabled": true
 }
