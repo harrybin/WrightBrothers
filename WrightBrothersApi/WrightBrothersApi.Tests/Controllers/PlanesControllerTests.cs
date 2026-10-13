@@ -62,5 +62,48 @@ namespace WrightBrothersApi.Tests.Controllers
             result.Result.Should().BeOfType<BadRequestObjectResult>();
         }
 
+        [Fact]
+        public void DeleteMultiple_RemovesPlanesWithMatchingIds()
+        {
+            var originalPlanes = ((List<Plane>)((OkObjectResult)_planesController.GetAll().Result!).Value!).ToList();
+            var planes = new List<Plane>
+            {
+                new() { Id = 901, Name = "Plane 901" },
+                new() { Id = 902, Name = "Plane 902" },
+                new() { Id = 903, Name = "Plane 903" }
+            };
+
+            try
+            {
+                _planesController.SetupPlanesData(planes);
+
+                var result = _planesController.DeleteMultiple([901, 903]);
+
+                var okResult = result.Should().BeOfType<OkObjectResult>().Subject;
+                okResult.Value.Should().BeEquivalentTo(new { DeletedCount = 2 });
+                var remainingPlanes = (List<Plane>)((OkObjectResult)_planesController.GetAll().Result!).Value!;
+                remainingPlanes.Select(plane => plane.Id).Should().Equal(902);
+            }
+            finally
+            {
+                _planesController.SetupPlanesData(originalPlanes);
+            }
+        }
+
+        [Theory]
+        [MemberData(nameof(InvalidPlaneIds))]
+        public void DeleteMultiple_RejectsEmptyOrInvalidIds(List<int>? planeIds)
+        {
+            var result = _planesController.DeleteMultiple(planeIds!);
+
+            result.Should().BeOfType<BadRequestResult>();
+        }
+
+        public static IEnumerable<object?[]> InvalidPlaneIds =>
+        [
+            [null],
+            [new List<int>()],
+            [new List<int> { 1, 0 }]
+        ];
     }
 }

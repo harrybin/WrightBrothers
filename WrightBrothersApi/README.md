@@ -16,6 +16,7 @@ Minimal REST API backend for managing an in‑memory catalog of historic Wright 
 - POST /planes – add a plane
 - PUT /planes/{id} – update a plane
 - DELETE /planes/{id} – remove a plane
+- DELETE /planes/bulk – remove planes by an array of IDs in the request body (returns the number deleted)
 
 Plane model: Id, Name, Year, Description, RangeInKm, ImageUrl.
 
