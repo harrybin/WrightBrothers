@@ -76,6 +76,19 @@ namespace WrightBrothersApi.Controllers
             return CreatedAtAction(nameof(GetById), new { id = plane.Id }, plane);
         }
 
+        [HttpDelete("bulk")]
+        public ActionResult DeleteMultiple([FromBody] List<int> planeIds)
+        {
+            if (planeIds == null || planeIds.Count == 0 || planeIds.Any(id => id <= 0))
+            {
+                return BadRequest();
+            }
+
+            var deletedCount = Planes.RemoveAll(plane => planeIds.Contains(plane.Id));
+
+            return Ok(new { DeletedCount = deletedCount });
+        }
+
         [HttpPost("setup")]
         public ActionResult SetupPlanesData(List<Plane> planes)
         {
