@@ -14,5 +14,7 @@
             "text": "Use conventional commit message format."
         }
     ],
-    "chat.copilot.hydraFusion.enabled": true
+    "chat.copilot.hydraFusion.enabled": true,
+    //currently in insiders only
+    "chat.copilot.stabilityOrderedPrompt": true
 }
