@@ -50,6 +50,36 @@ namespace WrightBrothersApi.Controllers
             return Ok(Planes);
         }
 
+        [HttpGet("sort")]
+        public ActionResult<List<Plane>> GetSorted([FromQuery] string sortBy = "name", [FromQuery] bool descending = false)
+        {
+            if (string.IsNullOrWhiteSpace(sortBy))
+            {
+                return BadRequest("Sort by must be one of: id, name, year, rangeInKm.");
+            }
+
+            IEnumerable<Plane> sortedPlanes;
+            switch (sortBy.ToLowerInvariant())
+            {
+                case "id":
+                    sortedPlanes = descending ? Planes.OrderByDescending(plane => plane.Id) : Planes.OrderBy(plane => plane.Id);
+                    break;
+                case "name":
+                    sortedPlanes = descending ? Planes.OrderByDescending(plane => plane.Name) : Planes.OrderBy(plane => plane.Name);
+                    break;
+                case "year":
+                    sortedPlanes = descending ? Planes.OrderByDescending(plane => plane.Year) : Planes.OrderBy(plane => plane.Year);
+                    break;
+                case "rangeinkm":
+                    sortedPlanes = descending ? Planes.OrderByDescending(plane => plane.RangeInKm) : Planes.OrderBy(plane => plane.RangeInKm);
+                    break;
+                default:
+                    return BadRequest("Sort by must be one of: id, name, year, rangeInKm.");
+            }
+
+            return Ok(sortedPlanes.ToList());
+        }
+
         [HttpGet("{id}")]
         public ActionResult<Plane> GetById(int id)
         {

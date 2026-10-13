@@ -9,6 +9,7 @@ Minimal REST API backend for managing an in‑memory catalog of historic Wright 
 
 ### Core Endpoints (Planes)
 - GET /planes – list all planes
+- GET /planes/sort?sortBy=year&descending=true – sort planes by id, name, year, or rangeInKm (ascending by default)
 - GET /planes/{id} – get plane by id
 - GET /planes/count – count planes
 - GET /planes/year/{year} – filter by year

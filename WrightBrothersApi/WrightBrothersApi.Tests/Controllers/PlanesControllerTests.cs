@@ -28,5 +28,39 @@ namespace WrightBrothersApi.Tests.Controllers
             returnedPlanes.Should().NotBeEmpty();
         }
 
+        [Fact]
+        public void GetSorted_ByYearAscending_ReturnsPlanesInYearOrder()
+        {
+            // Act
+            var result = _planesController.GetSorted("year");
+
+            // Assert
+            var okObjectResult = (OkObjectResult)result.Result!;
+            var returnedPlanes = (List<Plane>)okObjectResult.Value!;
+            returnedPlanes.Select(plane => plane.Year).Should().BeInAscendingOrder();
+        }
+
+        [Fact]
+        public void GetSorted_ByRangeDescending_ReturnsPlanesInDescendingRangeOrder()
+        {
+            // Act
+            var result = _planesController.GetSorted("rangeInKm", descending: true);
+
+            // Assert
+            var okObjectResult = (OkObjectResult)result.Result!;
+            var returnedPlanes = (List<Plane>)okObjectResult.Value!;
+            returnedPlanes.Select(plane => plane.RangeInKm).Should().BeInDescendingOrder();
+        }
+
+        [Fact]
+        public void GetSorted_WithUnsupportedProperty_ReturnsBadRequest()
+        {
+            // Act
+            var result = _planesController.GetSorted("unsupported");
+
+            // Assert
+            result.Result.Should().BeOfType<BadRequestObjectResult>();
+        }
+
     }
 }
