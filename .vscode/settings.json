@@ -10,11 +10,12 @@
         // {
         //     "file": ".copilot-commit-message-instructions.md"
         // }
-        {
-            "text": "Use conventional commit message format."
-        }
+        // {
+        //     "text": "Use conventional commit message format."
+        // }
     ],
     "chat.copilot.hydraFusion.enabled": true,
     //currently in insiders only
-    "chat.copilot.stabilityOrderedPrompt": true
+    "chat.copilot.stabilityOrderedPrompt": true,
+    "chat.canvases.enabled": true,
 }
